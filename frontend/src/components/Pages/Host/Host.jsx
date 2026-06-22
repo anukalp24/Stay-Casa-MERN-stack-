@@ -23,7 +23,7 @@ const [error, seterror] = useState("")
 
 
   const handleImage = (e)=>{
-    setfile(e.target.files[0])
+    setfile(...e.target.files)
   }
 
 const handlechange = (e)=>{
@@ -39,17 +39,24 @@ const handleadd =  async (e)=>{
 
     const newErrors = {}
     if(form.propertyName  === ""){
-      newErrors.propertyName = "Property name is required" 
+      newErrors.propertyName = "Property name field is required" 
+    }
+
+    if(form.category === ""){
+      newErrors.category = "Category field is required"
     }
       if( form.cityname === ""){
    newErrors.cityname = "City name is required" 
       } 
+      if( form.country === ""){
+   newErrors.cityname = "City name is required" 
+      } 
       
     if(form.price  === ""){
-         newErrors.price = "Price information is require" 
+         newErrors.price = "Price field is required" 
     }
     if(form.rating === ""){
-   newErrors.rating = "rating is required" 
+   newErrors.rating = "rating field is required" 
 
     }
     
@@ -83,7 +90,6 @@ if(form._id){
         
 let updateResult = await updateRequest.json()
 setresponse([...response ,updateResult])
-   navigate("/success")
 }
 else{
 
@@ -91,10 +97,14 @@ else{
 
 
   formData.append("propertyName" , form.propertyName)
-
+formData.append("category" ,form.category )
 formData.append(
   "cityname",
   form.cityname
+)
+formData.append(
+  "country",
+  form.country
 )
 
 formData.append(
@@ -114,14 +124,11 @@ formData.append(
 
 formData.append("image" , file)
 
-
-
-  const token = localStorage.getItem("token")
   let request2 = await fetch("http://localhost:4090/addhome" , {
     method: "post",
     headers: {
-      Authorization: token
-      // sending authorization token aswell
+      Authorization: localStorage.getItem("token")
+      // sending authorization token aswell.
     },
     body: formData
   })
@@ -132,16 +139,16 @@ formData.append("image" , file)
 }
 setform({
    propertyName:"",
+   category: "",
    cityname:"",
+   country: "",
    price:"",
    rating:"",
-   desc:""
+   desc:"",
 })
 
 }
-useEffect(() => {
-  console.log(response)
-}, [response])
+
 
   return (
     <>
@@ -154,13 +161,19 @@ useEffect(() => {
    <form>
 <input value={form.propertyName} name='propertyName'   onChange={handlechange}  placeholder='Property Name' id='property-name' type="text" />
    {error.propertyName && <p id= "error">{error.propertyName}</p> }
+
+
+   <input  placeholder='Category'  onChange={handlechange}  value={form.category} name='category' type="text" />
+{error.category && <p id= "error">{error.category}</p>  }
 <input value={form.cityname} name='cityname'   onChange={handlechange}  placeholder='City' id='city-name' type="text" />
    {error.cityname && <p id= "error">{error.cityname}</p> }
+<input value={form.country} name='country'   onChange={handlechange}  placeholder='country' id='country' type="text" />
+ {error.country && <p id= "error">{error.country}</p> }
 <input value={form.price} name='price'  onChange={handlechange}  placeholder='Price Per Night' id='price' type="text" />
  {error.price && <p id= "error">{error.price}</p> }
 <input value={form.rating} name='rating'  onChange={handlechange}  placeholder='Rating' id='rating' type="text" />
  {error.rating && <p id= "error">{error.rating}</p> }
-<input  onChange={handleImage}  name='photo' accept='Image/jpg , Image/jpeg , image/png'    placeholder='Image URL' id='img-url' type="file" />
+<input  onChange={handleImage}  name='photo'  accept="image/*"   placeholder='Image URL' id='img-url' type="file" multiple />
  {error.url && <p id= "error">{error.url}</p> }
 <textarea value={form.desc} name='desc'  onChange={handlechange}  placeholder='Description' id='description'></textarea>
  {error.desc && <p id= "error">{error.desc}</p> }

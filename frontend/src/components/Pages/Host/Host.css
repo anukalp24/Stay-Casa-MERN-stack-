@@ -1,14 +1,7 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-}
-
 .host-container {
   width: 100%;
   min-height: 100vh;
-  background: linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%);
+  background: var(--color-bg);
   padding: 120px 20px 80px 20px;
   display: flex;
   flex-direction: column;
@@ -17,89 +10,88 @@
 
 .heading-section {
   text-align: center;
-  margin-bottom: 60px;
-  max-width: 700px;
+  margin-bottom: 40px;
+  max-width: 540px;
 }
 
 .heading-section h2 {
-  font-size: 3.5rem;
+  font-size: 2.5rem;
   font-weight: 800;
-  color: #111827;
-  margin-bottom: 16px;
+  color: var(--color-text-primary);
+  margin-bottom: 12px;
   letter-spacing: -1px;
 }
 
 .heading-section p {
-  color: #6B7280;
-  font-size: 1.15rem;
-  font-weight: 500;
+  color: var(--color-text-secondary);
+  font-size: 1rem;
   line-height: 1.6;
 }
 
 form {
   width: 100%;
-  max-width: 700px;
-  background: white;
-  padding: 50px 45px;
-  border-radius: 20px;
+  max-width: 580px;
+  background: var(--color-surface);
+  padding: 40px 40px;
+  border-radius: var(--radius-2xl);
   display: flex;
   flex-direction: column;
-  gap: 22px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(0, 0, 0, 0.02);
+  gap: 18px;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--color-border-light);
 }
 
 input,
 textarea {
   width: 100%;
-  border: 1.5px solid #E5E7EB;
-  background: #F9FAFB;
-  border-radius: 12px;
-  padding: 15px 18px;
-  font-size: 1rem;
-  font-family: "Inter", sans-serif;
+  border: 1.5px solid var(--color-border);
+  background: var(--color-bg-alt);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  font-size: 0.9rem;
+  font-family: var(--font-sans);
   outline: none;
-  transition: all 0.3s ease;
-  color: #111827;
+  transition: all var(--transition-fast);
+  color: var(--color-text-primary);
 }
 
 input::placeholder,
 textarea::placeholder {
-  color: #9CA3AF;
-  font-weight: 500;
+  color: var(--color-text-tertiary);
 }
 
 input:focus,
 textarea:focus {
-  border-color: #6366F1;
-  background: white;
-  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+  border-color: var(--color-primary);
+  background: var(--color-surface);
+  box-shadow: 0 0 0 3px rgba(212, 119, 91, 0.1);
 }
 
 textarea {
-  resize: none;
-  min-height: 140px;
-  font-family: "Inter", sans-serif;
+  resize: vertical;
+  min-height: 120px;
 }
 
 #host-submit {
   width: 100%;
   border: none;
-  background: linear-gradient(135deg, #6366F1 0%, #EC4899 100%);
-  color: white;
+  background: var(--color-primary);
+  color: var(--color-text-inverse);
   padding: 16px;
-  border-radius: 12px;
-  font-size: 1rem;
+  border-radius: var(--radius-md);
+  font-size: 0.95rem;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.3s ease;
-  margin-top: 12px;
-  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+  transition: all var(--transition-base);
+  margin-top: 8px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
 #host-submit:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+  background: var(--color-primary-dark);
+  box-shadow: 0 8px 24px rgba(212, 119, 91, 0.35);
 }
 
 #host-submit:active {
@@ -107,33 +99,34 @@ textarea {
 }
 
 #error {
-  color: #DC2626;
-  font-size: 0.9rem;
-  margin-top: -14px;
+  color: var(--color-error);
+  font-size: 0.8rem;
+  margin-top: -12px;
   margin-left: 4px;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 @media (max-width: 768px) {
   .host-container {
-    padding: 100px 15px 60px 15px;
+    padding: 100px 16px 60px 16px;
   }
 
   .heading-section h2 {
-    font-size: 2.3rem;
+    font-size: 1.8rem;
   }
 
   .heading-section p {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 
   form {
-    padding: 30px 20px;
-    gap: 18px;
+    padding: 28px 20px;
+    gap: 16px;
   }
 
   input,
   textarea {
-    padding: 13px 15px;
+    padding: 12px 14px;
+    font-size: 0.85rem;
   }
 }

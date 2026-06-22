@@ -76,6 +76,8 @@ else{
 }
   };
 
+
+
   return (
     <div>
         {form.islogin === true ? (
@@ -89,8 +91,8 @@ else{
             Login to continue your journey with Stay-Casa.
           </p>
 
-          <p  onClick={()=>setForm({...form , islogin: false})}>dont have an account sign in.</p>
 
+          <p  onClick={()=>setForm({...form , islogin: false})}>dont have an account sign in.</p>
           <form onSubmit={handleLogin}>
             <div className="input-group">
               <input
@@ -111,14 +113,15 @@ else{
                 onChange={handleChange}
               />
             </div>
+<p
+  className="forgot-password"
+  onClick={() => navigate("/forgot-password")}
+>
+  Forgot Password?
+</p>
 
-            <p
-              className="forgot-password"
-              onClick={() => navigate("/forgot-password")}
-            >
-              Forgot Password?
-            </p>
 
+            
             <button type="submit" className="login-btn">
               Login
             </button>
@@ -171,6 +174,8 @@ else{
               />
             </div>
 
+
+
             
 
             <button type="submit" className="login-btn">
@@ -179,10 +184,6 @@ else{
           </form>
   </div>
       </div>
-
-
-
-
 
 </>
 

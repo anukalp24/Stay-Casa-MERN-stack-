@@ -20,7 +20,6 @@ const newUser = async (req, res) => {
       password,
       10
     );
-
     const userInfo = await User.create({
       name,
       email,
@@ -38,7 +37,7 @@ const newUser = async (req, res) => {
       message: "Account Created",
       token,
     });
-  } catch (error) {
+  } catch (error) { 
     console.log(error);
 
     res.status(500).json({
@@ -46,5 +45,4 @@ const newUser = async (req, res) => {
     });
   }
 };
-
 module.exports = newUser;

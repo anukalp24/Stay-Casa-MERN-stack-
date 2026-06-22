@@ -1,9 +1,18 @@
 const express = require("express")
-const userpost = express.Router()
+const user = express.Router()
 const addhome = require("../Controllers/Home/addhomeController")
 const { client } = require("../database/connection")
+const gethomes = require("../Controllers/Home/homesControllers")
 const authMiddleware = require("../Middleware/authMiddleware")
+const searchHomes = require("../Controllers/Home/SearchController")
 const upload = require("../Middleware/upload")
-userpost.post("/addhome" ,authMiddleware , upload.single("image") ,  addhome )
 
-module.exports = userpost
+const GetIndividualHomes = require("../Controllers/Home/GetSingleHome")
+
+
+
+user.post("/addhome" ,authMiddleware , upload.single("image") ,  addhome )
+user.get("/" , gethomes )
+user.get("/home/:id" , GetIndividualHomes )
+user.post("/search" , searchHomes)
+module.exports = user

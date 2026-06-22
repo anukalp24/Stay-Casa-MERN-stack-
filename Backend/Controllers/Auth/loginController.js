@@ -19,14 +19,15 @@ console.log("controller also runnign babay why errro i dont know")
                 message: "User not found"
             })
         }
-        
+
         const isMatch = await bcrypt.compare(password , existingUser.password)
         if(!isMatch){
             return res.status(401).json({
                 message: "Wrong Password"
             })
         }
-       
+
+
 
 const token = jwt.sign({
    id: existingUser._id
@@ -46,6 +47,5 @@ const token = jwt.sign({
         })
     }
 }
-
 
 module.exports =  login

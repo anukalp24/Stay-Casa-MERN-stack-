@@ -18,27 +18,11 @@ const [open, setopen] = useState(false)
         <Link to="/">Home</Link>
         <Link to="/About">About</Link>
         <Link to="/Contact">Contact</Link>
-        <Link to="/dashboard">WishList</Link>
-        <Link to="/stays">Stays</Link>
+        <Link to="/wishlist">WishList</Link>
         <Link id='login-btn' to="/auth">Login</Link>
+        <Link  to="/dashboard">Dashboard</Link>
         <div onMouseEnter={()=>setopen(true)} onMouseLeave={()=>setopen(false)} className="dropdown-btn">
-
-<div className="dropdown-menu">
-<Link to="/stays" id='btn'>Stays</Link>
-{open &&(
-  <>
-  <div className="options">
-  <p id='category'  >Beach</p>
-  <p id='category' >Mountain</p>
-  </div>
-  </>
-)}
-  </div>
-
-
-        </div>
-  
-     
+     </div>
      </div>
 
         <div className="host-box">

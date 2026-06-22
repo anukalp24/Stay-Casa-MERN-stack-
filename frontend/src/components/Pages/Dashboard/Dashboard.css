@@ -1,27 +1,18 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-}
-
-/* SUCCESS CONTAINER */
 .success-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%);
+  background: var(--color-bg);
   padding-bottom: 80px;
 }
 
-/* HERO SECTION */
 .success-hero {
-  min-height: 50vh;
-  background: linear-gradient(135deg, #6366F1 0%, #EC4899 100%);
+  min-height: 40vh;
+  background: var(--color-primary);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  color: white;
+  color: var(--color-text-inverse);
   padding: 80px 40px;
   position: relative;
   overflow: hidden;
@@ -30,107 +21,117 @@
 .success-hero::before {
   content: "";
   position: absolute;
-  top: -50%;
-  right: -10%;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+  top: -40%;
+  right: -8%;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.success-hero::after {
+  content: "";
+  position: absolute;
+  bottom: -35%;
+  left: -5%;
+  width: 380px;
+  height: 380px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.06) 0%, transparent 70%);
   border-radius: 50%;
   pointer-events: none;
 }
 
 .success-hero h1 {
-  font-size: 3.5rem;
-  margin-bottom: 20px;
+  font-size: 2.8rem;
+  margin-bottom: 14px;
   font-weight: 800;
   letter-spacing: -1px;
   z-index: 1;
 }
 
 .success-hero p {
-  font-size: 1.2rem;
-  max-width: 700px;
+  font-size: 1.05rem;
+  max-width: 540px;
   line-height: 1.7;
-  opacity: 0.95;
+  opacity: 0.9;
   z-index: 1;
 }
 
-/* PROPERTY SECTION */
 .property-wrapper {
   width: 90%;
-  max-width: 1400px;
+  max-width: 1280px;
   margin: -50px auto 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-  gap: 32px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
   position: relative;
   z-index: 2;
 }
 
-/* PROPERTY CARD */
 .box {
-  background: white;
-  border-radius: 16px;
+  background: var(--color-surface);
+  border-radius: var(--radius-2xl);
   overflow: hidden;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 1px solid rgba(0, 0, 0, 0.02);
+  box-shadow: var(--shadow-lg);
+  transition: all var(--transition-slow);
+  border: 1px solid var(--color-border-light);
 }
 
 .box:hover {
-  transform: translateY(-16px);
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-xl);
 }
 
 .box img {
   width: 100%;
-  height: 240px;
+  height: 220px;
   object-fit: cover;
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .box:hover img {
-  transform: scale(1.08);
+  transform: scale(1.05);
 }
 
 .property-content {
-  padding: 28px;
+  padding: 22px 24px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
 }
 
 .property-content h2 {
-  font-size: 1.5rem;
-  margin-bottom: 8px;
-  color: #111827;
+  font-size: 1.2rem;
+  margin-bottom: 2px;
+  color: var(--color-text-primary);
   font-weight: 700;
 }
 
 .property-content p {
-  color: #6B7280;
-  margin-bottom: 4px;
+  color: var(--color-text-secondary);
+  margin-bottom: 2px;
   line-height: 1.6;
-  font-weight: 500;
+  font-size: 0.9rem;
 }
 
 .price {
-  color: #EC4899 !important;
-  font-size: 1.4rem;
+  color: var(--color-primary);
+  font-size: 1.2rem;
   font-weight: 800;
-  margin-top: 8px;
+  margin-top: 4px;
 }
 
 .rating {
   font-weight: 700;
-  color: #111827;
-  font-size: 1rem;
+  color: var(--color-text-primary);
+  font-size: 0.9rem;
 }
 
 .button-group {
   display: flex;
-  gap: 12px;
-  margin-top: 16px;
+  gap: 10px;
+  margin-top: 12px;
 }
 
 .delete-btn,
@@ -139,89 +140,95 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 12px 16px;
-  border-radius: 10px;
-  font-size: 0.95rem;
-  font-weight: 600;
+  gap: 6px;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  font-size: 0.8rem;
+  font-weight: 700;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all var(--transition-base);
   border: 1.5px solid;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .delete-btn {
-  border-color: #EF4444;
-  background: white;
-  color: #EF4444;
+  border-color: var(--color-primary);
+  background: var(--color-surface);
+  color: var(--color-primary);
 }
 
 .delete-btn:hover {
-  background: #EF4444;
-  color: white;
+  background: var(--color-primary);
+  color: var(--color-text-inverse);
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(239, 68, 68, 0.2);
+  box-shadow: 0 6px 16px rgba(212, 119, 91, 0.25);
+}
+
+.delete-btn:active {
+  transform: scale(0.97);
+}
+
+.delete-btn svg {
+  transition: transform var(--transition-fast);
+}
+
+.delete-btn:hover svg {
+  transform: rotate(-10deg) scale(1.1);
 }
 
 .edit-btn {
-  border-color: #6366F1;
-  background: white;
-  color: #6366F1;
+  border-color: var(--color-secondary);
+  background: var(--color-surface);
+  color: var(--color-secondary);
 }
 
 .edit-btn:hover {
-  background: linear-gradient(135deg, #6366F1 0%, #EC4899 100%);
-  color: white;
+  background: var(--color-secondary);
+  color: var(--color-text-inverse);
   border-color: transparent;
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+  box-shadow: 0 6px 16px rgba(74, 139, 122, 0.25);
 }
 
-.delete-btn svg,
+.edit-btn:active {
+  transform: scale(0.97);
+}
+
 .edit-btn svg {
-  width: 18px;
-  height: 18px;
-  transition: transform 0.3s ease;
+  transition: transform var(--transition-fast);
 }
 
-.delete-btn:hover svg,
 .edit-btn:hover svg {
-  transform: scale(1.1);
+  transform: rotate(-12deg) scale(1.1);
 }
-
-
-
 
 .wishlist-btn {
   display: flex;
   align-items: center;
-  gap: 8px;
-
+  gap: 6px;
   padding: 10px 18px;
   border: none;
-  border-radius: 12px;
-
-  background: #fff0f3;
-  color: #e63946;
-
-  font-size: 15px;
-  font-weight: 600;
-
+  border-radius: var(--radius-md);
+  background: rgba(232, 168, 124, 0.12);
+  color: var(--color-primary-dark);
+  font-size: 0.85rem;
+  font-weight: 700;
   cursor: pointer;
-  transition: all 0.3s ease;
-
-  box-shadow: 0 4px 12px rgba(230, 57, 70, 0.15);
+  transition: all var(--transition-base);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .wishlist-btn svg {
-  transition: transform 0.3s ease;
+  transition: transform var(--transition-fast);
 }
 
 .wishlist-btn:hover {
-  background: #e63946;
-  color: white;
-
+  background: var(--color-primary);
+  color: var(--color-text-inverse);
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(230, 57, 70, 0.3);
+  box-shadow: 0 6px 16px rgba(212, 119, 91, 0.25);
 }
 
 .wishlist-btn:hover svg {
@@ -232,90 +239,30 @@
   transform: scale(0.96);
 }
 
-
-
-
-
-
-
-
 @media (max-width: 768px) {
   .success-hero {
     padding: 60px 20px;
+    min-height: 30vh;
   }
 
   .success-hero h1 {
-    font-size: 2.5rem;
+    font-size: 1.8rem;
   }
 
   .success-hero p {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 
   .property-wrapper {
     width: 95%;
-    gap: 24px;
+    gap: 18px;
   }
 
   .property-content {
-    padding: 20px;
+    padding: 18px 20px;
   }
 
   .button-group {
     flex-direction: column;
   }
 }
-
-.delete-btn:hover svg {
-  transform: rotate(-10deg) scale(1.1);
-}
-
-.delete-btn:active {
-  transform: scale(0.96);
-}
-
-
-.edit-btn {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
-  padding: 10px 18px;
-  border: 1px solid #0077ff;
-  border-radius: 12px;
-
-  background: white;
-  color: #0077ff;
-
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-
-  transition: all 0.3s ease;
-}
-
-.edit-btn svg {
-  transition: transform 0.3s ease;
-}
-
-.edit-btn:hover {
-  background: #0077ff;
-  color: white;
-
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 119, 255, 0.25);
-}
-
-.edit-btn:hover svg {
-  transform: rotate(-12deg) scale(1.1);
-}
-
-.edit-btn:active {
-  transform: scale(0.96);
-}
-
-
-
-
-
-

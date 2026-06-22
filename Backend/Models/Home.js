@@ -39,7 +39,25 @@ const HomeSchema = new mongoose.Schema({
      owner: {
            type: mongoose.Schema.Types.ObjectId,
            ref: "Users"
+       },
+
+       category:{
+         type: String
+       },
+       country: {
+         type: String
        }
+       
+})
+
+
+
+HomeSchema.index({
+   owner: 1
+})
+
+HomeSchema.index({
+    cityname: 1,   
 })
 
 

@@ -1,12 +1,12 @@
-const express = require("express")
-const wishlist =  express.Router()
-const wishlistfunc = require("../Controllers/Wishlist/wishlistController")
-const getwishlist = require("../Controllers/Wishlist/WishlistGetcontroller")
-const RemoveWishlist = require("../Controllers/Wishlist/RemoveWishlistController")
-const authMiddleware = require("../Middleware/authMiddleware")
+// const express = require("express")
+// const wishlist =  express.Router()
+// const wishlistfunc = require("../Controllers/Wishlist/wishlistController")
+// const getwishlist = require("../Controllers/Wishlist/WishlistGetcontroller")
+// const RemoveWishlist = require("../Controllers/Wishlist/RemoveWishlistController")
+// const authMiddleware = require("../Middleware/authMiddleware")
 
 
-wishlist.put("/wishlist/:id" , authMiddleware ,  wishlistfunc)
-wishlist.get("/wishlist" , getwishlist)
-wishlist.delete("/Removewishlist/:id" , RemoveWishlist)
-module.exports = wishlist
+// wishlist.put("/wishlist/:id" , authMiddleware ,  wishlistfunc)
+// wishlist.get("/wishlist" , getwishlist)
+// wishlist.delete("/Removewishlist/:id" , RemoveWishlist)
+// module.exports = wishlist

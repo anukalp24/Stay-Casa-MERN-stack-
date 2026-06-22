@@ -29,7 +29,7 @@ const getdashboardhomes =  async ()=>{
 
 getdashboardhomes()
 }, [])
-
+ 
 const handleedit  =(home)=>{
   setform(home)
  const newItem = dashboard.filter(val => {
@@ -39,7 +39,6 @@ const handleedit  =(home)=>{
   setdashboard(newItem)
 navigate("/Host")
 }
-
 
 const HandleDelete =  async (id)=>{
  let api =  await fetch(
@@ -87,10 +86,11 @@ Manage your stays, pricing and bookings like Airbnb.
 <div key={index} className="box">
 
 <img src={val.file} alt="" />
+
 <div className="property-content">
 
 <h2>{val.propertyName}</h2>
-
+<h2>{val.category}</h2>
 <p>{val.cityname}</p>
 
 <p className="price">₹{val.price}</p>
@@ -134,14 +134,8 @@ Manage your stays, pricing and bookings like Airbnb.
       d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.586-9.414a2 2 0 112.828 2.828L12 14l-4 1 1-4 8.414-8.414z"
     />
   </svg>
-
   Edit
 </button>
-
-
-
-
-
 </div>
 
 </div>

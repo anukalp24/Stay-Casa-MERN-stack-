@@ -3,13 +3,15 @@ import Navbar from '../../Navbar/Navbar'
 import Hero from '../../Hero-Section/Hero'
 import Footer from '../../Footer/Footer'
 import Categories from '../Categories/Categories'
-const Home = () => {
+import Stays from "../Stays/Stays"
+const HomeDetails = () => {
 
   return (
         <div className="home-parent-container">
 
       <Navbar/>
       <Hero/>
+<Stays/>
 <Categories/>
       <Footer/>
         </div>
@@ -17,4 +19,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default HomeDetails

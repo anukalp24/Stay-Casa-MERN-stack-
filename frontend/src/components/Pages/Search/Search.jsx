@@ -1,0 +1,70 @@
+import React from 'react'
+import { useState, useEffect, useContext } from 'react'
+import { info } from '../..'
+import { useNavigate } from 'react-router-dom'
+import "./Search.css"
+
+const Search = () => {
+  const { search ,   searchResult , setsearchResult  } = useContext(info)
+
+  
+  
+  useEffect(() => {
+  async function  searchfunc (){
+
+    const request = await fetch(`http://localhost:4090/search` , {
+      headers:  {"Content-Type": "application/json"},
+      method: "POST",
+      body: JSON.stringify({
+  name: localStorage.getItem("search")
+})
+    })
+
+    const response = await request.json()
+    setsearchResult(response)
+  }
+console.log(localStorage.getItem("search"))
+  searchfunc()
+}, [])
+
+
+
+  const navigate = useNavigate()
+
+  return (
+    <div className="search-page">
+      <div className="search-header">
+        <h1>Search Results</h1>
+        <p>{searchResult?.home?.length || 0} {searchResult?.home?.length === 1 ? "property" : "properties"} found</p>
+      </div>
+
+      {searchResult?.home?.length > 0 ? (
+        <div className="search-grid">
+          {searchResult.home.map((homes, index) => (
+            <div key={index} className="search-card" onClick={() => navigate(`/home/${homes._id}`)}>
+              <img className="search-card-img" src={homes.file} alt={homes.propertyName} />
+              <div className="search-card-body">
+                <h3 className="search-card-title">{homes.propertyName}</h3>
+                <p className="search-card-location">📍 {homes.cityname}</p>
+                <p className="search-card-desc" style={{ fontSize: "0.85rem", color: "#717171", margin: "0 0 6px", lineHeight: 1.5, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{homes.desc}</p>
+                <div className="search-card-divider" />
+                <div className="search-card-footer">
+                  <span className="search-card-price">₹{homes.price}<span> / night</span></span>
+                  <span className="search-card-rating"><span className="star">★</span> {homes.rating}</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="search-empty">
+          <div className="search-empty-icon">🔍</div>
+          <h2>No properties found</h2>
+          <p>Try searching for a different city or destination.</p>
+        </div>
+      )}
+    </div>
+  )
+}
+
+export default Search

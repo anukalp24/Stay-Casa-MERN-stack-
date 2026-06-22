@@ -1,152 +1,147 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-}
-
 .card-parent {
-  width: 100%;
-  min-height: 100vh;
-  padding: 100px 70px;
-  background: linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%);
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 32px 24px 80px;
 }
 
 .card-intro {
-  margin-bottom: 60px;
+  margin-bottom: 24px;
 }
 
 .card-intro span {
-  font-size: 3rem;
-  font-weight: 800;
-  color: #111827;
-  letter-spacing: -1px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #222;
 }
 
 .card-section {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-  gap: 32px;
-  max-width: 1600px;
-  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
 }
 
-.card-boxes {
-  background: white;
-  border-radius: 16px;
-  overflow: hidden;
-  position: relative;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+.airbnb-card {
+  width: 200px;
   cursor: pointer;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(0, 0, 0, 0.02);
+  flex-shrink: 0;
 }
 
-.card-boxes:hover {
-  transform: translateY(-12px);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
-}
-
-/* .card-boxes::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0));
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  z-index: 1;
-}
-
-.card-boxes:hover::before {
-  opacity: 1;
-} */
-
-#card-img {
+.airbnb-image-wrapper {
+  position: relative;
   width: 100%;
-  height: 240px;
-  object-fit: cover;
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  height: 180px;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #f7f7f7;
 }
 
-.card-boxes:hover #card-img {
+.airbnb-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.airbnb-card:hover .airbnb-image {
+  transform: scale(1.05);
+}
+
+.heart-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+  transition: transform 0.15s ease;
+  z-index: 2;
+}
+
+.heart-icon:hover {
   transform: scale(1.1);
 }
 
-.sec-1 {
-  position: absolute;
-  top: 16px;
-  left: 16px;
-  right: 16px;
-  z-index: 3;
+.heart-icon:active {
+  transform: scale(0.9);
+}
+
+.airbnb-content {
+  padding: 8px 2px 0;
+}
+
+.airbnb-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.sec-1 span:nth-child(1) {
-  background: rgba(255, 255, 255, 0.96);
-  color: #111827;
-  padding: 8px 16px;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  font-weight: 700;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-}
-
-.sec-1 span:nth-child(2) {
-  background: linear-gradient(135deg, #6366F1 0%, #EC4899 100%);
-  color: white;
-  padding: 8px 14px;
-  border-radius: 8px;
-  font-size: 0.88rem;
-  font-weight: 700;
-}
-
-.sec-2 {
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.sec-2 span:nth-child(1) {
-  font-size: 1rem;
-  color: #6B7280;
+.location {
+  font-size: 13px;
   font-weight: 600;
+  color: #222;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 6px;
 }
 
-.sec-2 span:nth-child(2) {
-  color: #4B5563;
-  font-size: 0.95rem;
-  line-height: 1.6;
+.rating {
+  font-size: 12px;
+  color: #222;
+  font-weight: 500;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
-.sec-2 span:nth-child(3) {
-  font-size: 1.35rem;
-  background: linear-gradient(135deg, #6366F1 0%, #EC4899 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-weight: 800;
-  margin-top: 8px;
+.category {
+  margin-top: 1px;
+  font-size: 12px;
+  color: #717171;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.description {
+  margin-top: 1px;
+  font-size: 12px;
+  color: #717171;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.price {
+  margin-top: 4px;
+  font-size: 13px;
+  color: #222;
+}
+
+.price span {
+  font-weight: 700;
 }
 
 @media (max-width: 768px) {
   .card-parent {
-    padding: 60px 20px;
+    padding: 24px 16px 60px;
   }
 
   .card-intro span {
-    font-size: 2.2rem;
+    font-size: 1.25rem;
   }
 
   .card-section {
-    grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 12px;
   }
 
-  #card-img {
-    height: 220px;
+  .airbnb-card {
+    width: 160px;
+  }
+
+  .airbnb-image-wrapper {
+    height: 150px;
   }
 }

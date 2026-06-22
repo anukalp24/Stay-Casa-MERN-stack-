@@ -6,6 +6,13 @@ const token = req.headers.authorization
 
 const decoded = jwt.verify(token , process.env.JWT_SECRET)
 console.log(decoded)
+// {
+//     id: "abc123userId",
+//     iat: 1718600000    // issued at timestamp (added automatically by jwt)
+// }
+// this is decoded bro
+
+
 req.user = decoded
 // we are using decoded because right now its a plain string so we have to extract id and other things seperately for database
 // here we are sending the token as controller ko bhi pata chalna chahiye

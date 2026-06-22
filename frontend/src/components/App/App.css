@@ -1,18 +1,7 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: #FFFFFF;
-  color: #111827;
-}
-
 .home-parent-container {
   display: flex;
   flex-direction: column;
   width: 100%;
-  background: #FFFFFF;
+  min-height: 100vh;
+  background: var(--color-bg);
 }
