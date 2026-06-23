@@ -7,7 +7,10 @@ import Footer from 'components/Footer/Footer'
 import { useNavigate} from 'react-router-dom'
 const Card = () => {
 const navigate = useNavigate()
-  const {response , setresponse , setwishlist , wishlist , form} = useContext(info)
+  const {response , setresponse , setwishlist , wishlist , form , handleStay} = useContext(info)
+
+
+
 
 const handlewishlist  = async (val)=>{
   if(val.wishlist === true){
@@ -38,15 +41,13 @@ setresponse(
 )
 }
 
-const handleStay = (id)=>{
-  navigate(`/home/${id}`)
-}
+
   return (
     <>
     <Navbar/>
 <div className="card-parent">
     <div className="card-intro">
-    <span>Featured Destinations</span>
+    <span>Popular Stays</span>
     </div>
     <div className="card-section">
 {response.map((val, index) => (
@@ -102,10 +103,10 @@ const handleStay = (id)=>{
     </div>
   </div>
 ))}
-
-
     </div>
+
 </div>
+<Footer/>
   </>        
   )
 }

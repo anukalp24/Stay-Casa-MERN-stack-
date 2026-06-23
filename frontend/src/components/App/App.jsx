@@ -12,8 +12,13 @@ import ForgotPassword from '../Pages/ForgetPassword/ForgotPassword'
 import ResetPassword from '../Pages/ForgetPassword/ResetPassword'
 import HomeDetails from '../Pages/HomeDetails/HomeDetails'
 import Search from '../Pages/Search/Search'
+import Stays from "../Pages/Stays/Stays"
+import Categories from '../Pages/Categories/Categories'
+import { useNavigate } from 'react-router-dom'
 import { info } from '..'
 function App() {
+  const navigate = useNavigate()
+
 const [response, setresponse] = useState([])
 const [wishlist, setwishlist] = useState([])
 const [search, setsearch] = useState("")
@@ -34,9 +39,12 @@ const FetchHomes = async ()=>{
     setresponse(response2)
 }
 FetchHomes()
-
 }, [])
 
+
+const handleStay = (id)=>{
+  navigate(`/home/${id}`)
+}
 // useEffect(() => {
 // const wishlist = async ()=>{
 //     const api =   await fetch("http://localhost:4090/wishlist")
@@ -49,7 +57,7 @@ FetchHomes()
 
   return (
     <>
-  <info.Provider value={{response , setresponse , form , setform , wishlist , setwishlist , search , setsearch , searchResult, setsearchResult}}>
+  <info.Provider value={{response , setresponse , form , setform , wishlist , setwishlist , search , setsearch , searchResult, setsearchResult , handleStay}}>
 <Routes>
 <Route path='/' element={<Home/>}></Route>
 <Route path='/About' element={<About/>}></Route>
@@ -62,6 +70,8 @@ FetchHomes()
 <Route path='/reset-password/:token' element={< ResetPassword/>}></Route>
 <Route  path='/home/:id' element={<HomeDetails/>} ></Route>
 <Route path='/search' element={<Search/>} ></Route>
+<Route path='/stays' element={<Stays/>} ></Route>
+<Route path='/categories' element={<Categories/>} ></Route>
 </Routes>
   </info.Provider>
     </>

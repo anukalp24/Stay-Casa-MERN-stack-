@@ -12,7 +12,6 @@ const addhome = async(req , res)=>{
              owner: req.user.id
         })
   console.log(req.body)
-
 // ques to ask
 // why i mean we have to pass the url like why cant we pass the img direclty form here itself??
 
@@ -25,8 +24,6 @@ const addhome = async(req , res)=>{
         })
     }
   
-
-
 // console.log(req.user)
 // will be this
 // {

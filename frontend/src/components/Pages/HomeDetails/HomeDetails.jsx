@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import "./HomeDetails.css"
 import Footer from '../../Footer/Footer'
+import Navbar from '../../Navbar/Navbar'
 const Home = () => {
   const { id } = useParams()
   const [home, sethome] = useState(null)
@@ -14,12 +15,24 @@ const Home = () => {
       const result = await request.json()
       sethome(result)
     }
-
     homefunc()
   }, [])
 
+
+  const handleshare = async ()=>{
+    try {
+      await navigator.share({
+        title: "UrbanStay",
+        text: "Check out this amazing property!",
+        url: window.location.href
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
   return (
     <>
+    <Navbar/>
     <div className="hd-wrapper">
 
       <div className="hd-hero">
@@ -34,11 +47,22 @@ const Home = () => {
       <div className="hd-body">
 
         <div className="hd-main">
-
           <div className="hd-title-row">
             <h1 className="hd-title">{home?.home?.propertyName}</h1>
             <div className="hd-share-row">
-              <button className="hd-share-btn">Share</button>
+<svg onClick={handleshare}
+  viewBox="0 0 50 50"
+  fill="currentColor"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path d="M38.288 10.297l1.414 1.415-14.99 14.99-1.414-1.414z" />
+  <path d="M40 20h-2v-8h-8v-2h10z" />
+  <path d="M35 38H15c-1.7 0-3-1.3-3-3V15c0-1.7 1.3-3 3-3h11v2H15c-.6 0-1 .4-1 1v20c0 .6.4 1 1 1h20c.6 0 1-.4 1-1V24h2v11c0 1.7-1.3 3-3 3z" />
+</svg>
+
+ 
+
+
             </div>
           </div>
 
@@ -141,7 +165,7 @@ const Home = () => {
               </div>
               <div className="hd-price-row total">
                 <span>Total</span>
-                <span>₹{Number(home?.home?.price || 0) + 800}</span>
+                <span>₹{Number(home?.home?.price) + 800}</span>
               </div>
             </div>
 

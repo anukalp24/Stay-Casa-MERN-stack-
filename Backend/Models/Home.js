@@ -61,6 +61,8 @@ HomeSchema.index({
 })
 
 
+
+
 // schema is just a blueprint baby
 // A Home should have:
 // title

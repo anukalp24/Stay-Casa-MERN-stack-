@@ -1,91 +1,64 @@
-import React from 'react'
+import React  from 'react'
+import {  useEffect , useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import Navbar from '../../Navbar/Navbar'
+import Footer from '../../Footer/Footer'
 import "./Categories.css"
 
 const Categories = () => {
+  const Navigate = useNavigate()
+  const [message, setmessage] = useState("")
+  const [categoryResponse, setcategoryResponse] = useState(null)
+ 
+
+useEffect(() => {
+ const categoryfunc = async ()=>{
+  const request = await fetch(`http://localhost:4090/categories` , {
+    headers:  {"Content-Type": "application/json"},
+    method: 'POST',
+    body: JSON.stringify({
+      categories: localStorage.getItem("category")
+    })
+  })
+
+  const result = await request.json()
+setcategoryResponse(result.categories)
+setmessage(result.message)
+ }
+
+ categoryfunc()
+}, [])
+
   return (
     <>
-<div className="lifestyle-section">
-<div className="lifestyle-heading">
-<h1>Discover Unique Stays</h1>
-<p>
-Explore beautifully curated stays for every kind of traveler —
-from luxury beachfront villas to peaceful mountain escapes.
-</p>
-</div>
-<div className="lifestyle-wrapper">
-<div className="stay-card">
-<img src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2" alt="" />
-<div className="stay-content">
-<h2>Beach Villas</h2>
-<p>Luxury seaside stays with breathtaking sunset views.</p>
-</div>
-</div>
-<div className="stay-card">
-<img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb" alt="" />
-<div className="stay-content">
-<h2>Mountain Retreats</h2>
-<p>Peaceful stays surrounded by forests and nature.</p>
-</div>
-</div>
-<div className="stay-card">
+    
+<Navbar/>
+    <div className="category-page">
+      <div className="category-header">
+        <h1>Search Results</h1>
+      </div>
 
-<img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267" alt="" />
+    
+        <div className="category-grid">
+          {categoryResponse?.map((homes, index) => (
+            <div key={index} className="category-card" onClick={() => Navigate(`/home/${homes._id}`)}>
+              <img className="category-card-img" src={homes.file} alt={homes.propertyName} />
+              <div className="category-card-body">
+                <h3 className="category-card-title">{homes.propertyName}</h3>
+                <p className="category-card-location">📍 {homes.cityname} , {homes.country}</p>
+                <p className="category-card-desc" style={{ fontSize: "0.85rem", color: "#717171", margin: "0 0 6px", lineHeight: 1.5, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{homes.desc}</p>
+                <div className="category-card-divider" />
+                <div className="category-card-footer">
+                  <span className="category-card-price">₹{homes.price}<span> / night</span></span>
+                  <span className="category-card-rating"><span className="star">★</span> {homes.rating}</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+    </div>
+    <Footer/>
 
-<div className="stay-content">
-
-<h2>Luxury Apartments</h2>
-
-<p>Modern city apartments with premium interiors.</p>
-
-</div>
-
-</div>
-
-<div className="stay-card">
-
-<img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85" alt="" />
-
-<div className="stay-content">
-
-<h2>Cozy Cabins</h2>
-
-<p>Warm wooden cabins perfect for winter escapes.</p>
-
-</div>
-
-</div>
-
-<div className="stay-card">
-
-<img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee" alt="" />
-
-<div className="stay-content">
-
-<h2>Lake View Homes</h2>
-
-<p>Relaxing waterfront stays with stunning scenery.</p>
-
-</div>
-
-</div>
-
-<div className="stay-card">
-
-<img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750" alt="" />
-
-<div className="stay-content">
-
-<h2>Modern Farmhouses</h2>
-
-<p>Spacious countryside homes with luxury comfort.</p>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
 
     </>
   )

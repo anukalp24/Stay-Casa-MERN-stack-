@@ -3,15 +3,15 @@ import { useState, useEffect, useContext } from 'react'
 import { info } from '../..'
 import { useNavigate } from 'react-router-dom'
 import "./Search.css"
-
+import Navbar from '../../Navbar/Navbar'
+import Footer from '../../Footer/Footer'
 const Search = () => {
-  const { search ,   searchResult , setsearchResult  } = useContext(info)
+  const {  searchResult , setsearchResult  } = useContext(info)
 
   
   
   useEffect(() => {
   async function  searchfunc (){
-
     const request = await fetch(`http://localhost:4090/search` , {
       headers:  {"Content-Type": "application/json"},
       method: "POST",
@@ -32,6 +32,8 @@ console.log(localStorage.getItem("search"))
   const navigate = useNavigate()
 
   return (
+    <>
+      <Navbar/>
     <div className="search-page">
       <div className="search-header">
         <h1>Search Results</h1>
@@ -45,7 +47,7 @@ console.log(localStorage.getItem("search"))
               <img className="search-card-img" src={homes.file} alt={homes.propertyName} />
               <div className="search-card-body">
                 <h3 className="search-card-title">{homes.propertyName}</h3>
-                <p className="search-card-location">📍 {homes.cityname}</p>
+                <p className="search-card-location">📍 {homes.cityname} , {homes.country}</p>
                 <p className="search-card-desc" style={{ fontSize: "0.85rem", color: "#717171", margin: "0 0 6px", lineHeight: 1.5, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{homes.desc}</p>
                 <div className="search-card-divider" />
                 <div className="search-card-footer">
@@ -64,6 +66,8 @@ console.log(localStorage.getItem("search"))
         </div>
       )}
     </div>
+    <Footer/>
+          </>
   )
 }
 

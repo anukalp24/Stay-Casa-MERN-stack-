@@ -28,7 +28,7 @@ const HandleAdd =  async()=>{
             Discover luxury villas, cozy cabins and modern apartments around the world.
         </p>
         <div className="search-box">
-          <input  onChange={(e)=>setsearch(e.target.value)}  placeholder='Search stays' type="text"  id="search-input" />
+          <input  onChange={(e)=>setsearch(e.target.value)}  placeholder='Search by city or category' type="text"  id="search-input" />
           <button  onClick={HandleAdd} id='search'>Search</button>
         </div>
 

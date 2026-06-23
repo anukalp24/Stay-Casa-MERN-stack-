@@ -55,14 +55,13 @@
 
 .hd-title-row {
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
+  justify-content: center;
   gap: 24px;
   margin-bottom: 8px;
 }
 
 .hd-title {
-  font-size: 1.75rem;
+  font-size: 1.70rem;
   font-weight: 600;
   color: #222;
   line-height: 1.2;
@@ -77,24 +76,16 @@
   flex-shrink: 0;
 }
 
-.hd-share-btn {
-  background: none;
-  border: none;
-  padding: 8px;
-  border-radius: 8px;
+.hd-share-row svg {
   cursor: pointer;
-  font-size: 0.9rem;
-  font-weight: 600;
+  width: 25px;
+  height: 25px;
   color: #222;
-  text-decoration: underline;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  transition: background 0.2s;
+  transition: color 0.2s, opacity 0.2s;
 }
-
-.hd-share-btn:hover {
-  background: #f7f7f7;
+.hd-share-row svg:hover {
+  color: #ff385c;
+  opacity: 0.8;
 }
 
 .hd-meta-row {
