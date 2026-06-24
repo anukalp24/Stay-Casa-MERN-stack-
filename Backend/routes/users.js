@@ -10,7 +10,6 @@ const categories = require("../Controllers/Home/Categories")
 const GetIndividualHomes = require("../Controllers/Home/GetSingleHome")
 
 
-
 user.post("/addhome" ,authMiddleware , upload.single("image") ,  addhome )
 user.get("/" , gethomes )
 user.get("/home/:id" , GetIndividualHomes )

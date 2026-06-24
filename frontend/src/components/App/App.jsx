@@ -4,7 +4,8 @@ import About from '../Pages/FooterPages/About/About'
 import Contact from '../Pages/Contact/Contact'
 import Home from '../Pages/Home/Home'
 import Host from '../Pages/Host/Host'
-import Dashboard from '../Pages/Dashboard/Dashboard'
+import Dashboard from '../Pages/Dashboard/DashboardHomes'
+import DashboardDetails from "../Pages/Dashboard/DashboardHomesDetails"
 import { useState , useEffect } from 'react'
 import Wishlist from '../Pages/Wishlist/Wishlist'
 import Login from '../Pages/Login/Login'
@@ -32,6 +33,7 @@ price:"",
 rating: "",
 desc: "",
 })
+const [dashboard, setdashboard] = useState([]) 
 useEffect(() => {
 const FetchHomes = async ()=>{
     const api =   await fetch("http://localhost:4090/")
@@ -45,6 +47,8 @@ FetchHomes()
 const handleStay = (id)=>{
   navigate(`/home/${id}`)
 }
+
+
 // useEffect(() => {
 // const wishlist = async ()=>{
 //     const api =   await fetch("http://localhost:4090/wishlist")
@@ -57,7 +61,7 @@ const handleStay = (id)=>{
 
   return (
     <>
-  <info.Provider value={{response , setresponse , form , setform , wishlist , setwishlist , search , setsearch , searchResult, setsearchResult , handleStay}}>
+  <info.Provider value={{response , setresponse , form , setform , wishlist , setwishlist , search , setsearch , searchResult, setsearchResult , handleStay , dashboard , setdashboard}}>
 <Routes>
 <Route path='/' element={<Home/>}></Route>
 <Route path='/About' element={<About/>}></Route>
@@ -72,6 +76,7 @@ const handleStay = (id)=>{
 <Route path='/search' element={<Search/>} ></Route>
 <Route path='/stays' element={<Stays/>} ></Route>
 <Route path='/categories' element={<Categories/>} ></Route>
+<Route path='/dashboardHomesDetails/:_id' element={<DashboardDetails/>}></Route>
 </Routes>
   </info.Provider>
     </>

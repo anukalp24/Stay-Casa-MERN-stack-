@@ -1,0 +1,146 @@
+.dashboardhomesdetails-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 32px 24px 80px;
+  margin-top: 100px;
+}
+
+.dashboardhomesdetails-image-section {
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 28px;
+}
+
+.dashboardhomesdetails-image {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  display: block;
+  border-radius: 16px;
+}
+
+.dashboardhomesdetails-content {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 16px;
+  padding: 28px 30px;
+}
+
+.dashboardhomesdetails-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #222;
+  margin: 0 0 8px;
+}
+
+.dashboardhomesdetails-location {
+  font-size: 1rem;
+  color: #717171;
+  margin: 0 0 6px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.dashboardhomesdetails-category {
+  display: inline-block;
+  font-size: 0.85rem;
+  color: #717171;
+  background: #f7f7f7;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 16px;
+}
+
+.dashboardhomesdetails-description {
+  font-size: 1rem;
+  color: #444;
+  line-height: 1.7;
+  margin: 0 0 6px;
+}
+
+.dashboardhomesdetails-divider {
+  height: 1px;
+  background: #eee;
+  margin: 20px 0;
+}
+
+.dashboardhomesdetails-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dashboardhomesdetails-price {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #222;
+}
+
+.dashboardhomesdetails-rating {
+  font-size: 1rem;
+  color: #222;
+  font-weight: 500;
+}
+
+.dashboardhomesdetails-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.dashboardhomesdetails-edit-btn,
+.dashboardhomesdetails-delete-btn {
+  flex: 1;
+  border: none;
+  border-radius: 10px;
+  padding: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: 0.2s ease;
+}
+
+.dashboardhomesdetails-edit-btn {
+  background: #222;
+  color: white;
+}
+
+.dashboardhomesdetails-edit-btn:hover {
+  opacity: 0.9;
+}
+
+.dashboardhomesdetails-delete-btn {
+  background: #ff385c;
+  color: white;
+}
+
+.dashboardhomesdetails-delete-btn:hover {
+  background: #e31c5f;
+}
+
+@media (max-width: 700px) {
+  .dashboardhomesdetails-wrapper {
+    padding: 20px 16px 60px;
+    margin-top: 80px;
+  }
+
+  .dashboardhomesdetails-image {
+    height: 260px;
+  }
+
+  .dashboardhomesdetails-content {
+    padding: 20px 18px;
+  }
+
+  .dashboardhomesdetails-title {
+    font-size: 1.4rem;
+  }
+
+  .dashboardhomesdetails-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+}

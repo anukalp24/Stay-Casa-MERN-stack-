@@ -51,10 +51,8 @@ if(home.owner.toString() !== req.user.id){
     })
 }
 
-const result = await Home.findOneAndUpdate(
-
-    {_id: req.params.id } ,
-
+const result = await Home.findByIdAndUpdate(
+req.params.id ,
      req.body  , 
      {new: true}
 )

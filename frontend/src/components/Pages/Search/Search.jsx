@@ -36,8 +36,8 @@ console.log(localStorage.getItem("search"))
       <Navbar/>
     <div className="search-page">
       <div className="search-header">
-        <h1>Search Results</h1>
-        <p>{searchResult?.home?.length || 0} {searchResult?.home?.length === 1 ? "property" : "properties"} found</p>
+        <h1>Properties in {localStorage.getItem("search")}</h1>
+        <p>{searchResult?.home?.length} properties found</p>
       </div>
 
       {searchResult?.home?.length > 0 ? (

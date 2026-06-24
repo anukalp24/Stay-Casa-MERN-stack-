@@ -1,36 +1,34 @@
-
-
-.category-page {
+.dashboard-all-page {
   max-width: 1200px;
   margin: 0 auto;
   padding: 32px 24px 80px;
-    margin-top: 100px;
+  margin-top: 100px;
 }
 
-.category-header {
+.dashboard-all-header {
   margin-bottom: 32px;
 }
 
-.category-header h1 {
+.dashboard-all-header h1 {
   font-size: 1.75rem;
   font-weight: 700;
   color: #222;
   margin: 0 0 6px;
 }
 
-.category-header p {
+.dashboard-all-header p {
   font-size: 0.95rem;
   color: #717171;
   margin: 0;
 }
 
-.category-grid {
+.dashboard-all-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 24px;
 }
 
-.category-card {
+.dashboard-all-card {
   border-radius: 16px;
   overflow: hidden;
   background: #fff;
@@ -39,23 +37,23 @@
   cursor: pointer;
 }
 
-.category-card:hover {
+.dashboard-all-card:hover {
   box-shadow: 0 8px 28px rgba(0,0,0,0.08);
   transform: translateY(-4px);
 }
 
-.category-card-img {
+.dashboard-all-card-img {
   width: 100%;
   height: 220px;
   object-fit: cover;
   display: block;
 }
 
-.category-card-body {
+.dashboard-all-card-body {
   padding: 16px 18px 20px;
 }
 
-.category-card-title {
+.dashboard-all-card-title {
   font-size: 1.1rem;
   font-weight: 600;
   color: #222;
@@ -65,7 +63,7 @@
   text-overflow: ellipsis;
 }
 
-.category-card-location {
+.dashboard-all-card-location {
   font-size: 0.9rem;
   color: #717171;
   margin: 0 0 10px;
@@ -74,80 +72,104 @@
   gap: 4px;
 }
 
-.category-card-divider {
+.dashboard-all-card-category {
+  font-size: 0.85rem;
+  color: #717171;
+  margin-bottom: 8px;
+}
+
+.dashboard-all-card-desc {
+  font-size: 0.85rem;
+  color: #717171;
+  margin: 0 0 6px;
+  line-height: 1.5;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.dashboard-all-card-divider {
   height: 1px;
   background: #eee;
   margin: 10px 0;
 }
 
-.category-card-footer {
+.dashboard-all-card-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.category-card-price {
+.dashboard-all-card-price {
   font-size: 1.15rem;
   font-weight: 700;
   color: #222;
 }
 
-.category-card-price span {
+.dashboard-all-card-price span {
   font-weight: 400;
   font-size: 0.85rem;
   color: #717171;
 }
 
-.category-card-rating {
+.dashboard-all-card-rating {
   font-size: 0.9rem;
   color: #222;
   font-weight: 500;
 }
 
-.category-card-rating .star {
-  color: #ff385c;
-  margin-right: 3px;
+.dashboard-all-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
 }
 
-.category-empty {
-  text-align: center;
-  padding: 80px 20px;
-}
-
-.category-empty-icon {
-  font-size: 3.5rem;
-  margin-bottom: 16px;
-  opacity: 0.6;
-}
-
-.category-empty h2 {
-  font-size: 1.4rem;
+.dashboard-all-edit-btn,
+.dashboard-all-delete-btn {
+  flex: 1;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  cursor: pointer;
   font-weight: 600;
-  color: #222;
-  margin: 0 0 8px;
+  transition: 0.2s ease;
 }
 
-.category-empty p {
-  font-size: 0.95rem;
-  color: #717171;
-  margin: 0;
+.dashboard-all-edit-btn {
+  background: #222;
+  color: white;
+}
+
+.dashboard-all-edit-btn:hover {
+  opacity: 0.9;
+}
+
+.dashboard-all-delete-btn {
+  background: #ff385c;
+  color: white;
+}
+
+.dashboard-all-delete-btn:hover {
+  background: #e31c5f;
 }
 
 @media (max-width: 700px) {
-  .category-page {
+  .dashboard-all-page {
     padding: 20px 16px 60px;
   }
 
-  .category-grid {
+  .dashboard-all-grid {
     grid-template-columns: 1fr;
     gap: 16px;
   }
 
-  .category-header h1 {
+  .dashboard-all-header h1 {
     font-size: 1.4rem;
   }
 
-  .category-card-img {
+  .dashboard-all-card-img {
     height: 180px;
   }
 }

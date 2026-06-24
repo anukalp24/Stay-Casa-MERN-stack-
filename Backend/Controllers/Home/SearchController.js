@@ -3,10 +3,22 @@ const Home = require("../../Models/Home")
 const Search =  async (req , res)=>{
     try {
      const home  = await Home.find({
-        cityname: {
-            $regex: req.body.name,
-            $options: "i"
+        $or: [
+{
+            cityname: {
+                $regex: req.body.name,
+                $options: "i"
+            }, 
+        } ,
+
+
+        {
+            category: {
+                $regex: req.body.name,
+                $options: "i"
+            }
         }
+        ]
      })
 
 // find returns a array 
@@ -31,3 +43,4 @@ if(home.length === 0){
 }
 
 module.exports  = Search
+

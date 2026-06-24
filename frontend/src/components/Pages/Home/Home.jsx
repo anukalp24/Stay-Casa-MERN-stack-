@@ -6,6 +6,18 @@ import { info } from '../..'
 import {  useContext } from 'react'
 import "./Home.css"
 import { useNavigate } from 'react-router-dom'
+
+import {
+  Home,
+  Trees,
+  Building2,
+  House,
+  Tractor,
+  Bed,
+  KeyRound,
+} from "lucide-react";
+
+
 const HomeDetails = () => {
 
   const Navigate = useNavigate()
@@ -13,10 +25,55 @@ const {response , handleStay } = useContext(info)
 const featuredHomes = response.slice(0 , 20)
   
 
+const categories = [
+  {name: "Villa" , icon: <Home size={24}/>},
+  { name: "Cabin", icon: <Trees size={24} /> },
+  { name: "Flat", icon: <Building2 size={24} /> },
+  { name: "Bungalow", icon: <House size={24} /> },
+  { name: "Farm House", icon: <Tractor size={24} /> },
+  { name: "Suite", icon: <Bed size={24} /> },
+  { name: "Entire Home", icon: <KeyRound size={24} /> },
+]
+
   return (
     <>
     <Navbar/>
     <Hero/>
+
+
+
+<div className="category-heading">
+  <h1>Explore by Category</h1>
+
+  <p>
+    Find the perfect stay for your next trip — from luxury villas
+    and cozy cabins to spacious farm houses and entire homes.
+  </p>
+</div>
+
+<section className='category-section'>
+<div className='category-wrapper'>
+{categories.map((item)=>(
+  <div  onClick={()=> {localStorage.setItem("category" , item.name) ; Navigate("/categories")}} className="category-pill" >
+<div className='category-icon'>{item.icon}</div>
+<span>{item.name}</span>
+  </div>
+))}
+</div>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
 <div className="home-parent">
   <div className="home-intro">
     <span>Popular Stays</span>
@@ -80,79 +137,10 @@ const featuredHomes = response.slice(0 , 20)
   </button>
 </div>
 
-<div className="home-lifestyle-section">
-  <div className="home-lifestyle-heading">
-    <h1>Discover Unique Stays</h1>
-    <p>
-      Explore beautifully curated stays for every kind of traveler —
-      from luxury beachfront villas to peaceful mountain escapes.
-    </p>
-  </div>
 
-  <div className="home-lifestyle-wrapper">
 
-    <div
-      onClick={() => {
-        localStorage.setItem("category", "Villa");
-        Navigate("/categories");
-      }}
-      className="home-stay-card"
-    >
-      <div className="home-stay-content">
-        <h2>Villa</h2>
-      </div>
-    </div>
 
-    <div
-      onClick={() => {
-        localStorage.setItem("category", "Cabin");
-        Navigate("/categories");
-      }}
-      className="home-stay-card"
-    >
-      <div className="home-stay-content">
-        <h2>Cabin</h2>
-      </div>
-    </div>
 
-    <div
-      onClick={() => {
-        localStorage.setItem("category", "Flat");
-        Navigate("/categories");
-      }}
-      className="home-stay-card"
-    >
-      <div className="home-stay-content">
-        <h2>Flat</h2>
-      </div>
-    </div>
-
-    <div
-      onClick={() => {
-        localStorage.setItem("category", "Bungalow");
-        Navigate("/categories");
-      }}
-      className="home-stay-card"
-    >
-      <div className="home-stay-content">
-        <h2>Bungalow</h2>
-      </div>
-    </div>
-
-    <div
-      onClick={() => {
-        localStorage.setItem("category", "Farm House");
-        Navigate("/categories");
-      }}
-      className="home-stay-card"
-    >
-      <div className="home-stay-content">
-        <h2>Farm House</h2>
-      </div>
-    </div>
-
-  </div>
-</div>
     
     <Footer/>
             </>

@@ -11,6 +11,9 @@ const {search, setsearch  } = useContext(info)
 
 
 const HandleAdd =  async()=>{
+   if(search === ""){
+    return
+   }
   localStorage.setItem("search" , search)
   navigate("/search")
 }

@@ -35,7 +35,8 @@ setmessage(result.message)
 <Navbar/>
     <div className="category-page">
       <div className="category-header">
-        <h1>Search Results</h1>
+        <h1>Showing Results for {localStorage.getItem("category")} </h1>
+        <p>  {categoryResponse?.length} {categoryResponse?.length === 1 ? "property" : "properties"}  found</p>
       </div>
 
     
