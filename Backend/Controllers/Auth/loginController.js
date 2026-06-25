@@ -2,10 +2,9 @@ const jwt = require("jsonwebtoken")
 const User = require("../../Models/User")
 const bcrypt = require("bcryptjs")
 const login =  async (req , res)=>{
-console.log("controller also runnign babay why errro i dont know")
     try {
         const {email , password}  = req.body
-
+console.log(req.body)
         const existingUser = await User.findOne({
         email
         })

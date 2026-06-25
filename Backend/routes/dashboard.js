@@ -12,3 +12,7 @@ dashboard.delete("/deletehome/:id" , authMiddleware ,  deletehome)
 dashboard.put("/edithome/:id" , updatehome)
 dashboard.get("/dashboardHomeDetails/:id" , dashboardHomesDetails)
 module.exports = dashboard
+
+
+
+

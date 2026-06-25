@@ -95,7 +95,6 @@ else{
 
   const formData = new FormData()   // creates an empty container lika a bag 
 
-
   formData.append("propertyName" , form.propertyName)
 formData.append("category" ,form.category )
 formData.append(

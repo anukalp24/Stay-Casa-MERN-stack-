@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css"
 
 const Login = () => {
   const navigate = useNavigate();
+  const [error, seterror] = useState("")
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -20,12 +22,10 @@ const Login = () => {
   };
 
   const handleLogin = async (e) => {
-    e.preventDefault();
-
+  e.preventDefault()
     if(form.islogin === true){
-
         
-        const response = await fetch(
+        const request = await fetch(
             "http://localhost:4090/login",
             {
         method: "POST",
@@ -36,9 +36,12 @@ const Login = () => {
       }
     );
 
-    const result = await response.json();
-
-    if (response.ok) {
+    const result = await request.json();
+  if(request.status === 429){
+seterror(result.message)
+return
+  }
+    if (request.ok) {
       localStorage.setItem(
         "token",
         result.token
@@ -46,7 +49,7 @@ const Login = () => {
     
     navigate("/dashboard");
 } else {
-    alert(result.message);
+    seterror(result.message)
 }
 }
 else{
@@ -71,7 +74,7 @@ else{
     
     navigate("/dashboard");
 } else {
-    alert(result.message);
+    seterror(result.message)
 }
 }
   };
@@ -125,6 +128,7 @@ else{
             <button type="submit" className="login-btn">
               Login
             </button>
+            <p>{error}</p>
           </form>
   </div>
       </div>
