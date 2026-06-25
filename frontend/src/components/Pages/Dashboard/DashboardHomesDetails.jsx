@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom'
 import { useEffect , useState , useContext } from 'react'
 import { info } from '../..'
 import { useNavigate } from 'react-router-dom'
+import Navbar from '../../Navbar/Navbar'
+import Footer from '../../Footer/Footer'
 import "./DashboardHomesDetails.css"
 const DashboardHomesDetails = () => {
   const {_id} = useParams()
@@ -64,6 +66,8 @@ navigate("/Host")
 
   return (
     <>
+
+    <Navbar/>
     {dashboardHomeDetails?  (
 
     <div className="dashboardhomesdetails-wrapper">
@@ -121,7 +125,7 @@ navigate("/Host")
       <p>nothing found</p>
     )}
     
-    
+    <Footer/>
     </>
   )
 }

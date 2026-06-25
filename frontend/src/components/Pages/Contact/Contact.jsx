@@ -4,6 +4,9 @@ import Footer from '../../Footer/Footer'
 import { useState , useEffect } from 'react'
 import "./Contact.css"
 const Contact = () => {
+
+const [message, setmessage] = useState("")
+
   const [first, setfirst] = useState({
     name: "",
     email: "",
@@ -15,9 +18,20 @@ const handlechange = (e)=>{
   setfirst({...first , [e.target.name] : e.target.value})
 }
 
-const handleadd = ()=>{
+const handleadd =  async (e)=>{
+  e.preventDefault()
+const request = await fetch(`http://localhost:4090/contact` , {
+  headers: {"Content-Type":"application/json"},
+  method: "POST",
+  body: JSON.stringify(first)
+})
+
+let result  = await request.json()
+setmessage(result.message)
 
 }
+
+
   return (
     <div>
       <Navbar/>
@@ -137,6 +151,7 @@ Mumbai, India
 <button onClick={handleadd} id="contact-btn">
 Send Message
 </button>
+<p>{message}</p>
 
 </form>
 
@@ -151,6 +166,6 @@ Send Message
       <Footer/>
     </div>
   )
-}
 
+}
 export default Contact

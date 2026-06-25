@@ -42,7 +42,7 @@ const FetchHomes = async ()=>{
 }
 FetchHomes()
 }, [])
-
+ 
 
 const handleStay = (id)=>{
   navigate(`/home/${id}`)

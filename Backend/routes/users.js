@@ -8,11 +8,12 @@ const searchHomes = require("../Controllers/Home/SearchController")
 const upload = require("../Middleware/upload")
 const categories = require("../Controllers/Home/Categories")
 const GetIndividualHomes = require("../Controllers/Home/GetSingleHome")
-
+const contact  = require("../Controllers/Home/Contact")
 
 user.post("/addhome" ,authMiddleware , upload.single("image") ,  addhome )
 user.get("/" , gethomes )
 user.get("/home/:id" , GetIndividualHomes )
 user.post("/search" , searchHomes)
 user.post("/categories" , categories)
+user.post("/contact" , contact )
 module.exports = user
