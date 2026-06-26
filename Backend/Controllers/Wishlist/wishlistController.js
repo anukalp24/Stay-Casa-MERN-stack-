@@ -55,7 +55,7 @@ const wishlistfunc  =  async (req , res)=>{
             wishlist: true,
         },
 
-        
+         
         {
             new: true
         }

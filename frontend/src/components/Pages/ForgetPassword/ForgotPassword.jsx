@@ -13,7 +13,6 @@ const [empty, setempty] = useState("")
 
     const forgetPassword = async () => {
 
-
         if(reset.email === ""){
             setempty("Email is required")
             return

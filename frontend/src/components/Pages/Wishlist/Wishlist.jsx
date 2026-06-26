@@ -37,7 +37,6 @@ setresponse(
 <Navbar/>
        
 <>
-
       {wishlist.map((val , index)=>(
         <div key={val._id} className="card-boxes">
         <img id='card-img' src={val.url} alt="" />

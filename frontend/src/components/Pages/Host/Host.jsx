@@ -152,34 +152,115 @@ setform({
   return (
     <>
 <Navbar/> 
+    <div className="host-page">
     <div className="host-container">
      <div className="heading-section">
-        <h2>Become a Host</h2>
+        <h2>Become a <span>Host</span></h2>
         <p>List your property and earn money.</p>
-     </div>   {/* heading sec div */}
-   <form>
-<input value={form.propertyName} name='propertyName'   onChange={handlechange}  placeholder='Property Name' id='property-name' type="text" />
-   {error.propertyName && <p id= "error">{error.propertyName}</p> }
+     </div>
+   <form className="host-form">
+    <div className="form-grid">
+     <div className="form-group">
+      <label className="form-label">Property Name</label>
+      <input value={form.propertyName} name='propertyName'   onChange={handlechange}  placeholder='e.g. Luxury Beach Villa' id='property-name' type="text" />
+      {error.propertyName && <p className="field-error">{error.propertyName}</p> }
+     </div>
 
+     <div className="form-group">
+      <label className="form-label">Category</label>
+      <input  placeholder='e.g. Villa, Cabin, Apartment'  onChange={handlechange}  value={form.category} name='category' type="text" />
+      {error.category && <p className="field-error">{error.category}</p>  }
+     </div>
 
-   <input  placeholder='Category'  onChange={handlechange}  value={form.category} name='category' type="text" />
-{error.category && <p id= "error">{error.category}</p>  }
-<input value={form.cityname} name='cityname'   onChange={handlechange}  placeholder='City' id='city-name' type="text" />
-   {error.cityname && <p id= "error">{error.cityname}</p> }
-<input value={form.country} name='country'   onChange={handlechange}  placeholder='country' id='country' type="text" />
- {error.country && <p id= "error">{error.country}</p> }
-<input value={form.price} name='price'  onChange={handlechange}  placeholder='Price Per Night' id='price' type="text" />
- {error.price && <p id= "error">{error.price}</p> }
-<input value={form.rating} name='rating'  onChange={handlechange}  placeholder='Rating' id='rating' type="text" />
- {error.rating && <p id= "error">{error.rating}</p> }
-<input  onChange={handleImage}  name='photo'  accept="image/*"   placeholder='Image URL' id='img-url' type="file" multiple />
- {error.url && <p id= "error">{error.url}</p> }
-<textarea value={form.desc} name='desc'  onChange={handlechange}  placeholder='Description' id='description'></textarea>
- {error.desc && <p id= "error">{error.desc}</p> }
-<button onClick={handleadd} type='submit' id='host-submit'>Add Property</button>
+     <div className="form-group">
+      <label className="form-label">City</label>
+      <input value={form.cityname} name='cityname'   onChange={handlechange}  placeholder='e.g. Shimla' id='city-name' type="text" />
+      {error.cityname && <p className="field-error">{error.cityname}</p> }
+     </div>
+
+     <div className="form-group">
+      <label className="form-label">Country</label>
+      <input value={form.country} name='country'   onChange={handlechange}  placeholder='e.g. India' id='country' type="text" />
+      {error.country && <p className="field-error">{error.country}</p> }
+     </div>
+
+     <div className="form-group">
+      <label className="form-label">Price Per Night</label>
+      <input value={form.price} name='price'  onChange={handlechange}  placeholder='e.g. ₹5000' id='price' type="text" />
+      {error.price && <p className="field-error">{error.price}</p> }
+     </div>
+
+     <div className="form-group">
+      <label className="form-label">Rating</label>
+      <input value={form.rating} name='rating'  onChange={handlechange}  placeholder='e.g. 4.5' id='rating' type="text" />
+      {error.rating && <p className="field-error">{error.rating}</p> }
+     </div>
+
+     <div className="form-group">
+      <label className="form-label">Property Image</label>
+      <div className="file-input-wrapper">
+       <input onChange={handleImage} name='photo' accept="image/*" id='img-url' type="file" multiple />
+       <span className="file-btn">Choose Files</span>
+      </div>
+      {error.url && <p className="field-error">{error.url}</p> }
+     </div>
+      {error.url && <p className="field-error">{error.url}</p> }
+     </div>
+
+    <div className="form-group full-width">
+     <label className="form-label">Description</label>
+     <textarea value={form.desc} name='desc'  onChange={handlechange}  placeholder='Describe your property — what makes it special?' id='description'></textarea>
+     {error.desc && <p className="field-error">{error.desc}</p> }
+    </div>
+
+    <div className="form-actions">
+     <button onClick={handleadd} type='submit' id='host-submit'>Add Property</button>
+    </div>
 
 </form>
-    </div>  {/* host container div */}
+    </div>
+    <div className="host-illustration">
+      <div className="ill-badge">
+        <span className="ill-badge-icon">$</span>
+        <div>
+          <p className="ill-badge-title">Earn up to</p>
+          <p className="ill-badge-amount">₹75,000</p>
+          <p className="ill-badge-sub">per month</p>
+        </div>
+      </div>
+      <div className="ill-features">
+        <div className="ill-feature">
+          <div className="ill-feature-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <div>
+            <p className="ill-feature-title">List your space</p>
+            <p className="ill-feature-desc">In just 10 minutes</p>
+          </div>
+        </div>
+        <div className="ill-feature">
+          <div className="ill-feature-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg>
+          </div>
+          <div>
+            <p className="ill-feature-title">Set your price</p>
+            <p className="ill-feature-desc">You're in control</p>
+          </div>
+        </div>
+        <div className="ill-feature">
+          <div className="ill-feature-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div>
+            <p className="ill-feature-title">Stay protected</p>
+            <p className="ill-feature-desc">Host guarantee included</p>
+          </div>
+        </div>
+      </div>
+      <div className="ill-glow ill-glow-1"></div>
+      <div className="ill-glow ill-glow-2"></div>
+    </div>
+    </div>
     <Footer/>
     </>
   )

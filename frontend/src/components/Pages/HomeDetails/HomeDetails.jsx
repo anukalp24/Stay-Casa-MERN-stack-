@@ -165,7 +165,7 @@ const Home = () => {
               </div>
               <div className="hd-price-row total">
                 <span>Total</span>
-                <span>₹{Number(home?.home?.price) + 800}</span>
+                <span>₹{(home?.home?.price) + 800}</span>
               </div>
             </div>
 

@@ -17,6 +17,7 @@ const Search = () => {
       method: "POST",
       body: JSON.stringify({
   name: localStorage.getItem("search")
+  
 })
     })
 

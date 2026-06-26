@@ -13,9 +13,9 @@ const navigate = useNavigate()
 
 
 const handlewishlist  = async (val)=>{
-  if(val.wishlist === true){
-    return
-  }
+  // if(val.wishlist === true){
+  //   return
+  // }
 let WishlistRequest =   await fetch(`http://localhost:4090/wishlist/${val._id}` , {
     method: "PUT",
          headers:{

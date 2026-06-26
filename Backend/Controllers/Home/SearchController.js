@@ -35,6 +35,7 @@ if(home.length === 0){
         message: "Home found succesfully",
         home: home
      })
+     
     } catch (error) {
         res.status(500).json({
             message: error.message

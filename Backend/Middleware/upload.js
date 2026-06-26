@@ -4,6 +4,7 @@ const upload = multer({
     dest: "uploads/"
 })
 
+
 module.exports = upload
 // multer overview:- 1. multer creates multer object
 //    upload.single() returns middleware function
