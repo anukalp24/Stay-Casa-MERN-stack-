@@ -21,7 +21,7 @@ import {
 const HomeDetails = () => {
 
   const Navigate = useNavigate()
-const {response , handleStay } = useContext(info)
+const {response , handleStay , handlewishlist } = useContext(info)
 const featuredHomes = response.slice(0 , 20)
   
 

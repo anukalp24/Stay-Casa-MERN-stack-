@@ -43,6 +43,7 @@
 const Home = require("../../Models/Home")
 
 const wishlistfunc  =  async (req , res)=>{
+    console.log("wishlist controller is working")
     const home =  await Home.findById(req.params.id)
     if (home.wishlist){
         return res.send({message: "already in wishlist"})

@@ -44,24 +44,74 @@ FetchHomes()
 }, [])
  
 
+
+
+
+
+
+
+
+const handlewishlist  = async (val)=>{
+  if(val.wishlist === true){
+    return
+  }
+let WishlistRequest =   await fetch(`http://localhost:4090/wishlist/${val._id}` , {
+    method: "PUT",
+         headers:{
+            "Content-Type":"application/json",
+            authorization: localStorage.getItem("token")
+         },
+         body: JSON.stringify(val)
+
+  })
+      if(!WishlistRequest.ok){
+        return
+      }
+  let result =  await WishlistRequest.json()
+  // wishlist becomes true
+  // wishlsit now contains an id same id of response
+setwishlist([...wishlist , result])
+setresponse(
+  response.map(item =>
+    item._id === val._id
+      ? { ...item, wishlist: true }
+      : item
+  )
+)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const handleStay = (id)=>{
   navigate(`/home/${id}`)
 }
 
 
-// useEffect(() => {
-// const wishlist = async ()=>{
-//     const api =   await fetch("http://localhost:4090/wishlist")
-//     const response2 = await api.json()
-//     setwishlist(response2)
-//   }
-//   wishlist()
+useEffect(() => {
+const wishlist = async ()=>{
+    const api =   await fetch("http://localhost:4090/wishlist")
+    const response2 = await api.json()
+    setwishlist(response2)
+  }
+  wishlist()
 
-// }, [])
+}, [])
 
   return (
     <>
-  <info.Provider value={{response , setresponse , form , setform , wishlist , setwishlist , search , setsearch , searchResult, setsearchResult , handleStay , dashboard , setdashboard}}>
+  <info.Provider value={{response , setresponse , form , setform , wishlist , setwishlist , search , setsearch , searchResult, setsearchResult , handleStay , dashboard , setdashboard , handlewishlist}}>
 <Routes>
 <Route path='/' element={<Home/>}></Route>
 <Route path='/About' element={<About/>}></Route>

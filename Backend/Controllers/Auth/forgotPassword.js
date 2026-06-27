@@ -32,7 +32,7 @@ const forgetPassword =  async (req , res)=>{
                     pass: process.env.EMAIL_PASS
                 }
             })
-
+ 
             // reset link with token in URL
 const resetLink = `http://localhost:5173/reset-password/${resetToken}`
             await transporter.sendMail({

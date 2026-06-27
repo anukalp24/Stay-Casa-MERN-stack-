@@ -11,12 +11,12 @@ app.use("/uploads" , express.static("uploads"))
 // here fornt end get req will come for the image
 
 const users = require("./routes/users")
-// const wishlist = require("./routes/wishlist")
+const wishlist = require("./routes/wishlist")
 const auth = require("./routes/auth")
 const dashboard = require("./routes/dashboard")
 
 app.use(users)
-// app.use(wishlist)
+app.use(wishlist)
 app.use(auth)
 app.use(dashboard)
 connectDb()

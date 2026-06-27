@@ -4,42 +4,12 @@ import { useState , useEffect , useContext } from 'react'
 import { info } from '../..'
 import Navbar from 'components/Navbar/Navbar'
 import Footer from 'components/Footer/Footer'
-import { useNavigate} from 'react-router-dom'
 const Card = () => {
-const navigate = useNavigate()
-  const {response , setresponse , setwishlist , wishlist , form , handleStay} = useContext(info)
+  const {response, handleStay , handlewishlist} = useContext(info)
 
 
 
 
-const handlewishlist  = async (val)=>{
-  // if(val.wishlist === true){
-  //   return
-  // }
-let WishlistRequest =   await fetch(`http://localhost:4090/wishlist/${val._id}` , {
-    method: "PUT",
-         headers:{
-            "Content-Type":"application/json",
-            authorization: localStorage.getItem("token")
-         },
-         body: JSON.stringify(val)
-
-  })
-      if(!WishlistRequest.ok){
-        return
-      }
-  let result =  await WishlistRequest.json()
-  // wishlist becomes true
-  // wishlsit now contains an id same id of response
-setwishlist([...wishlist , result])
-setresponse(
-  response.map(item =>
-    item._id === val._id
-      ? { ...item, wishlist: true }
-      : item
-  )
-)
-}
 
 
   return (
