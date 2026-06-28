@@ -8,5 +8,5 @@ const authMiddleware = require("../Middleware/authMiddleware")
 
 wishlist.put("/wishlist/:id" , authMiddleware ,  wishlistfunc)
 wishlist.get("/wishlist" , authMiddleware ,  getwishlist)
-wishlist.delete("/Removewishlist/:id" , RemoveWishlist)
+wishlist.delete("/Removewishlist/:id" , authMiddleware ,  RemoveWishlist)
 module.exports = wishlist

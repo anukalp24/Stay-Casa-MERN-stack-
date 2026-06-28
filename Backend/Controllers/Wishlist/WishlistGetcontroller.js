@@ -1,31 +1,27 @@
-// const { MongoParseError } = require("mongodb")
-// const {client}  = require("../database/connection")
 
-
-
-
-// const getwishlist = async(req , res)=>{
-//     const db  = client.db("airbnb")
-//     const homecollection = db.collection("homes")
-
-//     const homes = await homecollection.find({
-//         wishlist: true
-//     }).toArray()
-
-//     res.json(homes)
-// }
-
-// module.exports = getwishlist
-
-const Home = require("../../Models/Home")
-const wishlistfunc = require("./wishlistController")
+const Wishlist = require("../../Models/Wishlist")
 
 const getwishlist = async(req , res)=>{
-let gethomes = await Home.find({
-    wishlist: true,
-    owner: req.user.id
-})
-res.json(gethomes)
+
+    try {
+        
+        let wishlist = await Wishlist.find({
+            user: req.user.id
+        }).populate("home")
+        
+        
+        res.status(200).json({
+        wishlist,
+        }
+        )
+
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            message: "Some error occured"
+        })
+    }
 }
 
 module.exports = getwishlist

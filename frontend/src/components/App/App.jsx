@@ -42,8 +42,6 @@ const FetchHomes = async ()=>{
 }
 FetchHomes()
 }, [])
- 
-
 
 
 
@@ -52,6 +50,7 @@ FetchHomes()
 
 
 const handlewishlist  = async (val)=>{
+  console.log(localStorage.getItem("token"))
   if(val.wishlist === true){
     return
   }
@@ -64,33 +63,19 @@ let WishlistRequest =   await fetch(`http://localhost:4090/wishlist/${val._id}` 
          body: JSON.stringify(val)
 
   })
-      if(!WishlistRequest.ok){
+  if(!WishlistRequest.ok){
         return
       }
   let result =  await WishlistRequest.json()
-  // wishlist becomes true
-  // wishlsit now contains an id same id of response
 setwishlist([...wishlist , result])
-setresponse(
-  response.map(item =>
-    item._id === val._id
-      ? { ...item, wishlist: true }
-      : item
-  )
-)
 }
 
 
 
-
-
-
-
-
-
-
-
-
+    useEffect(() => {
+      console.log(wishlist)
+    }, [wishlist])
+    
 
 
 
@@ -101,7 +86,13 @@ const handleStay = (id)=>{
 
 useEffect(() => {
 const wishlist = async ()=>{
-    const api =   await fetch("http://localhost:4090/wishlist")
+    const api =   await fetch("http://localhost:4090/wishlist", {
+      method: "GET",
+      headers: {
+        "Content-Type":"application/json",
+        authorization: localStorage.getItem("token")
+      }
+    })
     const response2 = await api.json()
     setwishlist(response2)
   }

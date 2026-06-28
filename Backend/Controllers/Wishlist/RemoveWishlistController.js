@@ -1,54 +1,37 @@
-// const {client} =  require("../database/connection")
-// const wishlist = require("../routes/wishlist")
-// const { ObjectId } = require("mongodb")
 
-
-
-
-
-
-
-// const RemoveWishlist = async (req , res)=>{
-//     const db = client.db("airbnb")
-//     const homecollection = db.collection("homes")
-//  await homecollection.updateOne({
-//         _id: new ObjectId(req.params.id)
-//     } , 
-//     {
-//     $set:{
-//         wishlist: false
-//     }
-// }
-
-
-// )
-// res.send({
-//     wishlist: false
-// })
-
-// }
-// module.exports = RemoveWishlist
-
-
-
-// mongoose way
-// Home contains everything bro
-const Home = require("../../Models/Home")
+const Wishlist = require("../../Models/Wishlist")
 const RemoveWishlist = async (req , res)=>{
 
-    const home = Home.findByIdAndUpdate(req.params.id , 
 
-        {
-            wishlist: false
-        }
-,
-        {
-            new: true
-        }
-    )
+    try {
 
-    res.json({wishlist: false })
+        const exist = await Wishlist.findOneAndDelete({
+            user: req.user.id,
+            home: req.params.id
+        })
+
+
+        if(!exist){
+            return res.status(404).json({
+                message: "Wishlist not found"
+            })
+        }
+
+
+res.status(200).json({
+    message: "Home deleted from wishlist successfully"
+})
+
+    
+        
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({
+            message: "Some error occured"
+        })
     }
 
+    
+}
 
     module.exports = RemoveWishlist

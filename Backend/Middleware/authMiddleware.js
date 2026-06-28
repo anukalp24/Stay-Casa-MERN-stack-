@@ -4,6 +4,14 @@ const jwt = require("jsonwebtoken")
 const token = req.headers.authorization
 // we are getting this from add home request from react here and it is being decoded for the controller and databse  to use it
 
+
+
+if(!token){
+    return res.status(401).json({
+        message: "Token not provided"
+    })
+    console.log(message)
+}
 const decoded = jwt.verify(token , process.env.JWT_SECRET)
 console.log(decoded)
 // {
