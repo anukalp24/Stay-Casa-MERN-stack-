@@ -42,13 +42,6 @@ const FetchHomes = async ()=>{
 }
 FetchHomes()
 }, [])
-
-
-
-
-
-
-
 const handlewishlist  = async (val)=>{
   console.log(localStorage.getItem("token"))
   if(val.wishlist === true){
@@ -72,33 +65,10 @@ setwishlist([...wishlist , result])
 
 
 
-    useEffect(() => {
-      console.log(wishlist)
-    }, [wishlist])
-    
-
-
-
 const handleStay = (id)=>{
   navigate(`/home/${id}`)
 }
 
-
-useEffect(() => {
-const wishlist = async ()=>{
-    const api =   await fetch("http://localhost:4090/wishlist", {
-      method: "GET",
-      headers: {
-        "Content-Type":"application/json",
-        authorization: localStorage.getItem("token")
-      }
-    })
-    const response2 = await api.json()
-    setwishlist(response2)
-  }
-  wishlist()
-
-}, [])
 
   return (
     <>

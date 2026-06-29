@@ -8,8 +8,9 @@ const getwishlist = async(req , res)=>{
         let wishlist = await Wishlist.find({
             user: req.user.id
         }).populate("home")
-        
-        
+
+
+    
         res.status(200).json({
         wishlist,
         }

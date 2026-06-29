@@ -18,8 +18,11 @@ const wishlistfunc  =  async (req , res)=>{
            home: req.params.id
           })
        
-
+ 
           await wishlist.populate("home")
+
+
+
           res.status(200).json({
             wishlist,
             message: "Wishlist added successfully"

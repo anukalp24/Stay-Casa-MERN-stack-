@@ -2,12 +2,32 @@ import React from 'react'
 import { info } from '../..'
 import { useState , useContext , useEffect } from 'react'
 import './Wishlist.css'
-
+import Navbar from '../../Navbar/Navbar'
+import Footer from '../../Footer/Footer'
 const Wishlist = () => {
-    const {wishlist , setwishlist , response , setresponse} = useContext(info)
+    const {wishlist , setwishlist} = useContext(info)
+const [loader, setloader] = useState(true)
+
+useEffect(() => {
+const wishlist = async ()=>{
+    const api =   await fetch("http://localhost:4090/wishlist", {
+      method: "GET",
+      headers: {
+        authorization: localStorage.getItem("token")
+      }
+    })
+    const response2 = await api.json()
+    setwishlist(response2)
+    setloader(false)
+  }
+  wishlist()
+}, [])
 
     const handleremove = async (id) => {
       let remove = await fetch(`http://localhost:4090/Removewishlist/${id}`, {
+        headers:{
+           authorization: localStorage.getItem("token")
+        } ,
         method: "DELETE",
       })
 
@@ -15,62 +35,78 @@ const Wishlist = () => {
         return
       }
 
-      const newitem = wishlist.filter(val => val._id !== id)
-      setwishlist(newitem)
-
-      setresponse(
-        response.map(item =>
-          item._id === id
-            ? { ...item, wishlist: false }
-            : item
-        )
-      )
+      const newitem = wishlist.wishlist.filter(val => val._id !== id)
+      setwishlist({
+        ...wishlist , wishlist: newitem
+      })
     }
-
-
-
-
-     
+      
     return (
-      <div className="wishlist-parent">
-        <div className="wishlist-header">
-          <h1>Your Wishlist</h1>
-          <p>{wishlist.length} saved {wishlist.length === 1 ? 'property' : 'properties'}</p>
-        </div>
+ <>
+    <>
+  {loader === true ? (
+    <div className="loader-parent">
+      <div className="loader"></div>
+    </div>
+  ) : (
+    <div className="wishlist-parent">
+      <Navbar />
 
-        {wishlist.length === 0 ? (
-          <div className="wishlist-empty">
-            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-            </svg>
-            <h2>No saved properties yet</h2>
-            <p>Start exploring and save your favorite places to stay</p>
-          </div>
-        ) : (
-          <div className="wishlist-grid">
-            {wishlist?.wishlist?.map((val) => (
-              <div key={val._id} className="card-boxes">
-                <img id='card-img' src={val.home.file} alt="" />
+      <div className="wishlist-header">
+        <h1>Your Wishlist</h1>
+        <p>{wishlist.length} saved {wishlist.length === 1 ? 'property' : 'properties'}</p>
+      </div>
+
+      {wishlist?.wishlist?.length === 0 ? (
+        <div className="wishlist-empty">
+          <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+          <h2>No saved properties yet</h2>
+          <p>Start exploring and save your favorite places to stay</p>
+        </div>
+      ) : (
+        <div className="wishlist-grid">
+          {wishlist?.wishlist?.map((val) => (
+            <div key={val._id} className="card-boxes">
+
+              <img
+                className="card-img"
+                src={val.home.file}
+                alt={val.home.propertyName}
+              />
+
+              <div className="card-body">
+
                 <div className="sec-1">
-                  <span>{val.home.propertyName}</span>
-                  <span>{val.home.rating}</span>
+                  <h3 className="card-title">{val.home.propertyName}</h3>
+                  <span className="card-rating">⭐ {val.home.rating}</span>
                 </div>
+
+                <p className="card-location">📍 {val.home.cityname}</p>
+
+                <p className="card-desc">{val.home.desc}</p>
+
+                <div className="card-divider"></div>
+
                 <div className="sec-2">
-                  <span>{val.home.cityname}</span>
-                  <span>{val.home.desc}</span>
-                  <span>₹{val.home.price}</span>
+                  <span className="card-price">₹{val.home.price}</span>
                   <button onClick={() => handleremove(val._id)} className="wishlist-btn">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                    </svg>
                     Remove from Wishlist
                   </button>
                 </div>
+
               </div>
-            ))}
-          </div>
-        )}
-      </div>
+
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  )}
+</>
+          <Footer/>
+        </>
     )
 }
 

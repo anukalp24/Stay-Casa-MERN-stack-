@@ -8,13 +8,14 @@ const Dashboard = () => {
   const navigate = useNavigate()
 
 const {dashboard , setdashboard} = useContext(info)
-
+const [loader, setloader] = useState(true)
 
 
 
 
 useEffect(() => {
 const getdashboardhomes =  async ()=>{
+
   const api = await fetch(`http://localhost:4090/dashboard` , {
     method: "GET",
     headers:{
@@ -24,7 +25,7 @@ const getdashboardhomes =  async ()=>{
   })
   const dashboardHomes = await api.json()
   setdashboard(dashboardHomes)
-  //  becuase find alredy retuns an array thats why just ()
+  setloader(false)
 }
 
 getdashboardhomes()
@@ -34,8 +35,21 @@ getdashboardhomes()
 
   
 return (
-      <>
-        <Navbar/>
+  <>
+
+
+      {loader === true ? (
+<div className="loader-parent">
+    <div className="loader"></div>
+  </div>
+
+): (
+  
+
+  <>
+  
+  
+  <Navbar/>
 <div className="dashboard-all-page">
 
   <div className="dashboard-all-header">
@@ -47,15 +61,15 @@ return (
 
     {dashboard.map((val,index)=>(
       <div onClick={()=> {navigate(`/dashboardHomesDetails/${val._id}`)}}
-        key={index}
-        className="dashboard-all-card"
+      key={index}
+      className="dashboard-all-card"
       >
 
         <img
           className="dashboard-all-card-img"
           src={val.file}
           alt={val.propertyName}
-        />
+          />
 
         <div className="dashboard-all-card-body">
 
@@ -92,11 +106,13 @@ return (
 
       </div>
 
-    ))}
+))}
 
   </div>
 
 </div>
+</>
+    )}
       </>
    
   )

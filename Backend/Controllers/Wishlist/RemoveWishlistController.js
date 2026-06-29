@@ -7,7 +7,7 @@ const RemoveWishlist = async (req , res)=>{
 
         const exist = await Wishlist.findOneAndDelete({
             user: req.user.id,
-            home: req.params.id
+            _id: req.params.id
         })
 
 
