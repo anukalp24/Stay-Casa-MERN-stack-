@@ -113,12 +113,9 @@ navigate("/Host")
       <button onClick={()=>HandleDelete(dashboardHomeDetails.home._id)} className="dashboardhomesdetails-delete-btn">
         Delete
       </button>
-      <div>{dashboardHomeDetails?.message}</div>
     </div>
   </div>
 </div>
-
-
 
     ) : (
 

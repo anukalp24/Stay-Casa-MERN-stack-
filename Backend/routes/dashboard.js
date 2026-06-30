@@ -1,8 +1,8 @@
 const express = require("express")
 const authMiddleware = require("../Middleware/authMiddleware")
 const  getDashboardHomes = require("../Controllers/dashboard/Gethome")
-const deletehome = require("../Controllers/Home/deleteHomeController")
-const updatehome  = require("../Controllers/Home/Updatehomecontroller")
+const deletehome = require("../Controllers/dashboard/deleteHomeController")
+const updatehome  = require("../Controllers/dashboard/Updatehomecontroller")
 const dashboardHomesDetails = require("../Controllers/dashboard/DashboardHomesDetails")
 const dashboard = express.Router()
 

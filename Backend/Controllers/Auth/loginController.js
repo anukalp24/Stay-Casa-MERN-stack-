@@ -4,7 +4,11 @@ const bcrypt = require("bcryptjs")
 const login =  async (req , res)=>{
     try {
         const {email , password}  = req.body
-console.log(req.body)
+
+
+
+
+        
         const existingUser = await User.findOne({
         email
         })

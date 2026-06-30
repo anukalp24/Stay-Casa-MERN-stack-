@@ -23,7 +23,7 @@ const [error, seterror] = useState("")
 
 
   const handleImage = (e)=>{
-    setfile(...e.target.files)
+    setfile([...e.target.files])
   }
 
 const handlechange = (e)=>{

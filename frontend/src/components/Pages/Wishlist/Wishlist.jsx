@@ -5,7 +5,7 @@ import './Wishlist.css'
 import Navbar from '../../Navbar/Navbar'
 import Footer from '../../Footer/Footer'
 const Wishlist = () => {
-    const {wishlist , setwishlist} = useContext(info)
+    const {wishlist , setwishlist , handleStay} = useContext(info)
 const [loader, setloader] = useState(true)
 
 useEffect(() => {
@@ -68,7 +68,7 @@ const wishlist = async ()=>{
       ) : (
         <div className="wishlist-grid">
           {wishlist?.wishlist?.map((val) => (
-            <div key={val._id} className="card-boxes">
+            <div   onClick={()=>handleStay(val.home._id)}   key={val._id} className="card-boxes">
 
               <img
                 className="card-img"

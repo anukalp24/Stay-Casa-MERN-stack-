@@ -137,11 +137,6 @@ const categories = [
   </button>
 </div>
 
-
-
-
-
-    
     <Footer/>
             </>
   

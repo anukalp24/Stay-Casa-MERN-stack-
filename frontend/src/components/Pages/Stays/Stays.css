@@ -18,6 +18,7 @@
 }
 
 .card-section {
+  margin-top: 20vh;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -110,6 +111,83 @@
   text-overflow: ellipsis;
 }
 
+
+.price-filter {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 24px;
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 16px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.05);
+}
+
+.price-values {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.price-values span {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #222;
+}
+
+.horizontal-slider {
+  width: 100%;
+  margin: 25px 0;
+}
+
+.track {
+  background: #ff385c;
+  height: 6px;
+}
+
+.thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #fff;
+  border: 3px solid #ff385c;
+  cursor: grab;
+  margin-top: -8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.15);
+}
+
+.thumb:active {
+  cursor: grabbing;
+}
+
+.filter-btn {
+  width: 100%;
+  margin-top: 20px;
+  border: none;
+  border-radius: 12px;
+  padding: 14px;
+  background: #ff385c;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: .25s;
+}
+
+.filter-btn:hover {
+  background: #e31c5f;
+}
+
+.no-properties {
+  width: 100%;
+  min-height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #555;
+  text-align: center;
+}
 
 
 @media (max-width: 768px) {

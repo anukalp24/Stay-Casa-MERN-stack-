@@ -1,20 +1,3 @@
-// const { ObjectId } = require("mongodb")
-// const {client}  = require("../database/connection")
-
-
-// const deletehome = async(req ,res)=>{
-//     const db = client.db("airbnb")
-//     const homesCollection = db.collection("homes")
-
-//     await homesCollection.deleteOne({
-//         _id: new ObjectId(req.params.id)
-//     })
-//     res.json({
-//         success: true
-//     })
-// }
-
-// nnow mongoose baby
 
 const Home =   require("../../Models/Home")
 

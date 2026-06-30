@@ -43,10 +43,6 @@ const FetchHomes = async ()=>{
 FetchHomes()
 }, [])
 const handlewishlist  = async (val)=>{
-  console.log(localStorage.getItem("token"))
-  if(val.wishlist === true){
-    return
-  }
 let WishlistRequest =   await fetch(`http://localhost:4090/wishlist/${val._id}` , {
     method: "PUT",
          headers:{
@@ -59,10 +55,8 @@ let WishlistRequest =   await fetch(`http://localhost:4090/wishlist/${val._id}` 
   if(!WishlistRequest.ok){
         return
       }
-  let result =  await WishlistRequest.json()
-setwishlist([...wishlist , result])
-}
 
+}
 
 
 const handleStay = (id)=>{

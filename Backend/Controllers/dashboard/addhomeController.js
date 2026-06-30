@@ -5,16 +5,13 @@ const Home = require("../../Models/Home")
 const addhome = async(req , res)=>{
 
     try {
-        const file = `http://localhost:4090/uploads/${req.file.filename}`
+        const file = `http://localhost:4090/uploads/${req.files}`
         const result = await Home.create({
              ...req.body,
              file: file,
              owner: req.user.id
         })
-  console.log(req.body)
-// ques to ask
-// why i mean we have to pass the url like why cant we pass the img direclty form here itself??
-
+  console.log(req.body) 
         res.status(201).json(result)
         
     } catch (error) {
@@ -24,16 +21,6 @@ const addhome = async(req , res)=>{
         })
     }
   
-// console.log(req.user)
-// will be this
-// {
-//     id: "abc123userId",
-//     iat: 1718600000    // issued at timestamp (added automatically by jwt)
-// }
-
     
 }
 module.exports = addhome;
-
-
-
