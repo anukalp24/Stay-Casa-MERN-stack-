@@ -7,7 +7,6 @@ const login =  async (req , res)=>{
 
 
 
-
         
         const existingUser = await User.findOne({
         email

@@ -19,7 +19,7 @@ import { useNavigate } from 'react-router-dom'
 import { info } from '..'
 function App() {
   const navigate = useNavigate()
-
+const [allHomes, setallHomes] = useState([])
 const [response, setresponse] = useState([])
 const [wishlist, setwishlist] = useState([])
 const [search, setsearch] = useState("")
@@ -34,14 +34,16 @@ rating: "",
 desc: "",
 })
 const [dashboard, setdashboard] = useState([]) 
-useEffect(() => {
-const FetchHomes = async ()=>{
-    const api =   await fetch("http://localhost:4090/")
-    const response2 = await api.json()
-    setresponse(response2)
-}
-FetchHomes()
-}, [])
+
+
+
+
+
+
+
+
+
+
 const handlewishlist  = async (val)=>{
 let WishlistRequest =   await fetch(`http://localhost:4090/wishlist/${val._id}` , {
     method: "PUT",
@@ -66,7 +68,7 @@ const handleStay = (id)=>{
 
   return (
     <>
-  <info.Provider value={{response , setresponse , form , setform , wishlist , setwishlist , search , setsearch , searchResult, setsearchResult , handleStay , dashboard , setdashboard , handlewishlist}}>
+  <info.Provider value={{response , setresponse , form , setform , wishlist , setwishlist , search , setsearch , searchResult, setsearchResult , handleStay , dashboard , setdashboard , handlewishlist , allHomes , setallHomes}}>
 <Routes>
 <Route path='/' element={<Home/>}></Route>
 <Route path='/About' element={<About/>}></Route>

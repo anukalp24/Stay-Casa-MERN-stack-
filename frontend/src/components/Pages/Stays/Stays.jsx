@@ -7,10 +7,21 @@ import { info } from '../..'
 import Navbar from 'components/Navbar/Navbar'
 import Footer from 'components/Footer/Footer'
 const Card = () => {
-  const {response, handleStay , handlewishlist} = useContext(info)
+  const { handleStay , handlewishlist , allHomes ,  setallHomes} = useContext(info)
   const [conditional, setconditional] = useState(false)
 const [priceFilteredHomes, setpriceFilteredHomes] = useState([])
 const [price, setprice] = useState([0 , 100000])
+const [page, setPage] = useState(1)
+
+useEffect(() => {
+const FetchHomes = async ()=>{
+    const api =   await fetch(`http://localhost:4090/?page=${page}`)
+    const result  = await api.json()
+    setallHomes(result)
+}
+FetchHomes()
+}, [page])
+
 
 
 const handleAdd =  async()=>{
@@ -31,13 +42,31 @@ const handleAdd =  async()=>{
 
 }
 
+
+
+
+const handlePrev = ()=>{
+  if(page <= 1){
+    return
+  }
+  setPage(page - 1)
+
+}
+
+
+const handleNext = ()=>{
+  if(page >= 2){
+    return
+  }
+  setPage(page+1)
+}
   return (
     <>
     <Navbar/>
 <div className="card-section">
 
   {conditional === false ? (
-    response.map((homes, index) => (
+    allHomes.map((homes, index) => (
       <div
         key={index}
         onClick={() => handleStay(homes._id)}
@@ -143,8 +172,35 @@ const handleAdd =  async()=>{
 
 </div>
 
+<div className="pagination">
 
+  <button
+    className="pagination-btn"
+    onClick={handlePrev}
+  >
+    &#8249;
+  </button>
 
+  <button
+    className={`page-btn ${page === 1 ? "active" : ""}`}
+    onClick={() => setPage(1)}
+  >
+    1
+  </button>
+
+  <button
+    className={`page-btn ${page === 2 ? "active" : ""}`}
+    onClick={() => setPage(2)}
+  >
+    2
+  </button>
+
+  <button
+    className="pagination-btn"
+    onClick={handleNext}
+  >
+  </button>
+</div>
 <div className="price-filter">
 
   <div className="price-values">

@@ -131,8 +131,8 @@ formData.append("image" , file)
     },
     body: formData
   })
-  let result =  await request2.json()
-  setresponse([...response ,result])
+  // let result =  await request2.json()
+  // setresponse([...response ,result])
 
   navigate("/dashboard")
 }
