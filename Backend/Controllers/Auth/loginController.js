@@ -12,20 +12,17 @@ const login =  async (req , res)=>{
         email
         })
 
-        // it returns the whole object password name all
 
-
-    
         if(!existingUser){
             return res.status(404).json({
-                message: "User not found"
+                message: "No accoutn exist with this email"
             })
         }
 
         const isMatch = await bcrypt.compare(password , existingUser.password)
         if(!isMatch){
             return res.status(401).json({
-                message: "Wrong Password"
+                message: "Invalid email or password"
             })
         }
 

@@ -3,7 +3,7 @@ import Navbar from '../../Navbar/Navbar'
 import Hero from '../../Hero-Section/Hero'
 import Footer from '../../Footer/Footer'
 import { info } from '../..'
-import {  useContext } from 'react'
+import {  useContext , useEffect  , useState} from 'react'
 import "./Home.css"
 import { useNavigate } from 'react-router-dom'
 
@@ -21,9 +21,21 @@ import {
 const HomeDetails = () => {
 
   const Navigate = useNavigate()
-const {response , handleStay , handlewishlist } = useContext(info)
-const featuredHomes = response.slice(0 , 20)
-  
+const {handleStay , handlewishlist } = useContext(info)
+const [featuredHomes, setfeaturedHomes] = useState([])
+
+
+useEffect(() => {
+const FetchHomes = async ()=>{
+    const api =   await fetch(`http://localhost:4090/`)
+    const result  = await api.json()
+    setfeaturedHomes(result)
+}
+FetchHomes()
+}, [])
+
+
+
 
 const categories = [
   {name: "Villa" , icon: <Home size={24}/>},
@@ -64,16 +76,6 @@ const categories = [
 </section>
 
 
-
-
-
-
-
-
-
-
-
-
 <div className="home-parent">
   <div className="home-intro">
     <span>Popular Stays</span>
@@ -93,7 +95,7 @@ const categories = [
             src={val.file}
             alt={val.propertyName}
           />
-
+  
           <svg
             onClick={(e) => {
               e.stopPropagation();

@@ -36,6 +36,7 @@ const newUser = async (req, res) => {
       process.env.JWT_SECRET
     );
 
+    
     return res.status(201).json({
       message: "Account Created",
       token,

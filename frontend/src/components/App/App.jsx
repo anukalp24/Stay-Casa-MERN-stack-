@@ -19,7 +19,7 @@ import { useNavigate } from 'react-router-dom'
 import { info } from '..'
 function App() {
   const navigate = useNavigate()
-const [allHomes, setallHomes] = useState([])
+
 const [response, setresponse] = useState([])
 const [wishlist, setwishlist] = useState([])
 const [search, setsearch] = useState("")
@@ -36,6 +36,13 @@ desc: "",
 const [dashboard, setdashboard] = useState([]) 
 
 
+// useEffect(() => {
+
+//   const getHomes = async ()=>{
+//     const homes = await fetch(`http://localhost:4090/`)
+//   }
+//   getHomes()
+// }, [])
 
 
 
@@ -68,7 +75,7 @@ const handleStay = (id)=>{
 
   return (
     <>
-  <info.Provider value={{response , setresponse , form , setform , wishlist , setwishlist , search , setsearch , searchResult, setsearchResult , handleStay , dashboard , setdashboard , handlewishlist , allHomes , setallHomes}}>
+  <info.Provider value={{response , setresponse , form , setform , wishlist , setwishlist , search , setsearch , searchResult, setsearchResult , handleStay , dashboard , setdashboard , handlewishlist}}>
 <Routes>
 <Route path='/' element={<Home/>}></Route>
 <Route path='/About' element={<About/>}></Route>

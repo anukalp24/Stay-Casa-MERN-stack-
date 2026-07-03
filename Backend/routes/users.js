@@ -9,7 +9,6 @@ const upload = require("../Middleware/upload")
 const categories = require("../Controllers/Users/Categories")
 const GetIndividualHomes = require("../Controllers/Users/GetSingleHome")
 const contact  = require("../Controllers/Users/Contact")
-const priceFilterHomes = require("../Controllers/Users/PriceFilter") 
 
 user.post("/addhome" ,authMiddleware , upload.array("images" , 5) ,  addhome )
 user.get("/" , gethomes )
@@ -17,5 +16,4 @@ user.get("/home/:id" , GetIndividualHomes )
 user.post("/search" , searchHomes)
 user.post("/categories" , categories)
 user.post("/contact" , contact )
-user.post("/pricefilter" , priceFilterHomes )
 module.exports = user
