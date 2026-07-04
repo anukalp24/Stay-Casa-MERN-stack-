@@ -1,4 +1,5 @@
 require("dotenv").config()
+const cookie = require("cookie-parser")
 const express = require("express")
 const cors = require("cors")
 const connectDb = require("./database/mongoose")
@@ -7,6 +8,7 @@ const app = express()
 
 app.use(cors())
 app.use(express.json())
+app.use(cookie())
 app.use("/uploads" , express.static("uploads"))
 // here fornt end get req will come for the image
 

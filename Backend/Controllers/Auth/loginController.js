@@ -15,7 +15,7 @@ const login =  async (req , res)=>{
 
         if(!existingUser){
             return res.status(404).json({
-                message: "No accoutn exist with this email"
+                message: "No account exist with this email"
             })
         }
 
@@ -28,14 +28,14 @@ const login =  async (req , res)=>{
 
 
 
-const token = jwt.sign({
+const accessToken = jwt.sign({
    id: existingUser._id
 }, process.env.JWT_SECRET)
 
 
          return res.status(200).json({
             message: "Login Successfully",
-            token
+            accessToken: accessToken
          })
         
 

@@ -1,6 +1,7 @@
   const jwt = require("jsonwebtoken");
 const User = require("../../Models/User");
 const bcrypt = require("bcryptjs");
+const user = require("../../routes/users");
 
 const newUser = async (req, res) => {
   try {
@@ -29,17 +30,38 @@ const newUser = async (req, res) => {
       password: hashedPassword,
     });
 
-    const token = jwt.sign(
+    const accessToken = jwt.sign(
       {
         id: userInfo._id,
       },
-      process.env.JWT_SECRET
+      process.env.JWT_SECRET,
+      {expiresIn: "15m"}
     );
 
     
+    const refreshToken = jwt.sign({
+      id: userInfo._id
+    },
+  process.env.JWT_REFRESH_SECRET,
+  {expiresIn: "30d"}
+  )
+
+userInfo.refreshToken = refreshToken
+await userInfo.save()
+    
+
+
+res.cookie("refreshToken" , refreshToken , {
+  httpOnly: true,
+  secure: false,
+  sameSite: "lax",
+  maxAge: 30 * 24* 60 * 60 *1000
+})
+// during deployment we ned to do secure true
+
     return res.status(201).json({
       message: "Account Created",
-      token,
+      accessToken : accessToken
     });
   } catch (error) { 
     console.log(error);

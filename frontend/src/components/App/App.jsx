@@ -56,7 +56,7 @@ let WishlistRequest =   await fetch(`http://localhost:4090/wishlist/${val._id}` 
     method: "PUT",
          headers:{
             "Content-Type":"application/json",
-            authorization: localStorage.getItem("token")
+            authorization: localStorage.getItem("accessToken")
          },
          body: JSON.stringify(val)
 
@@ -66,8 +66,6 @@ let WishlistRequest =   await fetch(`http://localhost:4090/wishlist/${val._id}` 
       }
 
 }
-
-
 const handleStay = (id)=>{
   navigate(`/home/${id}`)
 }

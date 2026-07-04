@@ -47,8 +47,6 @@ const handleNext = ()=>{
     <>
     <Navbar/>
 <div className="card-section">
-
-  
     {allHomes.map((homes, index) => (
       <div
         key={index}
@@ -100,12 +98,17 @@ const handleNext = ()=>{
 
 
 </div>
-  <div className="pagination">
 
+  <div className="pagination">
+{allHomes.length < 5 ? (
+<p>Your result</p>
+
+) : (
+<>
   <button
     className="pagination-btn"
     onClick={handlePrev}
-  >
+    >
     &#8249;
   </button>
 
@@ -125,10 +128,12 @@ const handleNext = ()=>{
   <button
     className="pagination-btn"
     onClick={handleNext}
-  >
+    >
      &#8250;
   </button>
-</div>
+  </>
+  )}
+  </div>
 <div className="price-filter">
 
   <div className="price-values">
@@ -162,5 +167,5 @@ const handleNext = ()=>{
 <Footer/>
   </>        
   )
-}
+  }
 export default Card

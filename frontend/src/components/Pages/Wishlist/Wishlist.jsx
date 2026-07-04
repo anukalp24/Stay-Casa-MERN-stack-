@@ -26,7 +26,7 @@ const wishlist = async ()=>{
     const handleremove = async (id) => {
       let remove = await fetch(`http://localhost:4090/Removewishlist/${id}`, {
         headers:{
-           authorization: localStorage.getItem("token")
+           authorization: localStorage.getItem("accessToken")
         } ,
         method: "DELETE",
       })

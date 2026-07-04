@@ -19,9 +19,8 @@ const getdashboardhomes =  async ()=>{
   const api = await fetch(`http://localhost:4090/dashboard` , {
     method: "GET",
     headers:{
-      authorization: localStorage.getItem("token")
+      authorization: localStorage.getItem("accessToken")
     }
-
   })
   const dashboardHomes = await api.json()
   setdashboard(dashboardHomes)

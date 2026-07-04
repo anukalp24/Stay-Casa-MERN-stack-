@@ -126,7 +126,7 @@ formData.append("image" , file)
   let request2 = await fetch("http://localhost:4090/addhome" , {
     method: "post",
     headers: {
-      Authorization: localStorage.getItem("token")
+      Authorization: localStorage.getItem("accessToken")
       // sending authorization token aswell.
     },
     body: formData

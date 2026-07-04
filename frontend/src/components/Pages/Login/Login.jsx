@@ -32,6 +32,7 @@ const Login = () => {
         headers: {
           "Content-Type": "application/json"
         },
+        credentials: "include",
         body: JSON.stringify(form)
       }
     );
@@ -43,8 +44,8 @@ return
   }
     if (request.ok) {
       localStorage.setItem(
-        "token",
-        result.token
+        "accessToken",
+        result.accessToken 
     );
     
     navigate("/dashboard");
@@ -60,6 +61,7 @@ else{
         headers: {
           "Content-Type": "application/json"
         },
+           credentials: "include",
         body: JSON.stringify(form)
       }
     );
@@ -68,8 +70,8 @@ else{
 
     if (response.ok) {
       localStorage.setItem(
-        "token",
-        result.token
+        "accessToken",
+        result.accessToken
     );
     
     navigate("/dashboard");
