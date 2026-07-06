@@ -11,9 +11,7 @@ const refreshTokenFunc = async (req , res)=>{
             })
         }
         // check if cookies is still valid as its time is 30 days
-
-
-        const decoded = jwt.verify(refreshToken , process.env.JWT_REFRESHSECRET)
+        const decoded = jwt.verify(refreshToken , process.env.JWT_REFRESH_SECRET)
 
 const exist = await User.findOne({
     refreshToken: refreshToken
@@ -28,12 +26,12 @@ if(!exist){
 
 
 const newAccessToken = jwt.sign({
-    id: decoded._id
+    id: exist._id
 },
+// we can also use decoded.id aswell but we are checking from db
+
 process.env.JWT_SECRET,
 {expiresIn: "15m"})
-
-
 
 res.status(200).json({
     message: "new access token generated successfully",
@@ -51,9 +49,9 @@ res.status(200).json({
 }
 
 module.exports = refreshTokenFunc
-
-
-
+// very imp detail thats why we need database check also Tampered token → jwt.verify() catches it.
+// Expired token → jwt.verify() catches it.
+// Logged out / revoked / replaced refresh token → Database check catches it.
 
 
 

@@ -26,12 +26,31 @@ const login =  async (req , res)=>{
             })
         }
 
-
-
+        
 const accessToken = jwt.sign({
    id: existingUser._id
-}, process.env.JWT_SECRET)
+}, process.env.JWT_SECRET,
+   {expiresIn: "15m"}
+)
 
+ const refreshToken = jwt.sign({
+      id: existingUser._id
+    },
+  process.env.JWT_REFRESH_SECRET,
+  {expiresIn: "30d"}
+  )
+
+existingUser.refreshToken = refreshToken
+await existingUser.save()
+
+// we are also savign it in databse baby
+
+res.cookie("refreshToken" , refreshToken , {
+  httpOnly: true,
+  secure: false,
+  sameSite: "lax",
+  maxAge: 30 * 24* 60 * 60 *1000
+})
 
          return res.status(200).json({
             message: "Login Successfully",

@@ -4,19 +4,24 @@ import { useState , useContext , useEffect } from 'react'
 import './Wishlist.css'
 import Navbar from '../../Navbar/Navbar'
 import Footer from '../../Footer/Footer'
+import fetchWithRefresh from '../../../Utils/fetchWithRefresh'
 const Wishlist = () => {
     const {wishlist , setwishlist , handleStay} = useContext(info)
 const [loader, setloader] = useState(true)
 
 useEffect(() => {
+
 const wishlist = async ()=>{
-    const api =   await fetch("http://localhost:4090/wishlist", {
-      method: "GET",
+
+  const wishlist  = await fetchWithRefresh("http://localhost:4090/wishlist" , {
+method: "GET",
       headers: {
-        authorization: localStorage.getItem("token")
-      }
-    })
-    const response2 = await api.json()
+        authorization: localStorage.getItem("accessToken")
+      },
+        credentials: "include"
+  })
+   
+    const response2 = await wishlist.json()
     setwishlist(response2)
     setloader(false)
   }
@@ -24,11 +29,12 @@ const wishlist = async ()=>{
 }, [])
 
     const handleremove = async (id) => {
-      let remove = await fetch(`http://localhost:4090/Removewishlist/${id}`, {
+      let remove = await fetchWithRefresh(`http://localhost:4090/Removewishlist/${id}`, {
         headers:{
            authorization: localStorage.getItem("accessToken")
         } ,
         method: "DELETE",
+        credentials: "include"
       })
 
       if (!remove.ok) {
@@ -54,7 +60,7 @@ const wishlist = async ()=>{
 
       <div className="wishlist-header">
         <h1>Your Wishlist</h1>
-        <p>{wishlist.length} saved {wishlist.length === 1 ? 'property' : 'properties'}</p>
+        <p>{wishlist.wishlist.length} saved {wishlist.wishlist.length === 1 ? 'property' : 'properties'}</p>
       </div>
 
       {wishlist?.wishlist?.length === 0 ? (

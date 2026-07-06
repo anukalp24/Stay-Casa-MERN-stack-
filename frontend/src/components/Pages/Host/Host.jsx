@@ -10,8 +10,8 @@ const Host = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-   const token = localStorage.getItem("token")
-     console.log("TOKEN =", token)
+   const token = localStorage.getItem("accessToken")
+   
    if(!token){
     navigate("/auth")
    }
@@ -92,7 +92,7 @@ let updateResult = await updateRequest.json()
 setresponse([...response ,updateResult])
 }
 else{
-
+ 
   const formData = new FormData()   // creates an empty container lika a bag 
 
   formData.append("propertyName" , form.propertyName)

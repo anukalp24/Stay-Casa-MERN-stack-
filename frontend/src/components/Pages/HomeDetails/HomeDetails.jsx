@@ -77,11 +77,13 @@ const Home = () => {
               {home?.home?.propertyName?.charAt(0)?.toUpperCase() || "H"}
             </div>
             <div className="hd-host-info">
-              <h4>Hosted by {home?.home?.propertyName?.split(" ")[0] || "Host"}</h4>
+              <h4>Hosted by  {home?.home?.owner?.name} </h4>
               <p>Superhost · 4 years hosting</p>
             </div>
           </div>
-
+{/* <p className="dashboardhomesdetails-description">
+              {dashboardHomeDetails?.home.owner?.name}
+            </p> */}
           <div className="hd-highlights">
             <div className="hd-highlight-item">
               <span className="hd-highlight-icon">🏠</span>

@@ -2,7 +2,7 @@ const Home = require("../../Models/Home");
 
 const GetSingleHome = async (req, res) => {
   try {
-    const home = await Home.findById(req.params.id);
+    const home = await Home.findById(req.params.id).populate("owner");
     if (!home) {
       return res.status(404).json({
         success: false,
@@ -11,7 +11,6 @@ const GetSingleHome = async (req, res) => {
     }
 
     res.status(200).json({
-      success: true,
       message: "Home fetched successfully",
       home,
     });
@@ -21,7 +20,6 @@ const GetSingleHome = async (req, res) => {
     console.log(error);
 
     res.status(500).json({
-      success: false,
       message: "Internal server error",
     });
   }

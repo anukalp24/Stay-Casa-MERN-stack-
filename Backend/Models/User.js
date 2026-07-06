@@ -12,4 +12,3 @@ refreshToken: {
 // why this fedault ""
 const User = mongoose.model("User" , userSchema)
 module.exports = User
-

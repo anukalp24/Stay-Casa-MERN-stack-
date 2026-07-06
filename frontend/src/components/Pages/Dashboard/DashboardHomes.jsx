@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { info } from '../..'
 import "./DashboardHomes.css"
 import Navbar from '../../Navbar/Navbar'
+import fetchWithRefresh from '../../../Utils/fetchWithRefresh'
 const Dashboard = () => {
   const navigate = useNavigate()
 
@@ -16,11 +17,12 @@ const [loader, setloader] = useState(true)
 useEffect(() => {
 const getdashboardhomes =  async ()=>{
 
-  const api = await fetch(`http://localhost:4090/dashboard` , {
+  const api = await fetchWithRefresh("http://localhost:4090/dashboard" , {
     method: "GET",
     headers:{
       authorization: localStorage.getItem("accessToken")
-    }
+    },
+     credentials: "include"
   })
   const dashboardHomes = await api.json()
   setdashboard(dashboardHomes)
