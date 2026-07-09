@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css"
+import Navbar from "../../Navbar/Navbar";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -84,7 +85,9 @@ else{
 
 
   return (
+
     <div>
+      <Navbar/>
         {form.islogin === true ? (
 <>
         

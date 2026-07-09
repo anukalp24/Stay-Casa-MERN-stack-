@@ -13,6 +13,14 @@ const updateHome =  async (req , res)=>{
     }
 
 
+
+if(home.owner.toString() !== req.user.id){
+    return res.status(403).json({
+        message: "Not Authorized"
+    })
+}
+
+
 if(home.owner.toString() !== req.user.id){
     return res.status(403).json({
         message: "Not Authorized"
@@ -24,6 +32,14 @@ req.params.id ,
      req.body  , 
      {new: true}
 )
+
+// const resue = await Home.findOneAndUpdate({
+//  _id: req.params.id
+// } ,
+// req.body,
+// {new: true}
+
+// )
 
 res.json(result)
 }

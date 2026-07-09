@@ -36,22 +36,15 @@ desc: "",
 const [dashboard, setdashboard] = useState([]) 
 
 
-// useEffect(() => {
-
-//   const getHomes = async ()=>{
-//     const homes = await fetch(`http://localhost:4090/`)
-//   }
-//   getHomes()
-// }, [])
-
-
-
-
-
-
-
 
 const handlewishlist  = async (val)=>{
+let accessToken = localStorage.getItem("accessToken")
+if(!accessToken){
+  navigate("/auth")
+  return
+}
+
+
 let WishlistRequest =   await fetch(`http://localhost:4090/wishlist/${val._id}` , {
     method: "PUT",
          headers:{

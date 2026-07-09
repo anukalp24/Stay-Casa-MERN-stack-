@@ -21,8 +21,6 @@ const [open, setopen] = useState(false)
         <Link to="/wishlist">WishList</Link>
         <Link id='login-btn' to="/auth">Login</Link>
         <Link  to="/dashboard">Dashboard</Link>
-        <div onMouseEnter={()=>setopen(true)} onMouseLeave={()=>setopen(false)} className="dropdown-btn">
-     </div>
      </div>
 
         <div className="host-box">

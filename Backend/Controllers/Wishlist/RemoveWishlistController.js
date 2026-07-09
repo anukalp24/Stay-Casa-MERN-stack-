@@ -18,6 +18,13 @@ const RemoveWishlist = async (req , res)=>{
         }
 
 
+
+        if(exist.user !== req.user.id){
+            return res.status(403).json({
+                message: "Not Authorized"
+            })
+        }
+
 res.status(200).json({
     message: "Home deleted from wishlist successfully"
 })

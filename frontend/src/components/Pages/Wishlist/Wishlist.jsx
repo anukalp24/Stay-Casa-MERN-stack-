@@ -10,7 +10,6 @@ const Wishlist = () => {
 const [loader, setloader] = useState(true)
 
 useEffect(() => {
-
 const wishlist = async ()=>{
 
   const wishlist  = await fetchWithRefresh("http://localhost:4090/wishlist" , {

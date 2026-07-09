@@ -17,8 +17,7 @@ const wishlistfunc  =  async (req , res)=>{
            user: req.user.id,
            home: req.params.id
           })
-       
- 
+
           await wishlist.populate("home")
 
 

@@ -10,9 +10,5 @@ const dashboard = express.Router()
 dashboard.get("/dashboard" ,  authMiddleware ,  getDashboardHomes)
 dashboard.delete("/deletehome/:id" , authMiddleware ,  deletehome)
 dashboard.put("/edithome/:id" , updatehome)
-dashboard.get("/dashboardHomeDetails/:id" , dashboardHomesDetails)
+dashboard.get("/dashboardHomeDetails/:id" , authMiddleware ,  dashboardHomesDetails)
 module.exports = dashboard
-
-
-
-

@@ -9,7 +9,7 @@ const GetSingleHome = async (req, res) => {
         message: "Home not found",
       });
     }
-
+  
     res.status(200).json({
       message: "Home fetched successfully",
       home,
