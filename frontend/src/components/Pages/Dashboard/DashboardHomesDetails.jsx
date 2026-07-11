@@ -15,11 +15,20 @@ const DashboardHomesDetails = () => {
   const { setform, setresponse, response, setdashboard, dashboard } =
     useContext(info);
 
+
+
+
   useEffect(() => {
+  
     async function dashbaordDetails() {
-      const req = await fetch(
-        `http://localhost:4090/dashboardHomeDetails/${_id}`,
-      );
+      const req = await   fetchWithRefresh(`http://localhost:4090/dashboardHomeDetails/${_id}` , {
+headers: {
+  authorization: localStorage.getItem("accessToken"),
+  credentials: "include"
+}
+      }) 
+       
+      
       const result = await req.json();
       setdashboardHomeDetails(result);
     }

@@ -11,9 +11,14 @@ const ResetPassword = () => {
     const handlechange = (e) => {
         setform({ ...form, [e.target.name]: e.target.value })
     }
-
     const [message, setmessage] = useState()
     const resetPassword = async () => {
+
+        const strongPassword =   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/
+  if(!strongPassword.test(form.password)){
+              return setmessage("Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character.")
+  }
+
         const request = await fetch(`http://localhost:4090/reset-password/${token}`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },

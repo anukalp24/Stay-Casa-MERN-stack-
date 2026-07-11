@@ -6,7 +6,7 @@ import Navbar from "../../Navbar/Navbar";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [error, seterror] = useState("")
+  const [message, setmessage] = useState("")
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -24,8 +24,21 @@ const Login = () => {
 
   const handleLogin = async (e) => {
   e.preventDefault()
-    if(form.islogin === true){
+
+  
+  if(form.email === ""){
+    return setmessage("Email is required")
+  }
+  if(form.password === ""){
+    return setmessage("Password is required")
+  }
+const strongPassword =  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/
+
+
         
+        if(form.islogin === true){
+
+
         const request = await fetch(
             "http://localhost:4090/login",
             {
@@ -40,7 +53,7 @@ const Login = () => {
 
     const result = await request.json();
   if(request.status === 429){
-seterror(result.message)
+setmessage(result.message)
 return
   }
     if (request.ok) {
@@ -51,10 +64,19 @@ return
     
     navigate("/dashboard");
 } else {
-    seterror(result.message)
+    setmessage(result.message)
 }
 }
 else{
+ if(form.name === ""){
+    return setmessage("Name is required")
+  }
+
+ if(!strongPassword.test(form.password)){
+          return setmessage("Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character.")
+        }
+
+
       const response = await fetch(
             "http://localhost:4090/signin",
             {
@@ -77,11 +99,10 @@ else{
     
     navigate("/dashboard");
 } else {
-    seterror(result.message)
+    setmessage(result.message)
 }
 }
   };
-
 
 
   return (
@@ -133,7 +154,7 @@ else{
             <button type="submit" className="login-btn">
               Login
             </button>
-            <p>{error}</p>
+            <p>{message}</p>
           </form>
   </div>
       </div>
@@ -150,7 +171,7 @@ else{
           </p>
 
 
-          <p onClick={()=>setForm({... form , islogin: true})}>alredy have an accoutn log in</p>
+          <p onClick={()=>setForm({... form , islogin: true})}>already have an accoutn log in</p>
 
           <form onSubmit={handleLogin}>
             <div className="input-group">
@@ -181,6 +202,7 @@ else{
                 value={form.password}
                 onChange={handleChange}
               />
+              <p>{message}</p>
             </div>
 
 

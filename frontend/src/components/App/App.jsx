@@ -81,7 +81,7 @@ const handleStay = (id)=>{
 <Route path='/search' element={<Search/>} ></Route>
 <Route path='/stays' element={<Stays/>} ></Route>
 <Route path='/categories' element={<Categories/>} ></Route>
-<Route path='/dashboardHomesDetails/:_id' element={<DashboardDetails/>}></Route>
+<Route path='/dashboardHomeDetails/:_id' element={<DashboardDetails/>}></Route>
 </Routes>
   </info.Provider>
     </>

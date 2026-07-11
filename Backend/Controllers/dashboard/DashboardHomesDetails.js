@@ -1,15 +1,15 @@
 const Home = require("../../Models/Home")
 
 const dashboardHomesDetails =   async (req , res)=>{
-
     try {
+    
         const home = await Home.findById(req.params.id)
         if(!home){
-          res.status(404).json({
-            message: "Home not found"
-          })
+            res.status(404).json({
+                message: "Home not found"
+            })
         }
-
+        
 
 
         res.status(200).json({

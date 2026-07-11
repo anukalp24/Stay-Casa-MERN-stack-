@@ -59,9 +59,8 @@ return (
   </div>
 
   <div className="dashboard-all-grid">
-
     {dashboard.map((val,index)=>(
-      <div onClick={()=> {navigate(`/dashboardHomesDetails/${val._id}`)}}
+      <div onClick={()=> {navigate(`/dashboardHomeDetails/${val._id}`)}}
       key={index}
       className="dashboard-all-card"
       >

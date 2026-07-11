@@ -6,7 +6,9 @@ const forgetPassword =  async (req , res)=>{
     try {
         const {email} = req.body
 
-        const existingUser  = await User.findOne({email})
+        const existingUser  = await User.findOne({
+            email: email
+        })
 
         if(!existingUser){
             return res.status(404).json({
@@ -24,7 +26,6 @@ const forgetPassword =  async (req , res)=>{
             
 // it will update the original mongo db
 
-        
             const transporter = nodemailer.createTransport({
                 service: "gmail",
                 auth:{
@@ -35,6 +36,13 @@ const forgetPassword =  async (req , res)=>{
  
             // reset link with token in URL
 const resetLink = `http://localhost:5173/reset-password/${resetToken}`
+
+
+
+
+
+
+
             await transporter.sendMail({
                 from: process.env.EMAIL_USER,
                 to: req.body.email,
@@ -45,7 +53,6 @@ const resetLink = `http://localhost:5173/reset-password/${resetToken}`
                 <p>If you didn't request this, ignore this email.</p>
                 `
             })
-
 return res.status(200).json({
     message: "Reset link sent to your email"
 }

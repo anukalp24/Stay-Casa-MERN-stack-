@@ -22,8 +22,9 @@ if(!exist){
     return res.status(404).json({
         message: "Not authorized"
     })
-}
-
+} 
+ 
+ 
 
 const newAccessToken = jwt.sign({
     id: exist._id

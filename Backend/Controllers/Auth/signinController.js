@@ -7,17 +7,27 @@ const newUser = async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
+
+const strongPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+
+
     const existingUser = await User.findOne({
       email,
     });
-
+    
     if (existingUser) {
       return res.status(400).json({
         message: "User already exists",
       });
     }
 
- 
+
+        if(!strongPassword.test(password)){
+              return res.status(500).json({
+                message: "Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character."
+              })
+               }
+    
     const hashedPassword = await bcrypt.hash(
       password,
       10 

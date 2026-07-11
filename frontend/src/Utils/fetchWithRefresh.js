@@ -2,7 +2,6 @@
 
 const fetchWithRefresh = async ( url , options = {})=>{
     const req = await fetch(url , options)
-
     if(req.ok){
         return req
     }
@@ -17,12 +16,10 @@ const fetchWithRefresh = async ( url , options = {})=>{
         if(refreshReq.ok){
            const result = await refreshReq.json()
           localStorage.setItem("accessToken" , result.newAccessToken)
-
-          
                options.headers.authorization = localStorage.getItem("accessToken")
             // now we will be addign new access token as the old on eis expired thats hwy we are here in this block
             
-
+       
             const retry = await fetch(url ,options)
             return retry
         }
