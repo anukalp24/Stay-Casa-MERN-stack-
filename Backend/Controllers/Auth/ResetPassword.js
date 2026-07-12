@@ -17,7 +17,7 @@ const reset =  async (req , res) =>{
         }
 
         if(!strongPassword.test(req.body.password)){
-                    return res.status(500).json({
+                    return res.status(400).json({
                       message: "Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character."
                     })
                   }
@@ -28,6 +28,11 @@ const reset =  async (req , res) =>{
             findUser.resetToken = "";
             findUser.resetTokenExpiry = undefined
             findUser.refreshToken =""
+            res.clearCookie("refreshToken", {
+  httpOnly: true,
+  secure: false,
+  sameSite: "lax"
+});
           await  findUser.save()
         }
 

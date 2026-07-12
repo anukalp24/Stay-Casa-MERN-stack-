@@ -1,8 +1,9 @@
-  const jwt = require("jsonwebtoken");
+
 const User = require("../../Models/User");
 const bcrypt = require("bcryptjs");
 const user = require("../../routes/users");
-
+const crypto = require("crypto")
+const nodemailer  = require("nodemailer")
 const newUser = async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -28,6 +29,9 @@ const strongPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
               })
                }
     
+        const otp = crypto.randomInt(100000 , 1000000).toString()
+const otpExpiry = new Date(Date.now() + 10 *60 *1000)
+
     const hashedPassword = await bcrypt.hash(
       password,
       10 
@@ -38,43 +42,53 @@ const strongPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
       name,
       email,
       password: hashedPassword,
+      emailVerificationOtp: otp,
+emailVerificationExpiry: otpExpiry
     });
 
-    const accessToken = jwt.sign(
-      {
-        id: userInfo._id,
-      },
-      process.env.JWT_SECRET,
-      {expiresIn: "15m"}
-    );
-
-    
-    const refreshToken = jwt.sign({
-      id: userInfo._id
-    },
-  process.env.JWT_REFRESH_SECRET,
-  {expiresIn: "30d"}
-  )
-
-userInfo.refreshToken = refreshToken
-await userInfo.save()
-    
-
-
-res.cookie("refreshToken" , refreshToken , {
-  httpOnly: true,
-  secure: false,
-  sameSite: "lax",
-  maxAge: 30 * 24* 60 * 60 *1000
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth:{
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS
+  }
 })
-// during deployment we ned to do secure true
+
+await transporter.sendMail({
+  from: process.env.EMAIL_USER,
+  to: email,
+  subject: "Verify Your StayCasa Email Address",
+  html: `<h2>Welcome to StayCasa!</h2>
+
+<p>Thank you for signing up.</p>
+
+<p>Your email verification code is:</p>
+
+<h1>${otp}</h1>
+
+<p>This code is valid for <strong>10 minutes</strong>.</p>
+
+<p>If you didn't create a StayCasa account, you can safely ignore this email.</p>
+
+<p>Regards,<br><strong>StayCasa Team</strong></p>`
+})
+
+
+
+
+
+
+
+
+
 
     return res.status(201).json({
-      message: "Account Created",
-      accessToken : accessToken
+      message: "Account Created and successfully sent the verification link to your email",
+     
     });
+
   } catch (error) { 
-    console.log(error);
+  
 
     res.status(500).json({
       message: "Something went wrong",

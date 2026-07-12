@@ -25,7 +25,20 @@ resetToken: {
 resetTokenExpiry: {
 type: Date,
 default: ""
+} ,
+
+isVerified: {
+    type: Boolean,
+    default: false
+} ,
+
+emailVerificationOtp: {
+    type: String
+} ,
+emailVerificationExpiry:{
+    type: Date
 }
+
 })
 
 const User = mongoose.model("User" , userSchema)

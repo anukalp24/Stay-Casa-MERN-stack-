@@ -8,13 +8,14 @@ import Dashboard from '../Pages/Dashboard/DashboardHomes'
 import DashboardDetails from "../Pages/Dashboard/DashboardHomesDetails"
 import { useState , useEffect } from 'react'
 import Wishlist from '../Pages/Wishlist/Wishlist'
-import Login from '../Pages/Login/Login'
+import Login from '../Pages/Auth/Login'
 import ForgotPassword from '../Pages/ForgetPassword/ForgotPassword'
 import ResetPassword from '../Pages/ForgetPassword/ResetPassword'
 import HomeDetails from '../Pages/HomeDetails/HomeDetails'
 import Search from '../Pages/Search/Search'
 import Stays from "../Pages/Stays/Stays"
 import Categories from '../Pages/Categories/Categories'
+import EmailVerification from '../Pages/Auth/Email-Verification'
 import { useNavigate } from 'react-router-dom'
 import { info } from '..'
 function App() {
@@ -82,6 +83,7 @@ const handleStay = (id)=>{
 <Route path='/stays' element={<Stays/>} ></Route>
 <Route path='/categories' element={<Categories/>} ></Route>
 <Route path='/dashboardHomeDetails/:_id' element={<DashboardDetails/>}></Route>
+<Route path='/email-verification' element={<EmailVerification/>}></Route>
 </Routes>
   </info.Provider>
     </>

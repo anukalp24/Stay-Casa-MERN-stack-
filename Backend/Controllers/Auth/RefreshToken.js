@@ -50,33 +50,6 @@ res.status(200).json({
 }
 
 module.exports = refreshTokenFunc
-// very imp detail thats why we need database check also Tampered token → jwt.verify() catches it.
-// Expired token → jwt.verify() catches it.
-// Logged out / revoked / replaced refresh token → Database check catches it.
-
-
-
-
-
-// jwt.verify() checks:
-
-// ✅ Is the signature correct?
-// ✅ Was this token signed using JWT_REFRESH_SECRET?
-// ✅ Has it expired?
-// ✅ Has anyone modified it?
-
-// If all checks pass:
-
-// decoded
-
-// becomes something like:
-
-// {
-//     id: "687f9ab8...",
-//     iat: 1751654545,
-//     exp: 1754246545
-// }
-
 
 
 

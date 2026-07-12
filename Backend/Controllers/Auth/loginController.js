@@ -19,6 +19,13 @@ const login =  async (req , res)=>{
             })
         }
 
+
+        if(existingUser.isVerified === false){
+            return res.status(403).json({
+                message: "Please verify your email first"
+            })
+        }
+
         const isMatch = await bcrypt.compare(password , existingUser.password)
         if(!isMatch){
             return res.status(401).json({

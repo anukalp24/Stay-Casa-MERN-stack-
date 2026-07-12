@@ -3,9 +3,10 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css"
 import Navbar from "../../Navbar/Navbar";
-
 const Login = () => {
-  const navigate = useNavigate();
+
+  const navigate = useNavigate()
+
   const [message, setmessage] = useState("")
   const [form, setForm] = useState({
     name: "",
@@ -22,6 +23,8 @@ const Login = () => {
     });
   };
 
+
+  
   const handleLogin = async (e) => {
   e.preventDefault()
 
@@ -35,7 +38,7 @@ const Login = () => {
 const strongPassword =  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/
 
 
-        
+         
         if(form.islogin === true){
 
 
@@ -50,8 +53,8 @@ const strongPassword =  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/
         body: JSON.stringify(form)
       }
     );
-
     const result = await request.json();
+
   if(request.status === 429){
 setmessage(result.message)
 return
@@ -67,42 +70,50 @@ return
     setmessage(result.message)
 }
 }
-else{
- if(form.name === ""){
-    return setmessage("Name is required")
+
+else {
+  if (form.name === "") {
+    return setmessage("Name is required");
   }
 
- if(!strongPassword.test(form.password)){
-          return setmessage("Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character.")
-        }
+  if (!strongPassword.test(form.password)) {
+    return setmessage(
+      "Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character."
+    );
+  }
 
+  
 
-      const response = await fetch(
-            "http://localhost:4090/signin",
-            {
+  
+  const response = await fetch(
+    "http://localhost:4090/signin",
+    {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
-           credentials: "include",
+        credentials: "include",
         body: JSON.stringify(form)
       }
     );
-
-    const result = await response.json();
-
-    if (response.ok) {
-      localStorage.setItem(
-        "accessToken",
-        result.accessToken
-    );
     
-    navigate("/dashboard");
+    const result = await response.json();
+    
+    if(response.ok) {
+      navigate("/email-verification");
+      
+localStorage.setItem("email" , form.email)
+
+    
 } else {
     setmessage(result.message)
 }
 }
   };
+
+
+
+
 
 
   return (
@@ -221,7 +232,7 @@ else{
         )}
 
     </div>
+  
   );
-};
-
+  }
 export default Login;

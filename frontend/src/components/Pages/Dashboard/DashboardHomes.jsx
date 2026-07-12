@@ -15,6 +15,8 @@ const [loader, setloader] = useState(true)
 
 
 useEffect(() => {
+
+  
 const getdashboardhomes =  async ()=>{
 
   const api = await fetchWithRefresh("http://localhost:4090/dashboard" , {
@@ -28,6 +30,7 @@ const getdashboardhomes =  async ()=>{
   setdashboard(dashboardHomes)
   setloader(false)
 }
+
 getdashboardhomes()
 }, [])
  
@@ -45,7 +48,7 @@ return (
 
 ): (
   
-
+  
   <>
   
   
