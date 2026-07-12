@@ -29,7 +29,8 @@ const ResetPassword = () => {
 
         if (request.ok) {
             setmessage(result.message)
-            navigate("/auth")
+            localStorage.removeItem("accessToken")
+            navigate("/")
         } else {
             setmessage(result.message)
         }

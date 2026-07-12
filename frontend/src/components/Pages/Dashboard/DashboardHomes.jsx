@@ -28,7 +28,6 @@ const getdashboardhomes =  async ()=>{
   setdashboard(dashboardHomes)
   setloader(false)
 }
-
 getdashboardhomes()
 }, [])
  

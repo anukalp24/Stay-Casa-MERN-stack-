@@ -6,21 +6,21 @@ const Search =  async (req , res)=>{
         $or: [
 {
             cityname: {
-                $regex: req.body.name,
+                $regex: req.body,
                 $options: "i"
             }, 
         } ,
 
         {
             category: {
-                $regex: req.body.name,
+                $regex: req.body,
                 $options: "i"
             }
         }
         ]
      })
 
-// find returns a array 
+
 
 if(home.length === 0){
         return res.status(404).json({

@@ -13,9 +13,8 @@ const addhome = async(req , res)=>{
              owner: req.user.id,
            
         })
-
         await result.populate("owner")
-
+        
         res.status(201).json(result)
     } catch (error) {
         console.log(error)

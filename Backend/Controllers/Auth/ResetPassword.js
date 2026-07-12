@@ -16,18 +16,19 @@ const reset =  async (req , res) =>{
             })
         }
 
-
-
-
-
+        if(!strongPassword.test(req.body.password)){
+                    return res.status(500).json({
+                      message: "Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character."
+                    })
+                  }
 
         if(findUser.resetTokenExpiry > new Date()){
             const hashedPassword = await bcrypt.hash(req.body.password , 10)
             findUser.password = hashedPassword
             findUser.resetToken = "";
             findUser.resetTokenExpiry = undefined
+            findUser.refreshToken =""
           await  findUser.save()
-            
         }
 
         else{
@@ -37,11 +38,6 @@ const reset =  async (req , res) =>{
         }
 
 
-  if(!strongPassword.test(req.body.password)){
-              return res.status(500).json({
-                message: "Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character."
-              })
-            }
 
      return  res.status(200).json({
         message: "Password reset successfully"

@@ -15,10 +15,9 @@ const Search = () => {
     const request = await fetch(`http://localhost:4090/search` , {
       headers:  {"Content-Type": "application/json"},
       method: "POST",
-      body: JSON.stringify({
-  name: localStorage.getItem("search")
-  
-})
+      body: JSON.stringify(localStorage.getItem("search"))
+
+
     })
 
     const response = await request.json()
