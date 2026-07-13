@@ -24,7 +24,6 @@ const forgetPassword =  async (req , res)=>{
             existingUser.resetTokenExpiry  = resetTokenExpiry
             await existingUser.save()
             
-// it will update the original mongo db
 
             const transporter = nodemailer.createTransport({
                 service: "gmail",
@@ -42,7 +41,7 @@ const resetLink = `http://localhost:5173/reset-password/${resetToken}`
 
 
 
-
+ 
             await transporter.sendMail({
                 from: process.env.EMAIL_USER,
                 to: req.body.email,

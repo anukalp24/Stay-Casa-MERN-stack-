@@ -32,6 +32,7 @@ const strongPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
         const otp = crypto.randomInt(100000 , 1000000).toString()
 const otpExpiry = new Date(Date.now() + 10 *60 *1000)
 
+
     const hashedPassword = await bcrypt.hash(
       password,
       10 

@@ -22,6 +22,8 @@ resetToken: {
     type: String,
     default: ""
 }  ,
+
+
 resetTokenExpiry: {
 type: Date,
 default: ""

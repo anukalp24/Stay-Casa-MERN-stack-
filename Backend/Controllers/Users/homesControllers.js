@@ -27,7 +27,7 @@ const Home = require("../../Models/Home")
    }
   }).skip(skip).limit(limit)
 
-
+ 
      res.status(200).json(Homes)
 
 

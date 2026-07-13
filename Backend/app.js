@@ -19,10 +19,13 @@ const users = require("./routes/users")
 const wishlist = require("./routes/wishlist")
 const auth = require("./routes/auth")
 const dashboard = require("./routes/dashboard")
+const Payment = require("./routes/Payment")
 
 app.use(users)
 app.use(wishlist)
 app.use(auth)
 app.use(dashboard)
+app.use(Payment)
+
 connectDb()
 app.listen(4090)  

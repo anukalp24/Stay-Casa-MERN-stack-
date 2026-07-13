@@ -1,0 +1,208 @@
+.payment-failed {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg);
+  padding: 40px 20px;
+}
+
+/* ── container ── */
+
+.pf-container {
+  background: var(--color-surface);
+  border-radius: var(--radius-2xl);
+  padding: 56px 48px;
+  max-width: 460px;
+  width: 100%;
+  text-align: center;
+  box-shadow: var(--shadow-xl);
+  animation: pfSlideUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes pfSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ── icon ── */
+
+.pf-icon {
+  width: 88px;
+  height: 88px;
+  margin: 0 auto 28px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, #fde8e2, #f9d4cb);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pfPop 0.5s 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.pf-cross {
+  font-size: 2.8rem;
+  font-weight: 300;
+  color: var(--color-error);
+  line-height: 1;
+}
+
+@keyframes pfPop {
+  from {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ── text ── */
+
+.pf-heading {
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: var(--color-text-primary);
+  margin-bottom: 10px;
+  letter-spacing: -0.5px;
+}
+
+.pf-message {
+  font-size: 0.95rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+
+/* ── card ── */
+
+.pf-card {
+  background: var(--color-bg);
+  border-radius: var(--radius-xl);
+  padding: 24px 28px;
+  margin-bottom: 36px;
+  border: 1px solid var(--color-border-light);
+}
+
+.pf-card-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 0;
+}
+
+.pf-card-label {
+  font-size: 0.88rem;
+  color: var(--color-text-tertiary);
+  font-weight: 600;
+}
+
+.pf-card-value {
+  font-size: 0.88rem;
+  font-weight: 700;
+  padding: 5px 14px;
+  border-radius: var(--radius-full);
+}
+
+.pf-status-cancelled {
+  background: #fde8e2;
+  color: var(--color-error);
+}
+
+.pf-status-unconfirmed {
+  background: #fdf0e0;
+  color: #b8863a;
+}
+
+.pf-card-divider {
+  height: 1px;
+  background: var(--color-border-light);
+  margin: 14px 0;
+}
+
+/* ── buttons ── */
+
+.pf-actions {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.pf-btn {
+  display: inline-block;
+  padding: 14px 32px;
+  border-radius: var(--radius-full);
+  font-size: 0.95rem;
+  font-weight: 700;
+  transition: all var(--transition-base);
+  text-decoration: none;
+}
+
+.pf-btn-home {
+  background: var(--color-bg-alt);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
+}
+
+.pf-btn-home:hover {
+  background: var(--color-border);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.pf-btn-retry {
+  background: var(--color-gradient);
+  color: var(--color-text-inverse);
+  box-shadow: 0 4px 14px rgba(212, 119, 91, 0.3);
+}
+
+.pf-btn-retry:hover {
+  background: var(--color-gradient-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(212, 119, 91, 0.4);
+}
+
+.pf-btn:active {
+  transform: translateY(0);
+}
+
+/* ── responsive ── */
+
+@media (max-width: 540px) {
+  .pf-container {
+    padding: 40px 24px;
+  }
+
+  .pf-heading {
+    font-size: 1.4rem;
+  }
+
+  .pf-icon {
+    width: 72px;
+    height: 72px;
+  }
+
+  .pf-cross {
+    font-size: 2.2rem;
+  }
+
+  .pf-card {
+    padding: 20px;
+  }
+
+  .pf-actions {
+    flex-direction: column;
+  }
+
+  .pf-btn {
+    width: 100%;
+    text-align: center;
+  }
+}

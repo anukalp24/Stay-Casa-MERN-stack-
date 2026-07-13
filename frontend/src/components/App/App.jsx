@@ -16,6 +16,8 @@ import Search from '../Pages/Search/Search'
 import Stays from "../Pages/Stays/Stays"
 import Categories from '../Pages/Categories/Categories'
 import EmailVerification from '../Pages/Auth/Email-Verification'
+import PaymentSuccess from '../Pages/Payment/PaymentSuccess'
+import PaymentFailed from '../Pages/Payment/PaymentFailed'
 import { useNavigate } from 'react-router-dom'
 import { info } from '..'
 function App() {
@@ -84,6 +86,9 @@ const handleStay = (id)=>{
 <Route path='/categories' element={<Categories/>} ></Route>
 <Route path='/dashboardHomeDetails/:_id' element={<DashboardDetails/>}></Route>
 <Route path='/email-verification' element={<EmailVerification/>}></Route>
+<Route path='/payment-success' element={<PaymentSuccess/>}></Route>
+<Route path='/payment-cancel' element={<PaymentFailed/>}></Route>
+
 </Routes>
   </info.Provider>
     </>

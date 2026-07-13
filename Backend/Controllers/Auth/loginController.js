@@ -20,11 +20,11 @@ const login =  async (req , res)=>{
         }
 
 
-        if(existingUser.isVerified === false){
-            return res.status(403).json({
-                message: "Please verify your email first"
-            })
-        }
+        // if(existingUser.isVerified === false){
+        //     return res.status(403).json({
+        //         message: "Please verify your email first"
+        //     })
+        // }
 
         const isMatch = await bcrypt.compare(password , existingUser.password)
         if(!isMatch){
@@ -32,7 +32,7 @@ const login =  async (req , res)=>{
                 message: "Invalid email or password"
             })
         }
-
+ 
 const accessToken = jwt.sign({
    id: existingUser._id
 }, process.env.JWT_SECRET,

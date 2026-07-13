@@ -4,7 +4,29 @@ import { useEffect, useState } from 'react'
 import "./HomeDetails.css"
 import Footer from '../../Footer/Footer'
 import Navbar from '../../Navbar/Navbar'
+
+
+
+
+
 const Home = () => {
+
+
+
+
+
+
+
+
+
+
+// It did not  returned Stripe
+// it return
+// Promise<Stripe>
+
+// because Stripe JS is still loading.
+
+
   const { id } = useParams()
   const [home, sethome] = useState(null)
   const [imgError, setImgError] = useState(false)
@@ -18,6 +40,27 @@ const Home = () => {
     homefunc()
   }, [])
 
+
+  const handleadd = async  (id)=>{
+      console.log("Button clicked", id);
+    const createCheckoutSession =  await fetch(`http://localhost:4090/create-checkout-session/${id}` , {
+      headers: {
+        authorization: localStorage.getItem("accessToken")
+      },
+      method: "POST"
+    })
+
+    if(createCheckoutSession.ok){
+const data = await createCheckoutSession.json()
+
+
+// console.log("Stripe Object:", stripe);
+// console.log("redirectToCheckout:", stripe?.redirectToCheckout);
+
+
+window.location.href = data.url;
+}
+}
 
   const handleshare = async ()=>{
     try {
@@ -148,7 +191,7 @@ const Home = () => {
               <span>1 guest</span>
             </div>
 
-            <button className="hd-book-btn">Reserve Now</button>
+            <button onClick={()=>handleadd(home?.home?._id)} className="hd-book-btn">Reserve Now</button>
 
             <p className="hd-charge-note">You won't be charged yet</p>
 

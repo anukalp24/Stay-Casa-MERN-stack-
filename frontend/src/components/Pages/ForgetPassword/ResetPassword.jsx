@@ -12,6 +12,8 @@ const ResetPassword = () => {
         setform({ ...form, [e.target.name]: e.target.value })
     }
     const [message, setmessage] = useState()
+
+    
     const resetPassword = async () => {
 
         const strongPassword =   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/

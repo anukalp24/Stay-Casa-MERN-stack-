@@ -13,7 +13,7 @@ const dashboardHomesDetails =   async (req , res)=>{
 
 
         res.status(200).json({
-            home,
+            home, 
             message: "Home send successfully"
         })
 
