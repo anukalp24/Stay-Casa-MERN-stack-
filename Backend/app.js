@@ -20,12 +20,14 @@ const wishlist = require("./routes/wishlist")
 const auth = require("./routes/auth")
 const dashboard = require("./routes/dashboard")
 const Payment = require("./routes/Payment")
+const webhook = require("./routes/webhook");
 
 app.use(users)
 app.use(wishlist)
 app.use(auth)
 app.use(dashboard)
 app.use(Payment)
+app.use(webhook);
 
 connectDb()
 app.listen(4090)  

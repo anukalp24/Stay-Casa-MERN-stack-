@@ -5,26 +5,12 @@ import "./HomeDetails.css"
 import Footer from '../../Footer/Footer'
 import Navbar from '../../Navbar/Navbar'
 
-
+import fetchWithRefresh from '../../../Utils/fetchWithRefresh'
 
 
 
 const Home = () => {
 
-
-
-
-
-
-
-
-
-
-// It did not  returned Stripe
-// it return
-// Promise<Stripe>
-
-// because Stripe JS is still loading.
 
 
   const { id } = useParams()
@@ -41,23 +27,32 @@ const Home = () => {
   }, [])
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
   const handleadd = async  (id)=>{
-      console.log("Button clicked", id);
-    const createCheckoutSession =  await fetch(`http://localhost:4090/create-checkout-session/${id}` , {
-      headers: {
-        authorization: localStorage.getItem("accessToken")
-      },
-      method: "POST"
+    const createCheckoutSession = await fetchWithRefresh(`http://localhost:4090/create-checkout-session/${id}` , {
+    headers: {
+      authorization: localStorage.getItem("accessToken")
+    } ,
+    method: "POST",
+    credientials: "include"
     })
 
     if(createCheckoutSession.ok){
 const data = await createCheckoutSession.json()
-
-
-// console.log("Stripe Object:", stripe);
-// console.log("redirectToCheckout:", stripe?.redirectToCheckout);
-
-
 window.location.href = data.url;
 }
 }
