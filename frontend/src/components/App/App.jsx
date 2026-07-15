@@ -18,6 +18,7 @@ import Categories from '../Pages/Categories/Categories'
 import EmailVerification from '../Pages/Auth/Email-Verification'
 import PaymentSuccess from '../Pages/Payment/PaymentSuccess'
 import PaymentFailed from '../Pages/Payment/PaymentFailed'
+import Bookings from '../Pages/Bookings/Bookings'
 import { useNavigate } from 'react-router-dom'
 import { info } from '..'
 function App() {
@@ -88,6 +89,7 @@ const handleStay = (id)=>{
 <Route path='/email-verification' element={<EmailVerification/>}></Route>
 <Route path='/payment-success' element={<PaymentSuccess/>}></Route>
 <Route path='/payment-cancel' element={<PaymentFailed/>}></Route>
+<Route path='/Bookings'  element={<Bookings/>}></Route>
 
 </Routes>
   </info.Provider>

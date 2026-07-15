@@ -56,6 +56,7 @@ const [message, setmessage] = useState("")
     credentials: "include"
     })
 
+    console.log(createCheckoutSession);
     if(createCheckoutSession.ok){
 const data = await createCheckoutSession.json()
 window.location.href = data.url;

@@ -21,6 +21,7 @@ const Navbar = () => {
         <Link to="/wishlist">WishList</Link>
         <Link id='login-btn' to="/auth">Login</Link>
         <Link  to="/dashboard">Dashboard</Link>
+        <Link  to="/Bookings">Your Bookings</Link>
      </div>
 
         <div className="host-box">

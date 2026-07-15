@@ -5,36 +5,55 @@ const Payment = require("../../Models/Payment")
 const Home = require("../../Models/Home")
 
 
-
-
-
-
-
-const webhook = (req , res) =>{
+const webhook =  async (req , res) =>{
     try {
-        const signature = req.headers["stripe-signature "]
-
-
-
+       
+        const signature = req.headers["stripe-signature"]
+        
         const event  = stripe.webhooks.constructEvent(req.body , signature , process.env.STRIPE_WEBHOOK_SECRET)
-
+        // now event wil get all properties of req/body
+        // If the signature is valid, constructEvent() returns the event object.
+        
         if(event.type === "checkout.session.completed"){
+            console.log("payment successfull")
             const session = event.data.object
+            
+                    const exist  = await Payment.findOne({
+                    stripeSessionId: session.id
+                    })
+                    
+                    if(exist){
+                        return res.status(200)
+                    }
+
+                
             const userId = session.metadata.userId
             const homeId = session.metadata.homeId
-
+            
             const home = await Home.findById(homeId)
+console.log(session.metadata);
 
-
-            const document = Payment.create({
+            const Paymentdocument = await Payment.create({
+                stripeSessionId: session.id,
+                home: homeId, 
                 owner: userId,
+                totalPrice: session.amount_total / 100,
+     paymentStatus: session.payment_status,
              propertyName: home.propertyName,
-               totalPrice: session.amount_total / 100,
-    paymentStatus: session.payment_status,
+             cityname: home.cityname,
+             desc: home.desc,
+             file: home.file,
+             checkIn: session.metadata.checkIn,
+             checkOut: session.metadata.checkOut
             })
 
+
+
+
+
+
+
 // Now session is:
-                          
 // {
 //     id: "cs_test_123",
 
@@ -50,7 +69,7 @@ const webhook = (req , res) =>{
 
 
 return res.status(200).json({
-    message: "Bookign history created"
+ received: true
 })
 
 
@@ -58,7 +77,8 @@ return res.status(200).json({
         }
 
     } catch (error) {
-        return res.status(500).json({
+        console.log(error)
+        return res.status(400).json({
             message: "Something went wrong"
         })
     }
