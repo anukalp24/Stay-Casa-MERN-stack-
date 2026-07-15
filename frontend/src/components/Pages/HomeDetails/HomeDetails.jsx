@@ -4,7 +4,8 @@ import { useEffect, useState } from 'react'
 import "./HomeDetails.css"
 import Footer from '../../Footer/Footer'
 import Navbar from '../../Navbar/Navbar'
-
+import "react-datepicker/dist/react-datepicker.css";
+import DatePicker from 'react-datepicker'
 import fetchWithRefresh from '../../../Utils/fetchWithRefresh'
 
 
@@ -16,6 +17,13 @@ const Home = () => {
   const { id } = useParams()
   const [home, sethome] = useState(null)
   const [imgError, setImgError] = useState(false)
+const [checkIn, setcheckIn] = useState(null)
+const [checkOut, setcheckOut] = useState(null)
+const [message, setmessage] = useState("")
+
+
+
+
 
   useEffect(() => {
     const homefunc = async () => {
@@ -26,29 +34,26 @@ const Home = () => {
     homefunc()
   }, [])
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   
 
   const handleadd = async  (id)=>{
+
+
+    if(!checkIn || !checkOut){
+      return  setmessage("Please select check-in and check-out dates.")
+    }
+
     const createCheckoutSession = await fetchWithRefresh(`http://localhost:4090/create-checkout-session/${id}` , {
     headers: {
+          "Content-Type": "application/json",
       authorization: localStorage.getItem("accessToken")
     } ,
     method: "POST",
-    credientials: "include"
+    body: JSON.stringify({
+      checkIn: checkIn,
+      checkOut: checkOut
+    }),
+    credentials: "include"
     })
 
     if(createCheckoutSession.ok){
@@ -169,18 +174,19 @@ window.location.href = data.url;
                 <span className="hd-star">★</span> {home?.home?.rating}
               </span>
             </div>
-
+{/*  */}
             <div className="hd-date-picker">
               <div className="hd-date-field">
-                <label>Check-in</label>
+              
+                <DatePicker    minDate={new Date()}   selected={checkIn}   onChange={setcheckIn}  placeholderText="Check In"        />
                 <span>Add date</span>
               </div>
               <div className="hd-date-field">
-                <label>Checkout</label>
+             <DatePicker   minDate={new Date()}   selected={checkOut}  onChange={setcheckOut} placeholderText="Check out"/>
                 <span>Add date</span>
               </div>
             </div>
-
+<p>{message}</p>
             <div className="hd-guest-select">
               <label>Guests</label>
               <span>1 guest</span>
