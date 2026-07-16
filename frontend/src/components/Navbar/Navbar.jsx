@@ -1,39 +1,130 @@
-import React from 'react'
-import { useState } from 'react'
-import "./Navbar.css"
-import { Link } from "react-router-dom"
-const Navbar = () => {
-  
+import React, { useEffect, useRef, useState } from "react";
+import "./Navbar.css";
+import { Link } from "react-router-dom";
 
+import {
+  HiOutlineMenu,
+  HiOutlineHome,
+  HiOutlineHeart,
+  HiOutlineLogout,
+  HiOutlineClipboardList,
+  HiOutlinePlusCircle,
+} from "react-icons/hi";
+
+const Navbar = () => {
+  const [open, setOpen] = useState(false);
+
+  const menuRef = useRef(null);
+
+  // useEffect(() => {
+  //   const handleClickOutside = (e) => {
+  //     if (menuRef.current && !menuRef.current.contains(e.target)) {
+  //       setOpen(false);
+  //     }
+  //   };
+
+  //   const handleEsc = (e) => {
+  //     if (e.key === "Escape") {
+  //       setOpen(false);
+  //     }
+  //   };
+
+  //   document.addEventListener("mousedown", handleClickOutside);
+  //   document.addEventListener("keydown", handleEsc);
+
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleClickOutside);
+  //     document.removeEventListener("keydown", handleEsc);
+  //   };
+  // }, []);
 
   return (
-  <>
-      <nav id='nav'>
+    <nav className="navbar">
 
-        <div className="navbar-logo-box">
-                  <h2 id='title'>UrbanStay</h2>
-        </div>
+      <div className="navbar-logo">
+        <Link to="/">UrbanStay</Link>
+      </div>
 
-     <div className="nav-links">
+      <div className="navbar-center">
         <Link to="/">Home</Link>
         <Link to="/About">About</Link>
         <Link to="/Contact">Contact</Link>
-        <Link to="/wishlist">WishList</Link>
-        <Link id='login-btn' to="/auth">Login</Link>
-        <Link  to="/dashboard">Dashboard</Link>
-        <Link  to="/Bookings">Your Bookings</Link>
-     </div>
+      </div>
 
-        <div className="host-box">
-          <Link to="/Host" id='host-btn'>Become a host</Link>
+      <div className="navbar-right">
+
+        <Link className="host-btn" to="/Host">
+          List your property
+        </Link>
+
+        <div className="profile-wrapper" ref={menuRef}>
+
+          <button
+            className="profile-pill"
+            onClick={() => setOpen(!open)}
+          >
+            <HiOutlineMenu className="menu-icon" />
+
+          </button>
+
+          <div className={`dropdown ${open ? "show" : ""}`}>
+
+            <Link
+              to="/wishlist"
+              className="dropdown-item"
+              onClick={() => setOpen(false)}
+            >
+              <HiOutlineHeart />
+              Wishlist
+            </Link>
+
+            <Link
+              to="/Bookings"
+              className="dropdown-item"
+              onClick={() => setOpen(false)}
+            >
+              <HiOutlineClipboardList />
+              Your Bookings
+            </Link>
+
+            <Link
+              to="/dashboard"
+              className="dropdown-item"
+              onClick={() => setOpen(false)}
+            >
+              <HiOutlineHome />
+              Dashboard
+            </Link>
+
+            <Link
+              to="/Host"
+              className="dropdown-item"
+              onClick={() => setOpen(false)}
+            >
+              <HiOutlinePlusCircle />
+              Add Property
+            </Link>
+
+        
+
+
+            <Link
+              to="/auth"
+              className="dropdown-item logout"
+              onClick={() => setOpen(false)}
+            >
+              <HiOutlineLogout />
+              Logout
+            </Link>
+
+          </div>
+
         </div>
-      </nav>
 
+      </div>
 
+    </nav>
+  );
+};
 
-   
-  </>
-  )
-}
-
-export default Navbar
+export default Navbar;
