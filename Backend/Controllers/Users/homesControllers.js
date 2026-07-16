@@ -38,8 +38,7 @@ const Home = require("../../Models/Home")
    })
   }
  }
-
-
+  
  module.exports = gethomes
 
 

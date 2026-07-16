@@ -1,5 +1,5 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { data, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import "./HomeDetails.css"
 import Footer from '../../Footer/Footer'
@@ -56,11 +56,18 @@ const [message, setmessage] = useState("")
     credentials: "include"
     })
 
-    console.log(createCheckoutSession);
+    const data = await createCheckoutSession.json()
+    console.log(createCheckoutSession.status);
+console.log(data);
+
+
     if(createCheckoutSession.ok){
-const data = await createCheckoutSession.json()
+setmessage(data.message)
 window.location.href = data.url;
+
 }
+
+setmessage(data.message)
 }
 
   const handleshare = async ()=>{

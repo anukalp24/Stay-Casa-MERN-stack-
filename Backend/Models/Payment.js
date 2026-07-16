@@ -1,10 +1,21 @@
 const mongoose = require("mongoose")
 
 const PaymentSchema = new mongoose.Schema({
+
+
+
+
+    
+
+
     owner: {
         required: true,
         type:  mongoose.Schema.Types.ObjectId,
     }, 
+
+
+
+
 
 home: {
     type: String,

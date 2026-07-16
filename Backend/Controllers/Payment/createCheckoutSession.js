@@ -1,4 +1,5 @@
 const Home = require("../../Models/Home")
+const Payment = require("../../Models/Payment")
 const stripe = require("../../config/Stripe")
 const { checkout } = require("../../routes/webhook")
 
@@ -7,20 +8,47 @@ const createCheckoutSession =  async (req, res)=>{
       const {checkIn , checkOut} = req.body
         const home = await Home.findById(req.params.id)
         
+
+
         if(!home){
             return res.status(404).json({
                 message: "Home not found"
             })
         }
         
-                // if(home.owner.toString() === req.user.id){
-                //      console.log("you are the owner you cannt book ur own property")
-                //     return res.status(500).json({
-                //         message: " You cant book your own property"
-                //     })
-                // }
 
 
+        const existingBooking = await Payment.findOne({
+        home: req.params.id, 
+        checkIn: {
+            $lte: checkOut
+        } ,
+
+        checkOut: {
+            $gte: checkIn
+        }
+
+
+    })
+
+
+    if(existingBooking){
+        console.log("this propety is nto avaibalbe in these dates")
+        return res.status(409).json({
+            message: "This property is unavailable for the selected dates."
+        })
+    }
+
+        if(home.owner.toString() === req.user.id){
+            console.log("you cant book your own property")
+            return res.status(403).json({
+                message: "You cannot book your own property."
+            })
+        }
+
+
+
+    
 
         const session = await stripe.checkout.sessions.create({
 

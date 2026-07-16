@@ -2,8 +2,6 @@
 const stripe = require("../../config/Stripe")
 
 const Payment = require("../../Models/Payment")
-const Home = require("../../Models/Home")
-
 
 const webhook =  async (req , res) =>{
     try {
@@ -26,13 +24,12 @@ const webhook =  async (req , res) =>{
                         return res.status(200)
                     }
 
+                    
+                                const userId = session.metadata.userId
+                                const homeId = session.metadata.homeId
                 
-            const userId = session.metadata.userId
-            const homeId = session.metadata.homeId
-            
-            const home = await Home.findById(homeId)
-console.log(session.metadata);
 
+            
             const Paymentdocument = await Payment.create({
                 stripeSessionId: session.id,
                 home: homeId, 
@@ -47,11 +44,7 @@ console.log(session.metadata);
              checkOut: session.metadata.checkOut
             })
 
-
-
-
-
-
+        
 
 // Now session is:
 // {
@@ -71,9 +64,6 @@ console.log(session.metadata);
 return res.status(200).json({
  received: true
 })
-
-
-
         }
 
     } catch (error) {

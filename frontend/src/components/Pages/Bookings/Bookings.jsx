@@ -11,7 +11,6 @@ const Bookings = () => {
   const [bookings, setbookings] = useState([])
   const [loading, setLoading] = useState(true)
   const Navigate = useNavigate()
-
   useEffect(() => {
     const bookingFunc = async () => {
       try {

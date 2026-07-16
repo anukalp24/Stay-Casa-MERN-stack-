@@ -2,6 +2,8 @@ const mongoose = require("mongoose")
 
 
 const HomeSchema = new mongoose.Schema({
+
+
     propertyName:  {
         type: String,
         required: true

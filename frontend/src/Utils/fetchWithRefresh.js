@@ -27,6 +27,9 @@ const fetchWithRefresh = async ( url , options = {})=>{
             window.location.href = "/auth"
             return refreshReq.message
         }
+
+
+        return req
     }
 
     // what if refresh token which last 30 days expires too then also 

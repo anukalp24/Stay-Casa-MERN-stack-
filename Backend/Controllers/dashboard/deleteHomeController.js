@@ -11,7 +11,7 @@ try {
     
     
     
-    if(!home){
+    if(!deletedHome){
         return res.status(404).json({
             message: "Home not found"
         })
