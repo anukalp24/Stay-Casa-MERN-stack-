@@ -19,11 +19,9 @@ const Hero = () => {
 
       <div className="hero-left">
 
-        <span className="hero-tag">
-          🏡 Trusted by thousands of travelers
-        </span>
+       
 
-        <h1>
+        {/* <h1>
           Find your next <br />
           dream stay.
         </h1>
@@ -31,7 +29,17 @@ const Hero = () => {
         <p>
           Explore luxury villas, cozy cabins and unique homes
           across the world with StayCasa.
-        </p>
+        </p> */}
+
+<h1>
+    Your Perfect Stay <br />
+    Starts Here.
+</h1>
+
+<p>
+    Book unique homes and luxury stays around the world.
+</p>
+
 
         <div className="hero-search">
 
@@ -52,7 +60,7 @@ const Hero = () => {
       <div className="hero-right">
 
         <img
-          src={mountainHome}
+          src={poolHouse}
          
         />
 

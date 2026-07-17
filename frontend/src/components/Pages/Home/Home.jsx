@@ -5,6 +5,14 @@ import Footer from '../../Footer/Footer'
 import { info } from '../..'
 import {  useContext , useEffect  , useState} from 'react'
 import "./Home.css"
+import {
+  HiHome,
+  HiShieldCheck,
+  HiCreditCard,
+  HiStar,
+  HiArrowUpRight
+} from "react-icons/hi2";
+
 import { useNavigate } from 'react-router-dom'
 
 import {
@@ -77,67 +85,164 @@ const categories = [
 
 
 <div className="home-parent">
-  <div className="home-intro">
-    <span>Popular Stays</span>
-  </div>
+ <div className="home-parent">
 
-  <div className="home-section">
-    {featuredHomes.map((val, index) => (
-      <div
-        key={index}
-        onClick={() => handleStay(val._id)}
-        className="home-card"
-      >
-        <div className="home-image-wrapper">
+    <div className="home-intro">
+        <span>Popular Stays</span>
+    </div>
 
-          <img
-            className="home-image"
-            src={val.file}
-            alt={val.propertyName}
-          />
-  
-          <svg
-            onClick={(e) => {
-              e.stopPropagation();
-              handlewishlist(val);
-            }}
-            className="home-heart-icon"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="white"
-            strokeWidth="2"
-          >
-            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-          </svg>
+    <div className="home-section">
 
-        </div>
+        {featuredHomes.map((val, index) => (
 
-        <div className="home-content">
+            <div
+                key={index}
+                className="home-card"
+                onClick={() => handleStay(val._id)}
+            >
 
-          <div className="home-row">
-            <span className="home-location">
-              {val.cityname}, {val.country}
-            </span>
+                <div className="home-image-wrapper">
 
-            <span className="home-rating">
-              ★ {val.rating}
-            </span>
-          </div>
+                    <img
+                        src={val.file}
+                        alt={val.propertyName}
+                        className="home-image"
+                    />
 
-          <p className="home-description">
-            {val.desc}
-          </p>
+                    <svg
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            handlewishlist(val);
+                        }}
+                        className="home-heart-icon"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="white"
+                        strokeWidth="2"
+                    >
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                    </svg>
 
-        </div>
-      </div>
-    ))}
-  </div>
+                 
+                </div>
 
-  <button onClick={() => Navigate("/stays")}>
-    Explore more stays
+                <div className="home-content">
+
+                    <h3 className="home-title">
+                        {val.propertyName}
+                    </h3>
+
+                    <p className="home-location">
+                        📍 {val.cityname}, {val.country}
+                    </p>
+
+                    <div className="home-bottom">
+
+                        <div>
+
+                            <h4 className="home-price">
+                                ₹{val.price}
+                            </h4>
+
+                            <span className="home-night">
+                                per night
+                            </span>
+
+                        </div>
+
+                        <button
+                            className="home-arrow"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                handleStay(val._id);
+                            }}
+                        >
+                            <HiArrowUpRight/>
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        ))}
+
+    </div>
+
+</div>
+
+<div className="stays-btn-container">
+  <button id="stays" onClick={() => Navigate("/stays")}>
+    Explore More Stays
   </button>
 </div>
+</div>
+
+
+
+<section className="why-choose">
+  <div className="why-header">
+    <h2>Why Choose UrbanStay?</h2>
+    <p>
+      Discover a secure and seamless way to book your next stay with
+      trusted properties and reliable services.
+    </p>
+  </div>
+
+  <div className="why-grid">
+
+    <div className="why-card">
+      <div className="why-icon">
+        <HiHome />
+      </div>
+      <h3>Verified Properties</h3>
+      <p>
+        Every listing is reviewed before being published to ensure quality
+        and authenticity.
+      </p>
+    </div>
+
+    <div className="why-card">
+      <div className="why-icon">
+        <HiShieldCheck />
+      </div>
+      <h3>Secure Booking</h3>
+      <p>
+        Your account and bookings are protected using secure authentication
+        and encrypted sessions.
+      </p>
+    </div>
+
+    <div className="why-card">
+      <div className="why-icon">
+        <HiCreditCard />
+      </div>
+      <h3>Safe Payments</h3>
+      <p>
+        Payments are securely processed through Stripe with encrypted
+        transactions.
+      </p>
+    </div>
+
+    <div className="why-card">
+      <div className="why-icon">
+        <HiStar />
+      </div>
+      <h3>Top Rated Stays</h3>
+      <p>
+        Browse highly rated homes and enjoy unforgettable experiences with
+        confidence.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+
+
 
     <Footer/>
             </>

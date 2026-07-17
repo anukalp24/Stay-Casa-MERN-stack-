@@ -4,7 +4,7 @@
 
     width:100%;
 
-    min-height:92vh;
+    min-height:100vh;
 
     display:flex;
 
@@ -184,10 +184,7 @@
 
 @media(max-width:900px){
 
-.hero{
 
-    min-height:80vh;
-}
 
 .hero-left h1{
 
@@ -208,10 +205,7 @@
 
 @media(max-width:768px){
 
-.hero{
 
-    min-height:75vh;
-}
 
 .hero-left h1{
 

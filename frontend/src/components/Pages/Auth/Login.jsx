@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css"
+import mountainHouse from "../../../../dist/assets2/images/mountain.png"
 import Navbar from "../../Navbar/Navbar";
 const Login = () => {
 
@@ -110,126 +111,214 @@ localStorage.setItem("email" , form.email)
 }
 }
   };
-
-
-
-
-
-
   return (
 
     <div>
       <Navbar/>
-        {form.islogin === true ? (
-<>
-        
-<div className="login-container">
-        <div className="auth-box">
-          <h2>Welcome Back</h2>
+      <div>
+  <Navbar />
 
-          <p>
-            Login to continue your journey with Stay-Casa.
-          </p>
+  <div className="login-container">
+<img src={mountainHouse} alt="" />
+    <div className="login-left">
 
+      <span className="brand">UrbanStay</span>
 
-          <p  onClick={()=>setForm({...form , islogin: false})}>dont have an account sign in.</p>
-          <form onSubmit={handleLogin}>
-            <div className="input-group">
-              <input
-                type="email"
-                name="email"
-                placeholder="Email Address"
-                value={form.email}
-                onChange={handleChange}
-              />
+      <h1>
+        Stay Somewhere <br />
+        You'll Never Forget.
+      </h1>
+
+      <p>
+        Discover luxury villas, premium apartments and unique stays
+        across the world with UrbanStay.
+      </p>
+
+    </div>
+
+    <div className="login-right">
+
+      <div className="auth-box">
+
+        {form.islogin ? (
+
+          <>
+
+            <h2>Welcome Back</h2>
+
+            <p className="auth-subtitle">
+              Login to continue your journey with UrbanStay.
+            </p>
+
+            <form onSubmit={handleLogin}>
+
+              <div className="input-group">
+                <label>Email Address</label>
+
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Enter your email"
+                  value={form.email}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className="input-group">
+                <label>Password</label>
+
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Enter your password"
+                  value={form.password}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <p
+                className="forgot-password"
+                onClick={() => navigate("/forgot-password")}
+              >
+                Forgot Password?
+              </p>
+
+              <button
+                type="submit"
+                className="login-btn"
+              >
+                Login
+              </button>
+
+              <p className="error-message">
+                {message}
+              </p>
+
+            </form>
+
+            <div className="switch-auth">
+
+              <span>
+                Don't have an account?
+              </span>
+
+              <button
+                type="button"
+                onClick={() =>
+                  setForm({
+                    ...form,
+                    islogin:false
+                  })
+                }
+              >
+                Sign Up
+              </button>
+
             </div>
 
-            <div className="input-group">
-              <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                value={form.password}
-                onChange={handleChange}
-              />
-            </div>
-<p
-  className="forgot-password"
-  onClick={() => navigate("/forgot-password")}
->
-  Forgot Password?
-</p>
-
-
-            
-            <button type="submit" className="login-btn">
-              Login
-            </button>
-            <p>{message}</p>
-          </form>
-  </div>
-      </div>
           </>
+
         ) : (
-<>
 
-<div className="login-container">
-        <div className="auth-box">
-          <h2>Sign in</h2>
+          <>
 
-          <p>
-           Create ur account
-          </p>
+            <h2>Create Account</h2>
 
+            <p className="auth-subtitle">
+              Join UrbanStay today.
+            </p>
 
-          <p onClick={()=>setForm({... form , islogin: true})}>already have an accoutn log in</p>
+            <form onSubmit={handleLogin}>
 
-          <form onSubmit={handleLogin}>
-            <div className="input-group">
-              <input
-                type="name"
-                name="name"
-                placeholder="Name"
-                value={form.name}
-                onChange={handleChange}
-              />
+              <div className="input-group">
+
+                <label>Full Name</label>
+
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Enter your name"
+                  value={form.name}
+                  onChange={handleChange}
+                />
+
+              </div>
+
+              <div className="input-group">
+
+                <label>Email Address</label>
+
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Enter your email"
+                  value={form.email}
+                  onChange={handleChange}
+                />
+
+              </div>
+
+              <div className="input-group">
+
+                <label>Password</label>
+
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Create a password"
+                  value={form.password}
+                  onChange={handleChange}
+                />
+
+              </div>
+
+              <p className="error-message">
+                {message}
+              </p>
+
+              <button
+                type="submit"
+                className="login-btn"
+              >
+                Create Account
+              </button>
+
+            </form>
+
+            <div className="switch-auth">
+
+              <span>
+                Already have an account?
+              </span>
+
+              <button
+                type="button"
+                onClick={() =>
+                  setForm({
+                    ...form,
+                    islogin:true
+                  })
+                }
+              >
+                Login
+              </button>
+
             </div>
 
-            <div className="input-group">
-              <input
-                type="email"
-                name="email"
-                placeholder="Email Address"
-                value={form.email}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className="input-group">
-              <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                value={form.password}
-                onChange={handleChange}
-              />
-              <p>{message}</p>
-            </div>
-
-
-
-            
-
-            <button type="submit" className="login-btn">
-              Signin
-            </button>
-          </form>
-  </div>
-      </div>
-
-</>
+          </>
 
         )}
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+        
+
 
     </div>
   

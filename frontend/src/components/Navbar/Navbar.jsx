@@ -10,7 +10,7 @@ import {
   HiOutlineClipboardList,
   HiOutlinePlusCircle,
 } from "react-icons/hi";
-
+import { MdPerson } from "react-icons/md";
 const Navbar = () => {
 const navigate = useNavigate()
 
@@ -79,11 +79,17 @@ const navigate = useNavigate()
         <Link to="/">Home</Link>
         <Link to="/About">About</Link>
         <Link to="/Contact">Contact</Link>
+        <Link to="/stays">Explore</Link>
       </div>
 
       <div className="navbar-right">
         <Link className="host-btn" to="/Host">
           List your property
+        </Link>
+
+
+        <Link className="signin" to="/auth">
+        <MdPerson/>
         </Link>
 
         <div className="profile-wrapper" ref={menuRef}>

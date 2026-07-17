@@ -19,7 +19,9 @@ import EmailVerification from '../Pages/Auth/Email-Verification'
 import PaymentSuccess from '../Pages/Payment/PaymentSuccess'
 import PaymentFailed from '../Pages/Payment/PaymentFailed'
 import Bookings from '../Pages/Bookings/Bookings'
+import SecurityPrivacy from '../Pages/FooterPages/security/Security'
 import { useNavigate } from 'react-router-dom'
+import Terms from '../Pages/FooterPages/termsCondition.jsx/terms'
 import { info } from '..'
 function App() {
   const navigate = useNavigate()
@@ -90,6 +92,8 @@ const handleStay = (id)=>{
 <Route path='/payment-success' element={<PaymentSuccess/>}></Route>
 <Route path='/payment-cancel' element={<PaymentFailed/>}></Route>
 <Route path='/Bookings'  element={<Bookings/>}></Route>
+<Route path='/security-policy'  element={<SecurityPrivacy/>}></Route>
+<Route path='/terms-and-conditions'  element={< Terms/>}></Route>
 
 </Routes>
   </info.Provider>
