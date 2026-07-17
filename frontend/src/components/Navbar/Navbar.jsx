@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 import {
   HiOutlineMenu,
   HiOutlineHome,
@@ -12,8 +12,39 @@ import {
 } from "react-icons/hi";
 
 const Navbar = () => {
-  const [open, setOpen] = useState(false);
+const navigate = useNavigate()
 
+
+
+
+
+
+
+
+
+
+  const logout =  async()=>{
+  const logout= await fetch("http://localhost:4090/logout", {
+    method: "POST",
+    credentials: "include"
+  })
+
+  if(logout.ok){
+    alert("its working")
+  localStorage.removeItem("accessToken")
+  }
+  }
+
+
+
+
+
+
+
+
+
+
+  const [open, setOpen] = useState(false);
   const menuRef = useRef(null);
 
   // useEffect(() => {
@@ -40,7 +71,6 @@ const Navbar = () => {
 
   return (
     <nav className="navbar">
-
       <div className="navbar-logo">
         <Link to="/">UrbanStay</Link>
       </div>
@@ -52,23 +82,16 @@ const Navbar = () => {
       </div>
 
       <div className="navbar-right">
-
         <Link className="host-btn" to="/Host">
           List your property
         </Link>
 
         <div className="profile-wrapper" ref={menuRef}>
-
-          <button
-            className="profile-pill"
-            onClick={() => setOpen(!open)}
-          >
+          <button className="profile-pill" onClick={() => setOpen(!open)}>
             <HiOutlineMenu className="menu-icon" />
-
           </button>
 
           <div className={`dropdown ${open ? "show" : ""}`}>
-
             <Link
               to="/wishlist"
               className="dropdown-item"
@@ -105,24 +128,17 @@ const Navbar = () => {
               Add Property
             </Link>
 
-        
-
-
-            <Link
-              to="/auth"
+            <Link 
+           
               className="dropdown-item logout"
-              onClick={() => setOpen(false)}
+              onClick={logout}
             >
               <HiOutlineLogout />
               Logout
             </Link>
-
           </div>
-
         </div>
-
       </div>
-
     </nav>
   );
 };

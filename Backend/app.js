@@ -4,7 +4,7 @@ const express = require("express")
 const cors = require("cors")
 const connectDb = require("./database/mongoose")
 const app = express()
-
+console.log("backend hitted")
 console.log(__filename);
 app.use(cors({
     origin: "http://localhost:5173",
