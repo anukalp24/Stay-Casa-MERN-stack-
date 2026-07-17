@@ -27,7 +27,9 @@ const [message, setmessage] = useState("")
 
   useEffect(() => {
     const homefunc = async () => {
-      const request = await fetch(`http://localhost:4090/home/${id}`)
+      const request = await fetch(`http://localhost:4090/home/${id}` , {
+      credentials: "include"
+      })
       const result = await request.json()
       sethome(result)
     }

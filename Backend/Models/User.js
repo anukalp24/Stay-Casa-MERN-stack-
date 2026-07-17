@@ -1,6 +1,15 @@
 const mongoose = require("mongoose")
 
 const userSchema = new mongoose.Schema({
+
+
+
+    admin:{
+        type: String,
+        default: false
+    } ,
+
+
     name:{
         required: true,
         type: String
