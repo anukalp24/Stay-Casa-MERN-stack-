@@ -39,12 +39,12 @@ const createCheckoutSession =  async (req, res)=>{
         })
     }
 
-        if(home.owner.toString() === req.user.id){
-            console.log("you cant book your own property")
-            return res.status(403).json({
-                message: "You cannot book your own property."
-            })
-        }
+        // if(home.owner.toString() === req.user.id){
+        //     console.log("you cant book your own property")
+        //     return res.status(403).json({
+        //         message: "You cannot book your own property."
+        //     })
+        // }
 
 
 

@@ -2,11 +2,11 @@ const Payment = require("../Models/Payment")
 const mongoose = require("mongoose");
 
 const getBookings  =  async (req , res)=>{
+
     try {
      const bookedHomes = await Payment.find({
         owner: req.user.id
      })
-
 
      if(bookedHomes.length === 0){
     return res.status(404).json({
@@ -25,5 +25,4 @@ return res.status(200).json(bookedHomes)
         })
     }
 }
-
 module.exports = getBookings

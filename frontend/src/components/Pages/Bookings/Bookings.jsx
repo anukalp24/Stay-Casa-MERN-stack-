@@ -13,48 +13,62 @@ const Bookings = () => {
   const Navigate = useNavigate()
   useEffect(() => {
     const bookingFunc = async () => {
-      try {
-        const bookedHomes = await fetchWithRefresh("http://localhost:4090/bookings", {
-          method: "GET",
+    try {
+      
+      const bookedHomes = await fetchWithRefresh(`http://localhost:4090/bookings`, {
+        method: "GET",
           headers: {
             authorization: localStorage.getItem("accessToken")
           },
           credentials: "include"
         })
-
         if (!bookedHomes || !bookedHomes.ok) {
           setbookings([])
         } else {
           const homes = await bookedHomes.json()
           setbookings(homes)
+          setLoading(false)
         }
-      } catch (error) {
-        setbookings([])
-      } finally {
+        
+        
+      }
+      
+      catch (error) {
+         setbookings([]);
+
+      }
+
+      finally{
         setLoading(false)
       }
+      
     }
     bookingFunc()
   }, [])
 
-  const formatDate = (dateStr) => {
-    const date = new Date(dateStr)
-    return date.toLocaleDateString('en-IN', {
-      day: 'numeric',
-      month: 'short',
-      year: 'numeric'
-    })
-  }
 
-  const getNights = (checkIn, checkOut) => {
-    const diff = new Date(checkOut) - new Date(checkIn)
-    return Math.ceil(diff / (1000 * 60 * 60 * 24))
-  }
+
+const handleDelete = async(id)=>{
+const req = await fetchWithRefresh(`http://localhost:4090/delete-booking/${id}` , {
+  method: "DELETE",
+  headers: {
+    authorization: localStorage.getItem("accessToken")
+  } ,
+  credentials: "include"
+})
+
+
+if(req.ok){
+ const deleted =  bookings.filter((booking)=>(
+  booking._id !== id
+))
+setbookings(deleted)
+}
+}
 
   return (
     <>
       <Navbar />
-
       <div className="bookings-wrapper">
 
         <div className="bookings-header">
@@ -96,7 +110,7 @@ const Bookings = () => {
                       <CalendarDays size={14} />
                       <div>
                         <span className="booking-date-label">Check-in</span>
-                        <span className="booking-date-value">{formatDate(booking.checkIn)}</span>
+                        <span className="booking-date-value">{(booking.checkIn)}</span>
                       </div>
                     </div>
                     <div className="booking-date-divider" />
@@ -104,20 +118,24 @@ const Bookings = () => {
                       <CalendarDays size={14} />
                       <div>
                         <span className="booking-date-label">Check-out</span>
-                        <span className="booking-date-value">{formatDate(booking.checkOut)}</span>
+                        <span className="booking-date-value">{(booking.checkOut)}</span>
                       </div>
                     </div>
                   </div>
 
-                  <div className="booking-footer">
-                    <div className="booking-price">
-                      <CreditCard size={14} />
-                      <span>₹{booking.totalPrice.toLocaleString('en-IN')}</span>
-                    </div>
-                    <span className="booking-nights">
-                      {getNights(booking.checkIn, booking.checkOut)} night{getNights(booking.checkIn, booking.checkOut) > 1 ? 's' : ''}
-                    </span>
-                  </div>
+                 <div className="booking-footer">
+  <div className="booking-price">
+    <CreditCard size={14} />
+    <span>₹{booking.totalPrice.toLocaleString("en-IN")}</span>
+  </div>
+
+  <button
+    className="booking-delete-btn"
+    onClick={() => handleDelete(booking._id)}
+  >
+    Delete Booking
+  </button>
+</div>
                 </div>
 
               </div>
@@ -130,9 +148,8 @@ const Bookings = () => {
             <div className="bookings-empty-icon">🏠</div>
             <h2>No bookings yet</h2>
             <p>You haven't made any reservations. Start exploring and book your first stay!</p>
-            <button onClick={Navigate("/")}>Explore Stays</button>
+            <button onClick={()=>Navigate("/")}>Explore Stays</button>
           </div>
-
         )}
 
       </div>
