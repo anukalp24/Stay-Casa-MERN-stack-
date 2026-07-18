@@ -20,6 +20,7 @@ import PaymentSuccess from '../Pages/Payment/PaymentSuccess'
 import PaymentFailed from '../Pages/Payment/PaymentFailed'
 import Bookings from '../Pages/Bookings/Bookings'
 import SecurityPrivacy from '../Pages/FooterPages/security/Security'
+import NotFound from '../Pages/404/NotFound'
 import { useNavigate } from 'react-router-dom'
 import Terms from '../Pages/FooterPages/termsCondition.jsx/terms'
 import { info } from '..'
@@ -94,6 +95,7 @@ const handleStay = (id)=>{
 <Route path='/Bookings'  element={<Bookings/>}></Route>
 <Route path='/security-policy'  element={<SecurityPrivacy/>}></Route>
 <Route path='/terms-and-conditions'  element={< Terms/>}></Route>
+<Route path='*'  element={<NotFound/>}></Route>
 
 </Routes>
   </info.Provider>

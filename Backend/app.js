@@ -1,9 +1,11 @@
 require("dotenv").config()
 const cookie = require("cookie-parser")
 const express = require("express")
+const helmet = require("helmet");
 const cors = require("cors")
 const connectDb = require("./database/mongoose")
 const app = express()
+app.use(helmet())
 console.log("backend hitted")
 console.log(__filename);
 app.use(cors({
@@ -18,7 +20,6 @@ app.use(express.json())
 app.use(cookie())
 app.use("/uploads" , express.static("uploads"))
 // here fornt end get req will come for the image
-
 const users = require("./routes/users")
 const wishlist = require("./routes/wishlist")
 const auth = require("./routes/auth")
@@ -33,6 +34,4 @@ app.use(Payment)
 app.use(Bookings)
 
 connectDb()
-const mongoose = require("mongoose");
-console.log("App readyState:", mongoose.connection.readyState);
 app.listen(4090)  
