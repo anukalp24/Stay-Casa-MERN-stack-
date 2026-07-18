@@ -240,11 +240,14 @@ body{
     background:#fff2f2;
 }
 
-
+.signin svg{
+    display:block;
+    font-size:30px;
+}
 @media (max-width:1200px){
 
     .navbar{
-
+  
         padding:0 40px;
     }
 

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { info } from '../..'
 import "./DashboardHomes.css"
 import Navbar from '../../Navbar/Navbar'
+import Footer from '../../Footer/Footer'
 import fetchWithRefresh from '../../../Utils/fetchWithRefresh'
 const Dashboard = () => {
   const navigate = useNavigate()
@@ -115,6 +116,7 @@ return (
 </div>
 </>
     )}
+    <Footer/>
       </>
    
   )

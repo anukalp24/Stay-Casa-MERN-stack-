@@ -2,18 +2,20 @@ const { array } = require("../../Middleware/upload")
 const Home = require("../../Models/Home")
 const Search =  async (req , res)=>{
     try {
+
+        const {search} = req.body
      const home  = await Home.find({
         $or: [
 {
             cityname: {
-                $regex: req.body,
+                $regex: search,
                 $options: "i"
             }, 
         } ,
 
         {
             category: {
-                $regex: req.body,
+                $regex: search,
                 $options: "i"
             }
         }

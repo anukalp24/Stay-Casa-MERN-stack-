@@ -16,4 +16,4 @@ user.get("/home/:id" , GetIndividualHomes )
 user.post("/search" , searchHomes)
 user.post("/categories" , categories)
 user.post("/contact" , contact )
-module.exports = user
+module.exports = user 

@@ -2,7 +2,7 @@
 const stripe = require("../../config/Stripe")
 
 const Payment = require("../../Models/Payment")
-
+const Home  = require("../../Models/Home")
 const webhook =  async (req , res) =>{
     try {
        
@@ -27,7 +27,9 @@ const webhook =  async (req , res) =>{
                     
                                 const userId = session.metadata.userId
                                 const homeId = session.metadata.homeId
-                
+
+
+                const home = await Home.findById(homeId)
 
             
             const Paymentdocument = await Payment.create({

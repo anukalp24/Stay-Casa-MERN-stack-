@@ -36,4 +36,3 @@ connectDb()
 const mongoose = require("mongoose");
 console.log("App readyState:", mongoose.connection.readyState);
 app.listen(4090)  
- 

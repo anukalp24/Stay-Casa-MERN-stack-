@@ -6,12 +6,36 @@ import "rc-slider/assets/index.css";
 import { info } from '../..'
 import Navbar from 'components/Navbar/Navbar'
 import Footer from 'components/Footer/Footer'
+import { useNavigate } from 'react-router-dom';
+import {
+  FaStar,
+  FaHeart,
+  FaMapMarkerAlt,
+  FaWifi,
+  FaSwimmingPool,
+  FaParking,
+  FaSnowflake,
+  FaBed,
+  FaBath,
+  FaUsers,
+} from "react-icons/fa";
+
+import {
+  MdSearch,
+  MdKeyboardArrowDown,
+} from "react-icons/md";
+
+
+
+
 const Card = () => {
+  const navigate = useNavigate()
   const { handleStay , handlewishlist} = useContext(info)
 const [price, setprice] = useState([0 , 100000]) // slider state
 const [appliedPrice, setappliedPrice] = useState([0 , 100000]) // actual price filter state
 const [page, setPage] = useState(1)
 const [allHomes, setallHomes] = useState([])
+const [search, setsearch] = useState("")
 
 
 
@@ -45,7 +69,180 @@ const handleNext = ()=>{
 }
   return (
     <>
-    <Navbar/>
+<Navbar/>
+
+
+<div className="stays-page">
+
+  {/* Search */}
+
+  <div className="search-bar">
+
+    <input value={search} onChange={(e)=>setsearch(e.target.value)}
+      type="text"
+      placeholder="Search destinations, villas..."
+    />
+    <button onClick={()=> {localStorage.setItem("search" ,search ) ;  navigate("/search")  }} className="search-btn">
+      <MdSearch />
+    </button>
+
+  </div>
+
+
+
+  <div className="content-wrapper">
+
+    {/* LEFT */}
+
+    <aside className="filters">
+
+      <h3>Filters</h3>
+
+      <div className="filter-section">
+
+        <h4>Price Range</h4>
+
+        <input type="range" />
+
+        <div className="price-values">
+
+          <span>₹1,000</span>
+
+          <span>₹100,000</span>
+
+        </div>
+
+      </div>
+
+    </aside>
+
+
+
+    {/* RIGHT */}
+
+    <section className="properties-section">
+
+      <div className="section-top">
+
+        <h2>Luxury Stays</h2>
+
+        <button className="sort-btn">
+          Sort By
+          <MdKeyboardArrowDown />
+        </button>
+
+      </div>
+
+
+
+    
+
+{allHomes.map((home , index)=>(
+      <div className="property-card">
+
+<>
+  <div className="property-image">
+
+          <img src={home.file} alt="" />
+
+          <button className="wishlist-btn">
+            <FaHeart />
+          </button>
+
+        </div>
+
+
+        <div className="property-content">
+
+          <div className="property-header">
+
+            <div>
+
+              <h2>{home.propertyName}</h2>
+
+              <p>
+                <FaMapMarkerAlt />
+                {home.cityname} , {home.country}
+              </p>
+
+            </div>
+
+          </div>
+
+
+
+          <p className="property-description">{home.desc}</p>
+
+        </div>
+        <div className="price-section">
+
+          <span className="starting">
+            Starting From
+          </span>
+
+          <h2>₹{home.price}</h2>
+
+          <p>/ Night</p>
+
+          <button>
+            View Property
+          </button>
+
+        </div>
+</>
+
+      </div>
+))}
+
+
+
+
+
+
+
+
+      {/* PAGINATION */}
+
+      <div className="pagination">
+
+        <button>{"<"}</button>
+
+        <button className="active">1</button>
+
+        <button>2</button>
+
+        <button>3</button>
+
+        <button>{">"}</button>
+
+      </div>
+
+    </section>
+
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {/* <Navbar/>
 <div className="card-section">
     {allHomes.map((homes, index) => (
       <div
@@ -164,6 +361,7 @@ const handleNext = ()=>{
 
 </div>
 
+<Footer/> */}
 <Footer/>
   </>        
   )

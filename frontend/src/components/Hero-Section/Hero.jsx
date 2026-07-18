@@ -48,7 +48,6 @@ const Hero = () => {
             onChange={(e) => setsearch(e.target.value)}
             placeholder="Search city or property..."
           />
-
           <button onClick={HandleAdd}>
             Search
           </button>

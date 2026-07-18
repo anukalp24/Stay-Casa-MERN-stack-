@@ -69,92 +69,210 @@ setbookings(deleted)
   return (
     <>
       <Navbar />
-      <div className="bookings-wrapper">
+     <div className="bookings-page">
 
-        <div className="bookings-header">
-          <h1>Your Bookings</h1>
-          <p>Manage and view all your upcoming and past reservations</p>
-          <div className="bookings-header-line" />
+
+
+    <div className="bookings-header">
+
+        <div>
+
+            <h1>My Trips</h1>
+
+            <p>
+                Manage your upcoming and previous bookings.
+            </p>
+
         </div>
 
-        {loading ? (
-          <div className="bookings-loader">
-            <Loader2 className="spinner-icon" size={32} />
-            <p>Loading your bookings...</p>
-          </div>
-        ) : bookings.length > 0 ? (
+    </div>
 
-          <div className="bookings-grid">
-            {bookings.map((booking, index) => (
-              <div key={booking._id || index} className="booking-card">
+   
 
-                <div className="booking-card-image">
-                  <img src={booking.file} alt={booking.propertyName} />
-                  <span className={`booking-status ${booking.paymentStatus === 'paid' ? 'status-paid' : 'status-unpaid'}`}>
-                    {booking.paymentStatus}
-                  </span>
-                </div>
+    <div className="booking-stats">
 
-                <div className="booking-card-body">
-                  <h3 className="booking-property-name">{booking.propertyName}</h3>
+        <div className="stat-card">
 
-                  <div className="booking-location">
-                    <MapPin size={14} />
-                    <span>{booking.cityname}</span>
-                  </div>
+            <h2>{bookings.length}</h2>
 
-                  <p className="booking-desc">{booking.desc}</p>
+            <span>Total Trips</span>
 
-                  <div className="booking-dates">
-                    <div className="booking-date-item">
-                      <CalendarDays size={14} />
-                      <div>
-                        <span className="booking-date-label">Check-in</span>
-                        <span className="booking-date-value">{(booking.checkIn)}</span>
-                      </div>
+        </div>
+
+        <div className="stat-card">
+
+            <h2>₹{
+                bookings.reduce(
+                    (sum, booking) => sum + booking.totalPrice,
+                    0
+                )
+            }</h2>
+
+            <span>Total Spent</span>
+
+        </div>
+
+        <div className="stat-card">
+
+            <h2>
+                {
+                    bookings.filter(
+                        booking =>
+                            booking.paymentStatus === "Paid"
+                    ).length
+                }
+            </h2>
+
+            <span>Confirmed</span>
+
+        </div>
+
+    </div>
+
+
+
+    <div className="booking-list">
+
+        {
+
+            bookings.map((booking) => (
+
+                <div
+                    className="booking-card"
+                    key={booking._id}
+                >
+
+
+                    <div className="booking-image">
+
+                        <img
+                            src={booking.file}
+                            alt={booking.propertyName}
+                        />
+
                     </div>
-                    <div className="booking-date-divider" />
-                    <div className="booking-date-item">
-                      <CalendarDays size={14} />
-                      <div>
-                        <span className="booking-date-label">Check-out</span>
-                        <span className="booking-date-value">{(booking.checkOut)}</span>
-                      </div>
-                    </div>
-                  </div>
 
-                 <div className="booking-footer">
-  <div className="booking-price">
-    <CreditCard size={14} />
-    <span>₹{booking.totalPrice.toLocaleString("en-IN")}</span>
-  </div>
+               
 
-  <button
-    className="booking-delete-btn"
-    onClick={() => handleDelete(booking._id)}
-  >
-    Delete Booking
-  </button>
-</div>
-                </div>
+                    <div className="booking-right">
 
-              </div>
-            ))}
-          </div>
+                    
 
-        ) : (
+                        <div className="booking-top">
 
-          <div className="bookings-empty">
-            <div className="bookings-empty-icon">🏠</div>
-            <h2>No bookings yet</h2>
-            <p>You haven't made any reservations. Start exploring and book your first stay!</p>
-            <button onClick={()=>Navigate("/")}>Explore Stays</button>
-          </div>
-        )}
+                            <div>
 
-      </div>
+                                <h2>
 
-      <Footer />
+                                    {booking.propertyName}
+
+                                </h2>
+
+                                <div className="location">
+
+                                    <MapPin size={16} />
+
+                                    <span>
+
+                                        {booking.cityname}
+
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                            <span className="status paid">
+
+                                {booking.paymentStatus}
+
+                            </span>
+
+                        </div>
+
+                   
+
+                        <p className="booking-description">
+
+                            {booking.desc}
+
+                        </p>
+
+                    
+
+                        <div className="booking-info">
+
+                            <div>
+
+                                <CalendarDays size={18}/>
+
+                                <div>
+
+                                    <small>Check In</small>
+
+                                    <p>
+
+                                       {new Date(booking.checkIn).toLocaleDateString()}
+
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                            <div>
+
+                                <CalendarDays size={18}/>
+
+                                <div>
+
+                                    <small>Check Out</small>
+
+                                    <p>
+
+                                        {new Date(booking.checkOut).toLocaleDateString()}
+
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                            <div>
+
+                                <CreditCard size={18}/>
+
+                                <div>
+
+                                    <small>Total Paid</small>
+
+                                    <p>
+
+                                        ₹{booking.totalPrice}
+
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                    </div> 
+
+                </div> 
+
+            ))
+
+        }
+
+    </div> 
+</div> 
+
+<Footer />
+
     </>
   )
 }

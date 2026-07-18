@@ -12,10 +12,11 @@ const Search = () => {
   
   useEffect(() => {
   async function  searchfunc (){
+    console.log(localStorage.getItem("search"))
     const request = await fetch(`http://localhost:4090/search` , {
       headers:  {"Content-Type": "application/json"},
       method: "POST",
-      body: JSON.stringify(localStorage.getItem("search"))
+      body: JSON.stringify({search: localStorage.getItem("search")})
 
 
     })
@@ -23,7 +24,7 @@ const Search = () => {
     const response = await request.json()
     setsearchResult(response)
   }
-console.log(localStorage.getItem("search"))
+
   searchfunc()
 }, [])
 
