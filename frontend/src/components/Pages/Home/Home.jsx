@@ -60,26 +60,44 @@ const categories = [
     <Navbar/>
     <Hero/>
 
+<section className="category-section">
+
+    <div className="category-header">
 
 
-<div className="category-heading">
-  <h1>Explore by Category</h1>
+        <h2>Explore by Category</h2>
 
-  <p>
-    Find the perfect stay for your next trip — from luxury villas
-    and cozy cabins to spacious farm houses and entire homes.
-  </p>
-</div>
+        <p>Find the perfect stay for every occasion.</p>
 
-<section className='category-section'>
-<div className='category-wrapper'>
-{categories.map((item)=>(
-  <div  onClick={()=> {localStorage.setItem("category" , item.name) ; Navigate("/categories")}} className="category-pill" >
-<div className='category-icon'>{item.icon}</div>
-<span>{item.name}</span>
-  </div>
-))}
-</div>
+    </div>
+
+    <div className="category-wrapper">
+
+        {categories.map((item) => (
+
+            <div
+                key={item.name}
+                className="category-pill"
+                onClick={() => {
+                    localStorage.setItem("category", item.name);
+                    Navigate("/categories");
+                }}
+            >
+
+                <div className="category-icon">
+                    {item.icon}
+                </div>
+
+                <span>{item.name}</span>
+
+            </div>
+
+        ))}
+
+    </div>
+
+
+
 
 </section>
 

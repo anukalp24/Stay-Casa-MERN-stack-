@@ -47,27 +47,7 @@ const navigate = useNavigate()
   const [open, setOpen] = useState(false);
   const menuRef = useRef(null);
 
-  // useEffect(() => {
-  //   const handleClickOutside = (e) => {
-  //     if (menuRef.current && !menuRef.current.contains(e.target)) {
-  //       setOpen(false);
-  //     }
-  //   };
-
-  //   const handleEsc = (e) => {
-  //     if (e.key === "Escape") {
-  //       setOpen(false);
-  //     }
-  //   };
-
-  //   document.addEventListener("mousedown", handleClickOutside);
-  //   document.addEventListener("keydown", handleEsc);
-
-  //   return () => {
-  //     document.removeEventListener("mousedown", handleClickOutside);
-  //     document.removeEventListener("keydown", handleEsc);
-  //   };
-  // }, []);
+ 
 
   return (
     <nav className="navbar">
@@ -98,6 +78,23 @@ const navigate = useNavigate()
           </button>
 
           <div className={`dropdown ${open ? "show" : ""}`}>
+
+<div className="mobile-user">
+
+ <div className="mobile-user-icon">
+        <MdPerson />
+    </div>
+
+    <Link
+        to="/auth"
+        className="mobile-login-btn"
+        onClick={() => { setOpen(false) ; navigate("/auth")}}
+        >
+        Login / Sign up
+    </Link>
+      </div>
+
+            
             <Link
               to="/wishlist"
               className="dropdown-item"

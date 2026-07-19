@@ -23,7 +23,7 @@ const [error, seterror] = useState("")
 
 
   const handleImage = (e)=>{
-    setfile([...e.target.files])
+    setfile(e.target.files[0])
   }
 
 const handlechange = (e)=>{
@@ -94,7 +94,7 @@ setresponse([...response ,updateResult])
 else{
  
   const formData = new FormData()   // creates an empty container lika a bag 
-
+formData.append("image", file);
   formData.append("propertyName" , form.propertyName)
 formData.append("category" ,form.category )
 formData.append(
@@ -121,7 +121,7 @@ formData.append(
   form.desc
 )
 
-formData.append("image" , file)
+
 
   let request2 = await fetch("http://localhost:4090/addhome" , {
     method: "post",
@@ -199,7 +199,7 @@ setform({
      <div className="form-group">
       <label className="form-label">Property Image</label>
       <div className="file-input-wrapper">
-       <input onChange={handleImage} name='photo' accept="image/*" id='img-url' type="file" multiple />
+       <input onChange={handleImage} name='photo' accept="image/*" id='img-url' type="file" />
        <span className="file-btn">Choose Files</span>
       </div>
       {error.url && <p className="field-error">{error.url}</p> }

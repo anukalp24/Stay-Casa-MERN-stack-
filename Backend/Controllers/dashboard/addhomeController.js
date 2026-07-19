@@ -5,7 +5,9 @@ const Home = require("../../Models/Home")
 const addhome = async(req , res)=>{
  const {email} = req.body
     try {
-        const file = `http://localhost:4090/uploads/${req.files}`
+      
+
+   const file = `http://localhost:4090/uploads/${req.file.filename}`;
 
         const result = await Home.create({
              ...req.body,

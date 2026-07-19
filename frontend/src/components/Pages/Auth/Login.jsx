@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import mountainHouse from "../../../../dist/assets2/images/mountain.png";
+import modernHouse from "../../../../dist/assets2/images/modernhouse.png";
 import { HiOutlineArrowLeft } from "react-icons/hi";
 import Navbar from "../../Navbar/Navbar";
 const Login = () => {
@@ -95,7 +96,7 @@ const Login = () => {
       
 
         <div className="login-container">
-          <img src={mountainHouse} alt="" />
+          <img src={modernHouse} alt="" />
           <div className="login-left">
         
 

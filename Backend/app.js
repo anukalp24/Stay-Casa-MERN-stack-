@@ -5,15 +5,17 @@ const helmet = require("helmet");
 const cors = require("cors")
 const connectDb = require("./database/mongoose")
 const app = express()
-app.use(helmet())
-console.log("backend hitted")
+app.use(helmet({
+  crossOriginResourcePolicy: { policy: "cross-origin" }
+}))
+
 console.log(__filename);
 app.use(cors({
     origin: "http://localhost:5173",
     credentials: true
 }));
 
-
+ 
 const webhook = require("./routes/webhook");
 app.use(webhook)
 app.use(express.json())

@@ -1,11 +1,31 @@
 import "./Hero.css";
-import { useContext } from "react";
+import { useContext , useState , useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { info } from "..";
 import poolHouse from "../../../dist/assets2/images/herosection.png"
 import modernhouse from "../../../dist/assets2/images/modernhouse.png"
 import mountainHome from "../../../dist/assets2/images/mountain.png"
+
+
+
+import { HiOutlineSearch } from "react-icons/hi";
 const Hero = () => {
+
+
+  const images = [poolHouse , modernhouse , mountainHome]
+  
+  const [currentImage, setcurrentImage] = useState(0)
+  
+  
+useEffect(() => {
+  const interval = setInterval(() => {
+    setcurrentImage((prev) => (prev + 1) % images.length);
+  }, 5000);
+
+  return () => clearInterval(interval);
+}, []);
+
+
   const navigate = useNavigate();
   const { search, setsearch } = useContext(info);
   const HandleAdd = () => {
@@ -14,58 +34,38 @@ const Hero = () => {
     navigate("/search");
   };
 
+
+
+
   return (
-    <section className="hero">
+ 
+  <section className="hero">
 
-      <div className="hero-left">
+    <img
+      src={images[currentImage]}
+      alt=""
+      className="hero-image"
+    />
 
-       
+    <div className="hero-left">
+      <h1>Your Perfect Stay <br /> Starts Here.</h1>
+      <p>Book unique homes and luxury stays around the world.</p>
+    </div>
 
-        {/* <h1>
-          Find your next <br />
-          dream stay.
-        </h1>
+    <div className="hero-search">
+      <input
+        value={search}
+        onChange={(e) => setsearch(e.target.value)}
+        placeholder="Search city or property..."
+      />
+      <HiOutlineSearch
+        className="search-icon"
+        onClick={HandleAdd}
+      />
+    </div>
 
-        <p>
-          Explore luxury villas, cozy cabins and unique homes
-          across the world with StayCasa.
-        </p> */}
+  </section>
 
-<h1>
-    Your Perfect Stay <br />
-    Starts Here.
-</h1>
-
-<p>
-    Book unique homes and luxury stays around the world.
-</p>
-
-
-        <div className="hero-search">
-
-          <input
-            value={search}
-            onChange={(e) => setsearch(e.target.value)}
-            placeholder="Search city or property..."
-          />
-          <button onClick={HandleAdd}>
-            Search
-          </button>
-
-        </div>
-
-      </div>
-
-      <div className="hero-right">
-
-        <img
-          src={poolHouse}
-         
-        />
-
-      </div>
-
-    </section>
   );
 };
 
