@@ -21,7 +21,7 @@ const [scrolled, setscrolled] = useState(false)
 
 useEffect(() => {
  const handleScroll = ()=>{
-setscrolled(window.scrollY > 50)
+setscrolled(window.scrollY > 100)
  }
  window.addEventListener("scroll" , handleScroll)
 }, [])

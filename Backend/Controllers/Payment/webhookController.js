@@ -3,6 +3,9 @@ const stripe = require("../../config/Stripe")
 
 const Payment = require("../../Models/Payment")
 const Home  = require("../../Models/Home")
+const Notification = require("../../Models/Notification")
+
+
 const webhook =  async (req , res) =>{
     try {
        
@@ -31,8 +34,9 @@ const webhook =  async (req , res) =>{
 
                 const home = await Home.findById(homeId)
 
-            
-            const Paymentdocument = await Payment.create({
+
+                
+                const Paymentdocument = await Payment.create({
                 stripeSessionId: session.id,
                 home: homeId, 
                 owner: userId,
@@ -45,9 +49,22 @@ const webhook =  async (req , res) =>{
              checkIn: session.metadata.checkIn,
              checkOut: session.metadata.checkOut
             })
+            
+            
+            const notificationDocument =  await Notification.create({
+             owner: home.owner,
+             home: homeId,
+              totalPrice: session.amount_total / 100,
+     paymentStatus: session.payment_status,
+             propertyName: home.propertyName,
+             cityname: home.cityname,
+             desc: home.desc,
+             file: home.file,
+             checkIn: session.metadata.checkIn,
+             checkOut: session.metadata.checkOut
+            })
 
-        
-
+            
 // Now session is:
 // {
 //     id: "cs_test_123",
