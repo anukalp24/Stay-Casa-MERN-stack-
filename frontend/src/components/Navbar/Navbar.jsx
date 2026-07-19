@@ -14,11 +14,17 @@ import { MdPerson } from "react-icons/md";
 const Navbar = () => {
 const navigate = useNavigate()
 
+const [scrolled, setscrolled] = useState(false)
 
 
 
 
-
+useEffect(() => {
+ const handleScroll = ()=>{
+setscrolled(window.scrollY > 50)
+ }
+ window.addEventListener("scroll" , handleScroll)
+}, [])
 
 
 
@@ -50,12 +56,12 @@ const navigate = useNavigate()
  
 
   return (
-    <nav className="navbar">
+    <nav className={scrolled ? "navbar-scrolled" : "navbar"}>
       <div className="navbar-logo">
         <Link to="/">UrbanStay</Link>
       </div>
 
-      <div className="navbar-center">
+      <div className= { scrolled ? "navbar-center-scrolled" : "navbar-center" }>
         <Link to="/">Home</Link>
         <Link to="/About">About</Link>
         <Link to="/Contact">Contact</Link>
@@ -63,7 +69,7 @@ const navigate = useNavigate()
       </div>
 
       <div className="navbar-right">
-        <Link className="host-btn" to="/Host">
+        <Link className={scrolled ? "host-btn-scrolled" : "host-btn"} to="/Host">
           List your property
         </Link>
 
