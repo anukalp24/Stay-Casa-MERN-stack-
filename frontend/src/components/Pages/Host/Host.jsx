@@ -6,7 +6,7 @@ import { useState , useContext  ,useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { info } from '../..'
 const Host = () => {
-  const [file, setfile] = useState(null)
+  const [files, setfiles] = useState([])
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -20,10 +20,8 @@ const Host = () => {
 const [error, seterror] = useState("")
 
   const {response , setresponse , form , setform} = useContext(info)
-
-
   const handleImage = (e)=>{
-    setfile(e.target.files[0])
+    setfiles(e.target.files)
   }
 
 const handlechange = (e)=>{
@@ -57,14 +55,13 @@ const handleadd =  async (e)=>{
     }
     if(form.rating === ""){
    newErrors.rating = "rating field is required" 
-
     }
     
     
-    if(!file){
-   newErrors.url =  "url is required" 
+  //   if(files.length < 3){
+  //  newErrors.url =   "Please upload at least 3 images"
 
-    }
+  //   }
     
     if(form.desc === "" ){
        newErrors.desc = "Description is required" 
@@ -75,28 +72,16 @@ const handleadd =  async (e)=>{
   if(Object.keys(newErrors).length > 0){
     return
   }
-// solution in progress.
-console.log(form)
 if(form._id){
-   console.log("this is update request")
-  let updateRequest = await fetch(`http://localhost:4090/edithome/${form._id}`,{
-    method: "PUT",
-    headers: {
-    "Content-Type":"application/json"       
-},
-         body:JSON.stringify(form)
-        })
-        console.log(updateRequest)
-        
-let updateResult = await updateRequest.json()
-setresponse([...response ,updateResult])
-}
-else{
- 
-  const formData = new FormData()   // creates an empty container lika a bag 
-formData.append("image", file);
+ const formData = new FormData()   // creates an empty container lika a bag 
+formData.append("files", files[0]);
+formData.append("files", files[1]);
+formData.append("files", files[2]);
+
+
   formData.append("propertyName" , form.propertyName)
 formData.append("category" ,form.category )
+
 formData.append(
   "cityname",
   form.cityname
@@ -122,6 +107,52 @@ formData.append(
 )
 
 
+
+
+   console.log("this is update request")
+  let updateRequest = await fetch(`http://localhost:4090/edithome/${form._id}`,{
+    method: "PUT",
+    headers: {
+
+    authorization: localStorage.getItem("accessToken")
+},
+         body: formData
+        })
+  
+
+}
+else{
+  const formData = new FormData()   // creates an empty container lika a bag 
+files.forEach((file) => {
+  formData.append("files", file);
+});
+
+  formData.append("propertyName" , form.propertyName)
+formData.append("category" ,form.category )
+
+formData.append(
+  "cityname",
+  form.cityname
+)
+formData.append(
+  "country",
+  form.country
+)
+
+formData.append(
+  "price",
+  form.price
+)
+
+formData.append(
+  "rating",
+  form.rating
+)
+
+formData.append(
+  "desc",
+  form.desc
+)
 
   let request2 = await fetch("http://localhost:4090/addhome" , {
     method: "post",
@@ -199,7 +230,7 @@ setform({
      <div className="form-group">
       <label className="form-label">Property Image</label>
       <div className="file-input-wrapper">
-       <input onChange={handleImage} name='photo' accept="image/*" id='img-url' type="file" />
+       <input onChange={handleImage} name='photo' accept="image/*" id='img-url' type="file" multiple />
        <span className="file-btn">Choose Files</span>
       </div>
       {error.url && <p className="field-error">{error.url}</p> }

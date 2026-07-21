@@ -7,11 +7,14 @@ const addhome = async(req , res)=>{
     try {
       
 
-   const file = `http://localhost:4090/uploads/${req.file.filename}`;
+   const files = req.files.map(file =>(
+`http://localhost:4090/uploads/${file.filename}`
+   ))
+   
 
         const result = await Home.create({
              ...req.body,
-             file: file,
+             files: files,
              owner: req.user.id,
            
         })

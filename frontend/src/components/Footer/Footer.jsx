@@ -29,9 +29,10 @@ const Footer = () => {
 
 <div className="footer-sec-1">
     <h2>Account</h2>
-   <a href="">Login</a>
-  <a href="">Stays</a>
-   <a href="/Host">Become a Host</a>
+    <Link to="/auth">Login</Link>
+    <Link to="/stays">Explore Stays</Link>
+    <Link to="/host">Become a host</Link>
+
 </div>
 
 <div className="footer-sec-1">

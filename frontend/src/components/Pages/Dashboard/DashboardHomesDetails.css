@@ -119,6 +119,68 @@
   background: #e31c5f;
 }
 
+
+
+.dashboardhomesdetails-empty {
+  min-height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+.dashboardhomesdetails-empty-card {
+  width: 100%;
+  max-width: 500px;
+  background: #fff;
+  padding: 45px 35px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+}
+
+.dashboardhomesdetails-empty-icon {
+  font-size: 70px;
+  margin-bottom: 18px;
+}
+
+.dashboardhomesdetails-empty-card h2 {
+  font-size: 2rem;
+  color: #222;
+  margin-bottom: 12px;
+}
+
+.dashboardhomesdetails-empty-card p {
+  color: #666;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+
+.dashboardhomesdetails-back-btn {
+  background: #ff385c;
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.dashboardhomesdetails-back-btn:hover {
+  background: #e11d48;
+  transform: translateY(-2px);
+}
+
+
+
+
+
+
+
+
 @media (max-width: 700px) {
   .dashboardhomesdetails-wrapper {
     padding: 20px 16px 60px;

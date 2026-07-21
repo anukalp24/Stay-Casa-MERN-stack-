@@ -1,10 +1,10 @@
-const Payment = require("../Models/Payment")
+const Payment = require("../../Models/Payment")
 
 
 const payment = async (req , res)=>{
     try {
 
-       console.log("booking delete controler hitted just now")
+   
        
         const deleteBooking = await Payment.findOneAndDelete({
             _id: req.params.id,

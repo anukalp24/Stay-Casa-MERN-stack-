@@ -29,8 +29,6 @@ body{
     justify-content:space-between;
 
     z-index:1000;
-
-    background:white;
     background: transparent;
     transition:.35s ease;
 }

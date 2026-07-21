@@ -70,7 +70,7 @@ return (
 
         <img
           className="dashboard-all-card-img"
-          src={val.file}
+          src={val.files[0]}
           alt={val.propertyName}
           />
 

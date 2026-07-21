@@ -9,7 +9,7 @@ const categories = require("../Controllers/Users/Categories")
 const GetIndividualHomes = require("../Controllers/Users/GetSingleHome")
 const contact  = require("../Controllers/Users/Contact")
 
-user.post("/addhome" ,authMiddleware , upload.single("image") ,  addhome )
+user.post("/addhome" ,authMiddleware , upload.array("files" , 3) ,  addhome )
 user.get("/" , gethomes )
 user.get("/home/:id" , GetIndividualHomes )
 user.post("/search" , searchHomes)

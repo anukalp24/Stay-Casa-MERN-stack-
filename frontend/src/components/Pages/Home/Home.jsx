@@ -4,6 +4,7 @@ import Hero from '../../Hero-Section/Hero'
 import Footer from '../../Footer/Footer'
 import { info } from '../..'
 import {  useContext , useEffect  , useState} from 'react'
+
 import "./Home.css"
 import {
   HiHome,
@@ -27,7 +28,6 @@ import {
 
 
 const HomeDetails = () => {
-
   const Navigate = useNavigate()
 const {handleStay , handlewishlist } = useContext(info)
 const [featuredHomes, setfeaturedHomes] = useState([])
@@ -68,7 +68,6 @@ const categories = [
         <h2>Explore by Category</h2>
 
         <p>Find the perfect stay for every occasion.</p>
-
     </div>
 
     <div className="category-wrapper">
@@ -122,7 +121,7 @@ const categories = [
                 <div className="home-image-wrapper">
 
                     <img
-                        src={val.file}
+                        src={val.files[0]}
                         alt={val.propertyName}
                         className="home-image"
                     />

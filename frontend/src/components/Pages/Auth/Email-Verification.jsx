@@ -1,29 +1,22 @@
-import React, { use } from "react";
+import React from "react";
 import Navbar from "../../Navbar/Navbar";
 import "./Email-Verification.css";
 import { info } from "../..";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import OtpInput from "react-otp-input";
+
 const EmailVerification = () => {
 const navigate = useNavigate()
-const [otp, setotp] = useState({
-    first: "",
-second: "",
-third: "",
-fourth: "",
-fifth: "",
-sixth: ""
-})
+const [otp, setotp] = useState("")
 
-const handlechange = (e)=>{
-    setotp({
-        ...otp , [e.target.name] : e.target.value
-    })
-}
+
+
+
 
 const handleadd =  async (e)=>{
  e.preventDefault();
-    const otpCode  = otp.first + otp.second + otp.third + otp.fourth  + otp.fifth + otp.sixth
+    const otpCode  = otp
   const verify = await fetch("http://localhost:4090/email-verification", {
     method: "POST",
     headers: {
@@ -34,9 +27,7 @@ const handleadd =  async (e)=>{
         email: localStorage.getItem("email")
     }),
   });
-
-  const verifyReq = await verify.json();
-
+  const verifyReq = await verify.json()
   if (verify.ok) {
     localStorage.setItem("accessToken" ,  verifyReq.accessToken)
 navigate("/")
@@ -67,12 +58,26 @@ navigate("/")
 
           <form>
             <div className="otp-input-group">
-              <input    value={otp.first} name="first" onChange={handlechange} type="text" maxLength={1} className="otp-input" />
-              <input   value={otp.second}  name="second"  onChange={handlechange} type="text" maxLength={1} className="otp-input" />
-              <input   value={otp.third} name="third"  onChange={handlechange} type="text" maxLength={1} className="otp-input" />
-              <input   value={otp.fourth} name="fourth"  onChange={handlechange} type="text" maxLength={1} className="otp-input" />
-              <input   value={otp.fifth} name="fifth"  onChange={handlechange} type="text" maxLength={1} className="otp-input" />
-              <input  value={otp.sixth}  name="sixth"  onChange={handlechange} type="text" maxLength={1} className="otp-input" />
+<OtpInput
+        value={otp}
+        onChange={setotp}
+        numInputs={6}
+        renderSeparator={<span style={{ width: "10px" }}></span>}
+        renderInput={(props) => (
+          <input
+            {...props}
+            style={{
+              width: "50px",
+              height: "50px",
+              fontSize: "20px",
+              textAlign: "center",
+              border: "1px solid #ccc",
+              borderRadius: "8px",
+            }}
+          />
+        )}
+      />
+
             </div>
 
             <button onClick={handleadd} type="button" className="otp-verify-btn">
@@ -80,9 +85,7 @@ navigate("/")
             </button>
           </form>
 
-          <div className="otp-resend">
-            <p className="otp-resend-timer">Resend code in 30s</p>
-          </div>
+          
 
           <p className="otp-back">Back to Login</p>
         </div>

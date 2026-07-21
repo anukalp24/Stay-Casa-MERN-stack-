@@ -20,6 +20,7 @@ import PaymentSuccess from '../Pages/Payment/PaymentSuccess'
 import PaymentFailed from '../Pages/Payment/PaymentFailed'
 import Bookings from '../Pages/Bookings/Bookings'
 import SecurityPrivacy from '../Pages/FooterPages/security/Security'
+import Reservation from '../Pages/Reservation/Reservation'
 import NotFound from '../Pages/404/NotFound'
 import { useNavigate } from 'react-router-dom'
 import Terms from '../Pages/FooterPages/termsCondition.jsx/terms'
@@ -31,6 +32,7 @@ const [response, setresponse] = useState([])
 const [wishlist, setwishlist] = useState([])
 const [search, setsearch] = useState("")
 const [searchResult, setsearchResult] = useState(null)
+
 const [form, setform] = useState({
 propertyName: "",
 category: "",
@@ -95,6 +97,7 @@ const handleStay = (id)=>{
 <Route path='/Bookings'  element={<Bookings/>}></Route>
 <Route path='/security-policy'  element={<SecurityPrivacy/>}></Route>
 <Route path='/terms-and-conditions'  element={< Terms/>}></Route>
+<Route path='/reservations'  element={<Reservation/>}></Route>
 <Route path='*'  element={<NotFound/>}></Route>
 
 </Routes>

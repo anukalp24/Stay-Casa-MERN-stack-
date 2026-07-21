@@ -143,7 +143,7 @@ const handleNext = ()=>{
 <>
   <div className="property-image">
 
-          <img src={home.file} alt="" />
+          <img src={home.files[0]} alt="" />
 
           <button className="wishlist-btn">
             <FaHeart />
@@ -164,13 +164,8 @@ const handleNext = ()=>{
                 <FaMapMarkerAlt />
                 {home.cityname} , {home.country}
               </p>
-
             </div>
-
           </div>
-
-
-
           <p className="property-description">{home.desc}</p>
 
         </div>

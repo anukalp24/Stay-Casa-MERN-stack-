@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import {
   HiOutlineMenu,
   HiOutlineHome,
@@ -12,11 +13,30 @@ import {
 } from "react-icons/hi";
 import { MdPerson } from "react-icons/md";
 const Navbar = () => {
+
+let navbarClass = "navbar"
+let navbarLinkClass = "navbar-center"
+
+  const location  = useLocation()
+  const isHomePage = location.pathname === "/"
+
+  if(!isHomePage){
+    navbarClass = "navbar-scrolled"
+    navbarLinkClass = "navbar-center-scrolled"
+   
+  }
+
+  else{
+    navbarClass = "navbar"
+  }
 const navigate = useNavigate()
 
 const [scrolled, setscrolled] = useState(false)
 
-
+if(scrolled){
+  navbarClass = "navbar-scrolled"
+  navbarLinkClass = "navbar-center-scrolled"
+}
 
 
 useEffect(() => {
@@ -36,7 +56,7 @@ setscrolled(window.scrollY > 100)
   })
 
   if(logout.ok){
-    alert("its working")
+    alert("you have been logged out")
   localStorage.removeItem("accessToken")
   }
   }
@@ -56,12 +76,12 @@ setscrolled(window.scrollY > 100)
  
 
   return (
-    <nav className={scrolled ? "navbar-scrolled" : "navbar"}>
+    <nav className={navbarClass}>
       <div className="navbar-logo">
         <Link to="/">UrbanStay</Link>
       </div>
 
-      <div className= { scrolled ? "navbar-center-scrolled" : "navbar-center" }>
+      <div className= {navbarLinkClass}>
         <Link to="/">Home</Link>
         <Link to="/About">About</Link>
         <Link to="/Contact">Contact</Link>
@@ -69,7 +89,7 @@ setscrolled(window.scrollY > 100)
       </div>
 
       <div className="navbar-right">
-        <Link className={scrolled ? "host-btn-scrolled" : "host-btn"} to="/Host">
+        <Link className={navbarLinkClass} to="/Host">
           List your property
         </Link>
 
@@ -117,6 +137,14 @@ setscrolled(window.scrollY > 100)
             >
               <HiOutlineClipboardList />
               Your Bookings
+            </Link>
+            <Link
+              to="/reservations"
+              className="dropdown-item"
+              onClick={() => setOpen(false)}
+            >
+              <HiOutlineClipboardList />
+              Reservation
             </Link>
 
             <Link

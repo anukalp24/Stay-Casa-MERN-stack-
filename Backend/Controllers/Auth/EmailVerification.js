@@ -8,14 +8,11 @@ const verification = async (req , res)=>{
        const exist = await User.findOne({
         email: email,
        })
-
  if(!exist){
         return res.status(404).json({
             message: "User Not found"
         })
        }
-
-
 
        if(exist.emailVerificationOtp !== otpCode){
         return res.status(400).json({
@@ -28,6 +25,7 @@ if(exist.emailVerificationExpiry < new Date()){
         message: "OTP has expired"
     })
 }
+
 
       exist.isVerified = true
 

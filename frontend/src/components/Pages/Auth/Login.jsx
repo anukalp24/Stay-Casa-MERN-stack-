@@ -101,10 +101,9 @@ const Login = () => {
         
 
             <h1>
-              Stay Somewhere <br />
+              Stay Somewhere 
               You'll Never Forget.
             </h1>
-
             <p>
               Discover luxury villas, premium apartments and unique stays across
               the world with UrbanStay.
@@ -129,7 +128,7 @@ const Login = () => {
                       <input
                         type="email"
                         name="email"
-                        placeholder="Enter your email"
+                        placeholder="john24@gmail.com"
                         value={form.email}
                         onChange={handleChange}
                       />

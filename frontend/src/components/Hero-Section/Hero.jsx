@@ -38,7 +38,7 @@ useEffect(() => {
 
 
   return (
- 
+
   <section className="hero">
 
     <img

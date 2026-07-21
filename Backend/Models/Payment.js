@@ -1,8 +1,7 @@
+const { ObjectId } = require("mongodb")
 const mongoose = require("mongoose")
 
 const PaymentSchema = new mongoose.Schema({
-
-
 
 
     
@@ -13,12 +12,15 @@ const PaymentSchema = new mongoose.Schema({
         type:  mongoose.Schema.Types.ObjectId,
     }, 
 
-
-
-
+guest:{
+  required: true,
+       type:  mongoose.Schema.Types.ObjectId,
+       ref: "User"
+}
+,
 
 home: {
-    type: String,
+     type: mongoose.Schema.Types.ObjectId,
     required: true
 } ,
 
@@ -65,11 +67,13 @@ desc:{
      type: String,
     required: true,
 } , 
+  files:[
+    {
+        type: String,
+        required: true,
+    }
+] ,
 
-file:{
- type: String,
-    required: true,
-}
 
 
 })

@@ -4,24 +4,37 @@
 const Home = require("../../Models/Home")
 
 const updateHome =  async (req , res)=>{
-
+console.log("update controler jsut hitted")
   try {
-     const home = await Home.findOneAndUpdate({
-        _id: req.params.id,
-        owner: req.user.id
-    } ,
+      const home = await Home.findOne({
+          _id: req.params.id,
+          owner: req.user.id
+      });
 
-req.body,
-{new: true}
-)
+      if(!home){
+        return res.status(404).json({
+            message: "Home not found"
+        })
+      }
+
+      if(req.files.length === 0){
+        req.files = []
+      }
+    const files  = req.files.map(file=>(
+        `http://localhost:4090/uploads/${file.filename}`
+    ))
 
 
+    const allFiles = [...home.files , ... files]
 
-if(!home){
-    return res.status(404).json({
-        message: "Home not found"
-    })
-}
+    home.set({
+  ...req.body,
+  files: allFiles
+});
+
+await home.save();
+
+
 
 
 return res.status(200).json({

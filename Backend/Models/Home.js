@@ -24,10 +24,12 @@ const HomeSchema = new mongoose.Schema({
       required:true
    },
 
-   file:{
-      type:String,
-      required:true
-   },
+   files:[
+    {
+        type: String,
+        required: true,
+    }
+] ,
 
    desc:{
       type:String,

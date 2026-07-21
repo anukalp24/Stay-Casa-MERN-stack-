@@ -1,11 +1,11 @@
-const Payment = require("../Models/Payment")
+const Payment = require("../../Models/Payment")
 const mongoose = require("mongoose");
 
 const getBookings  =  async (req , res)=>{
 
     try {
      const bookedHomes = await Payment.find({
-        owner: req.user.id
+        guest: req.user.id               
      })
 
      if(bookedHomes.length === 0){

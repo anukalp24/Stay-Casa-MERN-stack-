@@ -21,19 +21,18 @@ app.use(webhook)
 app.use(express.json())
 app.use(cookie())
 app.use("/uploads" , express.static("uploads"))
-// here fornt end get req will come for the image
+
 const users = require("./routes/users")
 const wishlist = require("./routes/wishlist")
 const auth = require("./routes/auth")
 const dashboard = require("./routes/dashboard")
 const Payment = require("./routes/Payment")
-const Bookings = require("./routes/Bookings")
 app.use(users)
 app.use(wishlist)
 app.use(auth)
 app.use(dashboard)
 app.use(Payment)
-app.use(Bookings)
+
 
 connectDb()
 app.listen(4090)  

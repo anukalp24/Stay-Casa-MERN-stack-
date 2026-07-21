@@ -9,7 +9,6 @@ import "./DashboardHomesDetails.css";
 import fetchWithRefresh from "../../../Utils/fetchWithRefresh";
 const DashboardHomesDetails = () => {
   const { _id } = useParams();
-
   const navigate = useNavigate();
   const [dashboardHomeDetails, setdashboardHomeDetails] = useState();
   const { setform, setresponse, response, setdashboard, dashboard } =
@@ -56,7 +55,6 @@ headers: {
       setdashboardHomeDetails(null);
 
       const newResponse = response.filter((val) => val._id !== id);
-
       setresponse(newResponse);
     }
   };
@@ -79,7 +77,7 @@ headers: {
           <div className="dashboardhomesdetails-image-section">
             <img
               className="dashboardhomesdetails-image"
-              src={dashboardHomeDetails?.home?.file}
+              src={dashboardHomeDetails?.home?.files[0]}
             />
           </div>
 
@@ -129,7 +127,24 @@ headers: {
           </div>
         </div>
       ) : (
-        <p>nothing found</p>
+     <div className="dashboardhomesdetails-empty">
+  <div className="dashboardhomesdetails-empty-card">
+    <div className="dashboardhomesdetails-empty-icon">🏠</div>
+
+    <h2>Property Not Found</h2>
+
+    <p>
+      This property may have been deleted or is no longer available.
+    </p>
+
+    <button
+      className="dashboardhomesdetails-back-btn"
+      onClick={() => navigate("/dashboard")}
+    >
+      Back to Dashboard
+    </button>
+  </div>
+</div>
       )}
 
       <Footer />

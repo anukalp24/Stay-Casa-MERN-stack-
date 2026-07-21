@@ -77,28 +77,34 @@ method: "GET",
 
               <img
                 className="card-img"
-                src={val.home.file}
-                alt={val.home.propertyName}
+                src={val?.home?.files[0]}
+                alt={val?.home?.propertyName}
               />
 
               <div className="card-body">
 
                 <div className="sec-1">
-                  <h3 className="card-title">{val.home.propertyName}</h3>
-                  <span className="card-rating">⭐ {val.home.rating}</span>
+                  <h3 className="card-title">{val?.home?.propertyName}</h3>
+                  <span className="card-rating">⭐ {val?.home?.rating}</span>
                 </div>
 
-                <p className="card-location">📍 {val.home.cityname}</p>
+                <p className="card-location">📍 {val?.home?.cityname}</p>
 
-                <p className="card-desc">{val.home.desc}</p>
+                <p className="card-desc">{val?.home?.desc}</p>
 
                 <div className="card-divider"></div>
 
                 <div className="sec-2">
-                  <span className="card-price">₹{val.home.price}</span>
-                  <button onClick={() => handleremove(val._id)} className="wishlist-btn">
-                    Remove from Wishlist
-                  </button>
+                  <span className="card-price">₹{val?.home?.price}</span>
+                 <button
+  className="wishlist-btn"
+  onClick={(e) => {
+    e.stopPropagation();
+    handleremove(val._id);
+  }}
+>
+  Remove from Wishlist
+</button>
                 </div>
 
               </div>
