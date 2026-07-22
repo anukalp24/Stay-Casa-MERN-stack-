@@ -3,6 +3,8 @@ import "./Navbar.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import darkLogo from "../../assets/logo/dark-logo.png"
+import Mainlogo from "../../assets/logo/logo.png"
 import {
   HiOutlineMenu,
   HiOutlineHome,
@@ -17,12 +19,13 @@ const Navbar = () => {
 let navbarClass = "navbar"
 let navbarLinkClass = "navbar-center"
 
+let logo = Mainlogo
   const location  = useLocation()
   const isHomePage = location.pathname === "/"
-
   if(!isHomePage){
     navbarClass = "navbar-scrolled"
     navbarLinkClass = "navbar-center-scrolled"
+    logo = darkLogo
    
   }
 
@@ -36,6 +39,7 @@ const [scrolled, setscrolled] = useState(false)
 if(scrolled){
   navbarClass = "navbar-scrolled"
   navbarLinkClass = "navbar-center-scrolled"
+logo = darkLogo
 }
 
 
@@ -56,18 +60,9 @@ setscrolled(window.scrollY > 100)
   })
 
   if(logout.ok){
-    alert("you have been logged out")
   localStorage.removeItem("accessToken")
   }
   }
-
-
-
-
-
-
-
-
 
 
   const [open, setOpen] = useState(false);
@@ -77,8 +72,8 @@ setscrolled(window.scrollY > 100)
 
   return (
     <nav className={navbarClass}>
-      <div className="navbar-logo">
-        <Link to="/">UrbanStay</Link>
+      <div  className="navbar-logo">
+        <img src={logo} className={scrolled ? "darkLogo" : "logo"} alt="" />
       </div>
 
       <div className= {navbarLinkClass}>

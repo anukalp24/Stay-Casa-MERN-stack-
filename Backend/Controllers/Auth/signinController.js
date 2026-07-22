@@ -58,7 +58,7 @@ const transporter = nodemailer.createTransport({
 await transporter.sendMail({
   from: process.env.EMAIL_USER,
   to: email,
-  subject: "Verify Your StayCasa Email Address",
+  subject: "Verify Your Havenly Email Address",
   html: `<h2>Welcome to StayCasa!</h2>
 
 <p>Thank you for signing up.</p>

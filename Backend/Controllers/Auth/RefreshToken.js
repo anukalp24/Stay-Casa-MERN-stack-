@@ -24,8 +24,6 @@ if(!exist){
     })
 } 
 
-
-
 const newAccessToken = jwt.sign({
     id: exist._id
 },

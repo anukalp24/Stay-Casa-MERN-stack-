@@ -5,6 +5,7 @@ import Footer from '../../Footer/Footer'
 import { useState , useContext  ,useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { info } from '../..'
+import fetchWithRefresh from '../../../Utils/fetchWithRefresh'
 const Host = () => {
   const [files, setfiles] = useState([])
   const navigate = useNavigate()
@@ -47,15 +48,13 @@ const handleadd =  async (e)=>{
    newErrors.cityname = "City name is required" 
       } 
       if( form.country === ""){
-   newErrors.cityname = "City name is required" 
+   newErrors.country = "City name is required" 
       } 
       
     if(form.price  === ""){
          newErrors.price = "Price field is required" 
     }
-    if(form.rating === ""){
-   newErrors.rating = "rating field is required" 
-    }
+    
     
     
   //   if(files.length < 3){
@@ -96,10 +95,7 @@ formData.append(
   form.price
 )
 
-formData.append(
-  "rating",
-  form.rating
-)
+
 
 formData.append(
   "desc",
@@ -110,7 +106,7 @@ formData.append(
 
 
    console.log("this is update request")
-  let updateRequest = await fetch(`http://localhost:4090/edithome/${form._id}`,{
+  let updateRequest = await fetchWithRefresh(`http://localhost:4090/edithome/${form._id}`,{
     method: "PUT",
     headers: {
 
@@ -123,9 +119,9 @@ formData.append(
 }
 else{
   const formData = new FormData()   // creates an empty container lika a bag 
-files.forEach((file) => {
-  formData.append("files", file);
-});
+formData.append("files", files[0]);
+formData.append("files", files[1]);
+formData.append("files", files[2]);
 
   formData.append("propertyName" , form.propertyName)
 formData.append("category" ,form.category )
@@ -144,17 +140,13 @@ formData.append(
   form.price
 )
 
-formData.append(
-  "rating",
-  form.rating
-)
 
 formData.append(
   "desc",
   form.desc
 )
 
-  let request2 = await fetch("http://localhost:4090/addhome" , {
+  let request2 = await fetchWithRefresh("http://localhost:4090/addhome" , {
     method: "post",
     headers: {
       Authorization: localStorage.getItem("accessToken")
@@ -173,7 +165,6 @@ setform({
    cityname:"",
    country: "",
    price:"",
-   rating:"",
    desc:"",
 })
 
@@ -221,11 +212,7 @@ setform({
       {error.price && <p className="field-error">{error.price}</p> }
      </div>
 
-     <div className="form-group">
-      <label className="form-label">Rating</label>
-      <input value={form.rating} name='rating'  onChange={handlechange}  placeholder='e.g. 4.5' id='rating' type="text" />
-      {error.rating && <p className="field-error">{error.rating}</p> }
-     </div>
+    
 
      <div className="form-group">
       <label className="form-label">Property Image</label>

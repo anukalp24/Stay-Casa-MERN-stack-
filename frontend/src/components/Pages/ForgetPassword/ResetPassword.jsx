@@ -13,7 +13,7 @@ const ResetPassword = () => {
     }
     const [message, setmessage] = useState()
 
-    
+      
     const resetPassword = async () => {
 
         const strongPassword =   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/

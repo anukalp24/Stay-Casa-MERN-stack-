@@ -8,7 +8,6 @@ import fetchWithRefresh from '../../../Utils/fetchWithRefresh'
 const Wishlist = () => {
     const {wishlist , setwishlist , handleStay} = useContext(info)
 const [loader, setloader] = useState(true)
-
 useEffect(() => {
 const wishlist = async ()=>{
 
@@ -95,16 +94,21 @@ method: "GET",
                 <div className="card-divider"></div>
 
                 <div className="sec-2">
-                  <span className="card-price">₹{val?.home?.price}</span>
-                 <button
-  className="wishlist-btn"
+                  <span className="card-price">₹{val?.home?.price}/night</span>
+                
+               <button
+  
+  className="wishlist-button"
   onClick={(e) => {
     e.stopPropagation();
     handleremove(val._id);
   }}
 >
-  Remove from Wishlist
-</button>
+  Remove
+</button> 
+
+
+
                 </div>
 
               </div>

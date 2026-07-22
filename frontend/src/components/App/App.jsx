@@ -24,6 +24,7 @@ import Reservation from '../Pages/Reservation/Reservation'
 import NotFound from '../Pages/404/NotFound'
 import { useNavigate } from 'react-router-dom'
 import Terms from '../Pages/FooterPages/termsCondition.jsx/terms'
+import Faq from '../Pages/FooterPages/Faq/Faq'
 import { info } from '..'
 function App() {
   const navigate = useNavigate()
@@ -39,7 +40,6 @@ category: "",
 country: "",
 cityname: "",
 price:"",
-rating: "",
 desc: "",
 })
 const [dashboard, setdashboard] = useState([]) 
@@ -98,6 +98,7 @@ const handleStay = (id)=>{
 <Route path='/security-policy'  element={<SecurityPrivacy/>}></Route>
 <Route path='/terms-and-conditions'  element={< Terms/>}></Route>
 <Route path='/reservations'  element={<Reservation/>}></Route>
+<Route path='/faq'  element={<Faq/>}></Route>
 <Route path='*'  element={<NotFound/>}></Route>
 
 </Routes>

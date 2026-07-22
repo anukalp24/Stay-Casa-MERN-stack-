@@ -45,7 +45,7 @@ const resetLink = `http://localhost:5173/reset-password/${resetToken}`
             await transporter.sendMail({
                 from: process.env.EMAIL_USER,
                 to: req.body.email,
-                subject: "Stay-Casa Password Reset",
+                subject: "Havenly Password Reset",
                 html: ` <h2>Reset Your Password</h2>
                 <p>Click the link below. It expires in 15 minutes.</p>
                 <a href="${resetLink}">Reset Password</a>

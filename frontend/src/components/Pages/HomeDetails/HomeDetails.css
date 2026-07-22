@@ -10,6 +10,8 @@
     margin-bottom:35px;
 }
 
+
+
 .hd-gallery{
     display:flex;
     gap:12px;
@@ -20,7 +22,7 @@
     width:60%;
     height:100%;
     overflow:hidden;
-    border-radius:20px;
+    border-radius:10px;
 }
 
 .hd-gallery-right{
@@ -35,7 +37,7 @@
     height:calc((100% - 12px)/2);
     width:100%;
     object-fit:cover;
-    border-radius:20px;
+    border-radius:10px;
     transition:.35s;
     cursor:pointer;
 }
@@ -49,7 +51,7 @@
 }
 
 .hd-gallery img:hover{
-    transform:scale(1.03);
+    /* transform:scale(1.03); */
 }
 
 .hd-gallery-actions{
@@ -308,14 +310,6 @@
     }
 
 }
-
-
-
-
-
-
-
-
 
 
 .hd-sidebar{

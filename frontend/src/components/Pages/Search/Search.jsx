@@ -45,7 +45,7 @@ const Search = () => {
         <div className="search-grid">
           {searchResult.home.map((homes, index) => (
             <div key={index} className="search-card" onClick={() => navigate(`/home/${homes._id}`)}>
-              <img className="search-card-img" src={homes.file} alt={homes.propertyName} />
+              <img className="search-card-img" src={homes.files[0]} alt={homes.propertyName} />
               <div className="search-card-body">
                 <h3 className="search-card-title">{homes.propertyName}</h3>
                 <p className="search-card-location">📍 {homes.cityname} , {homes.country}</p>

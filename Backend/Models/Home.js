@@ -19,10 +19,7 @@ const HomeSchema = new mongoose.Schema({
       required:true
    },
 
-   rating:{
-      type:Number,
-      required:true
-   },
+ 
 
    files:[
     {

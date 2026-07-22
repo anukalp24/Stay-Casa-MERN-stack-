@@ -5,7 +5,6 @@ const Home = require("../../Models/Home")
 const addhome = async(req , res)=>{
  const {email} = req.body
     try {
-      
 
    const files = req.files.map(file =>(
 `http://localhost:4090/uploads/${file.filename}`
@@ -22,7 +21,6 @@ const addhome = async(req , res)=>{
         
         res.status(201).json(result)
     } catch (error) {
-        console.log(error)
         res.status(500).json({
             message: "Something went wrong"
         })

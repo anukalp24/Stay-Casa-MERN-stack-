@@ -38,7 +38,7 @@
     width:58px;
     height:58px;
     border:none;
-    background:#111;
+        background-color:#1E1E1E;
     color:#fff;
     display:flex;
     justify-content:center;
@@ -48,7 +48,7 @@
 }
 
 .search-btn:hover{
-    background:#333;
+    background:#000000;
 }
 
 .search-btn svg{
@@ -360,12 +360,11 @@
     height:50px;
 
     border:none;
-
+border: 1px solid black;
     border-radius:8px;
+background-color: white;
 
-    background:#111;
-
-    color:#fff;
+    color:#000000;
 
     font-size:15px;
     font-weight:600;
@@ -376,7 +375,8 @@
 }
 
 .price-section button:hover{
-    background:#333;
+    color: white;
+         background-color:#1E1E1E;
 }
 
 /* RESPONSIVE */

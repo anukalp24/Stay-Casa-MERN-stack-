@@ -3,8 +3,9 @@ import Navbar from '../../Navbar/Navbar'
 import Hero from '../../Hero-Section/Hero'
 import Footer from '../../Footer/Footer'
 import { info } from '../..'
+import { useNavigate } from 'react-router-dom'
 import {  useContext , useEffect  , useState} from 'react'
-
+import photo from "../../../assets/photos/photo2.png"
 import "./Home.css"
 import {
   HiHome,
@@ -14,7 +15,7 @@ import {
   HiArrowUpRight
 } from "react-icons/hi2";
 
-import { useNavigate } from 'react-router-dom'
+
 
 import {
   Home,
@@ -28,6 +29,7 @@ import {
 
 
 const HomeDetails = () => {
+  const navigate = useNavigate()
   const Navigate = useNavigate()
 const {handleStay , handlewishlist } = useContext(info)
 const [featuredHomes, setfeaturedHomes] = useState([])
@@ -50,8 +52,6 @@ const categories = [
   { name: "Cabin", icon: <Trees size={24} /> },
   { name: "Flat", icon: <Building2 size={24} /> },
   { name: "Bungalow", icon: <House size={24} /> },
-  { name: "Farm House", icon: <Tractor size={24} /> },
-  { name: "Suite", icon: <Bed size={24} /> },
   { name: "Entire Home", icon: <KeyRound size={24} /> },
 ]
 
@@ -66,8 +66,6 @@ const categories = [
 
 
         <h2>Explore by Category</h2>
-
-        <p>Find the perfect stay for every occasion.</p>
     </div>
 
     <div className="category-wrapper">
@@ -94,15 +92,10 @@ const categories = [
         ))}
 
     </div>
-
-
-
-
+     
 </section>
-
-
 <div className="home-parent">
- <div className="home-parent">
+ 
 
     <div className="home-intro">
         <span>Popular Stays</span>
@@ -195,13 +188,13 @@ const categories = [
     Explore More Stays
   </button>
 </div>
-</div>
+
 
 
 
 <section className="why-choose">
   <div className="why-header">
-    <h2>Why Choose UrbanStay?</h2>
+    <h2>Why Choose Havenly?</h2>
     <p>
       Discover a secure and seamless way to book your next stay with
       trusted properties and reliable services.
@@ -258,7 +251,54 @@ const categories = [
 </section>
 
 
+<section className="partner-section">
+      <div className="partner-image">
+        <img
+          src={photo}
+          alt="Villa"
+        />
+      </div>
 
+      <div className="partner-content">
+        <h2>List Your Property With Us</h2>
+
+        <div className="feature">
+          <span>✔</span>
+          <div>
+            <h4>Higher revenue, low maintenance</h4>
+            <p>Dynamic pricing, premium listings, and dedicated support.</p>
+          </div>
+        </div>
+
+        <div className="feature">
+          <span>✔</span>
+          <div>
+            <h4>Reach thousands of travellers</h4>
+            <p>Get bookings from verified guests across the country.</p>
+          </div>
+        </div>
+
+        <div className="feature">
+          <span>✔</span>
+          <div>
+            <h4>Hassle-free management</h4>
+            <p>We help with marketing, bookings and customer support.</p>
+          </div>
+        </div>
+
+        <div className="feature">
+          <span>✔</span>
+          <div>
+            <h4>Create memorable stays</h4>
+            <p>Deliver unique experiences that guests love and recommend.</p>
+          </div>
+        </div>
+
+        <button onClick={()=>navigate("/host")} className="partner-btn">
+          List your property →
+        </button>
+      </div>
+    </section>
 
 
     <Footer/>

@@ -1,6 +1,6 @@
 .footer-parent{
     margin-top:80px;
-    background:#111827;
+    background:#1E1E1E;
     color:#fff;
 }
 
@@ -41,7 +41,7 @@
 }
 
 .footer-sec-1 a:hover{
-    color:#ff385c;
+   text-decoration: underline;
 }
 
 .footer-bottom{

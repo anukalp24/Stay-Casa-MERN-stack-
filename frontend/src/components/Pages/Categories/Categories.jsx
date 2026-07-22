@@ -41,7 +41,7 @@ setmessage(result.message)
         <div className="category-grid">
           {categoryResponse?.map((homes, index) => (
             <div key={index} className="category-card" onClick={() => Navigate(`/home/${homes._id}`)}>
-              <img className="category-card-img" src={homes.file} alt={homes.propertyName} />
+              <img className="category-card-img" src={homes.files[0]} alt={homes.propertyName} />
               <div className="category-card-body">
                 <h3 className="category-card-title">{homes.propertyName}</h3>
                 <p className="category-card-location">📍 {homes.cityname} , {homes.country}</p>

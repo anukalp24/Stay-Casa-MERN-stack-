@@ -20,6 +20,9 @@
 }
 
 .hero-left{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
     position:absolute;
     top:50%;
     left:50%;
@@ -27,16 +30,21 @@
     text-align:center;
     color:#fff;
     z-index:2;
+    ;
 }
 
 .hero-left h1{
-    font-size:64px;
-    line-height:1.1;
-    margin-bottom:18px;
+    font-size:72px;
+    font-weight:800;
+    line-height:1.05;
+     text-shadow:
+        0 4px 20px rgba(0,0,0,.45);
 }
-
 .hero-left p{
-    font-size:18px;
+    font-size:20px;
+     text-shadow:
+        0 4px 20px rgba(0,0,0,.45);
+        font-weight: 500;
 }
 
 .hero-search{
@@ -67,11 +75,49 @@
     width:50px;
     height:50px;
     border-radius:50%;
-    background:#ff5a5f;
-    color:#fff;
+   /* background-color:#1E1E1E ; */
+    color:#050505;
     padding:12px;
     cursor:pointer;
 }
+
+
+
+.hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:1;
+
+    background:linear-gradient(
+        90deg,
+        rgba(0,0,0,.38) 0%,
+        rgba(0,0,0,.33) 18%,
+        rgba(0,0,0,.25) 40%,
+        rgba(0,0,0,.25) 50%,
+        rgba(0,0,0,.25) 60%,
+        rgba(0,0,0,.22) 82%,
+        rgba(0,0,0,.38) 100%
+    );
+}
+
+
+
+
+.hero-left{
+    z-index:2;
+}
+
+.hero-search{
+    z-index:3;
+}
+
+
+
+
+
+
+
 
 @media (max-width:768px){
 
@@ -161,8 +207,68 @@
 
 }
 
+@media (max-width:468px){
 
 
+.hero{
+    height:58vh;
+    position:relative;
+    overflow:visible;
+}
+.hero-image{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-bottom-left-radius:28px;
+    border-bottom-right-radius:28px;
+}
+
+
+.hero-search{
+    position:absolute;
+    left:50%;
+    top:100%;
+    transform:translate(-50%, -50%);
+    width:88%;
+    height:62px;
+    background:#fff;
+    border-radius:35px;
+    display:flex;
+    align-items:center;
+    padding:0 10px 0 20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+    z-index:20;
+}
+
+
+    .hero-left{
+        display:block;
+        position:absolute;
+        top:32%;
+        left:50%;
+        transform:translate(-50%,-50%);
+        width:90%;
+        text-align:center;
+        color:#fff;
+        z-index:2;
+    }
+
+    .hero-left h1{
+        font-size:2.6rem;      /* ~35px */
+        font-weight:700;
+        line-height:1.2;
+        letter-spacing:-1px;
+        margin-top: 130px;
+    }
+
+    .hero-left p{
+   display: none;
+    }
+
+
+
+    
+}
 /* Large laptops (15"-17") */
 @media (min-width:1440px){
 /* 
