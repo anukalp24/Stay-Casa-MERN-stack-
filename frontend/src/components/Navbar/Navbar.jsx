@@ -71,9 +71,9 @@ setscrolled(window.scrollY > 100)
  
 
   return (
-    <nav className={navbarClass}>
+    <nav  className={navbarClass}>
       <div  className="navbar-logo">
-        <img src={logo} className={scrolled ? "darkLogo" : "logo"} alt="" />
+        <img onClick={()=>navigate("/")} src={logo} className={scrolled ? "darkLogo" : "logo"} alt="" />
       </div>
 
       <div className= {navbarLinkClass}>

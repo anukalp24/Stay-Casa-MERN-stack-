@@ -33,9 +33,9 @@ const webhook =  async (req , res) =>{
 
                 const home = await Home.findById(homeId)
 
-                // for guest and owner both
                 const Paymentdocument = await Payment.create({
                 stripeSessionId: session.id,
+                paymentIntentId: session.payment_intent,
                 home: homeId, 
                 owner: home.owner,
                 guest: userId,

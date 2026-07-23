@@ -49,7 +49,7 @@ const Bookings = () => {
 
 
 const handleDelete = async(id)=>{
-const req = await fetchWithRefresh(`http://localhost:4090/delete-booking/${id}` , {
+const req = await fetchWithRefresh(`http://localhost:4090/cancel-booking/${id}` , {
   method: "DELETE",
   headers: {
     authorization: localStorage.getItem("accessToken")
@@ -146,7 +146,7 @@ setbookings(deleted)
                     <div className="booking-image">
 
                         <img
-                            src={booking.file}
+                            src={booking.files[0]}
                             alt={booking.propertyName}
                         />
 

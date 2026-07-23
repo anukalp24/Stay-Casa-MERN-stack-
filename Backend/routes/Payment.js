@@ -2,23 +2,23 @@ const express = require("express")
 const authMiddleware = require("../Middleware/authMiddleware")
 const createCheckoutSession = require("../Controllers/Payment/createCheckoutSession")
 const reservationsController = require("../Controllers/Payment/Reservations")
-const deleteReservationController = require("../Controllers/Payment/DeleteReservation")
+const reservationDetails = require("../Controllers/Payment/ReservationDetails")
+const cancelReservationController = require("../Controllers/Payment/CancelReservation")
 
 
 
 const bookingController = require("../Controllers/Payment/BookingsController")
-const deleteController = require("../Controllers/Payment/DeleteBooking")
+const cancelBooking = require("../Controllers/Payment/CancelBooking")
 
 
 const Router = express.Router()
 
 Router.get("/bookings" , authMiddleware ,   bookingController)
-Router.delete("/delete-booking/:id" , authMiddleware , deleteController )
+Router.put("/cancel-booking/:id" , authMiddleware , cancelBooking )
 
 Router.post("/create-checkout-session/:id" , authMiddleware , createCheckoutSession )
 Router.get("/reservations" , authMiddleware ,  reservationsController ) 
-Router.delete("/delete-reservations/:id" , authMiddleware , deleteReservationController) 
-
-
+Router.get("/reservationDetails/:id" , authMiddleware , reservationDetails  ) 
+Router.put("/cancel-reservations/:id" , authMiddleware , cancelReservationController) 
 
 module.exports = Router

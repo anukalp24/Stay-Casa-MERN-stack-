@@ -51,7 +51,10 @@ stripeSessionId: {
     required: true,
     unique: true
 } , 
-
+paymentIntentId: {
+    type: String,
+    required: true
+} ,
 
     propertyName:{
          type: String,

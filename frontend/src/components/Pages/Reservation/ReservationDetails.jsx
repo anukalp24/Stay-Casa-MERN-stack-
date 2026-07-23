@@ -1,19 +1,62 @@
-import React from "react";
-import { useParams } from "react-router-dom";
-import "../HomeDetails/HomeDetails"
-import { useEffect, useState, useContext } from "react";
-import { info } from "../..";
-import { useNavigate } from "react-router-dom";
-import Navbar from "../../Navbar/Navbar";
-import Footer from "../../Footer/Footer";
-import "./DashboardHomesDetails.css";
-import fetchWithRefresh from "../../../Utils/fetchWithRefresh";
-const DashboardHomesDetails = () => {
-  const { _id } = useParams();
-  const navigate = useNavigate();
-  const [dashboardHomeDetails, setdashboardHomeDetails] = useState();
-  const { setform, setresponse, response, setdashboard, dashboard } =
-    useContext(info);
+import React from 'react'
+import { useState , useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+import fetchWithRefresh from '../../../Utils/fetchWithRefresh'
+import Navbar from '../../Navbar/Navbar'
+import Footer from '../../Footer/Footer'
+const ReservationDetails = () => {
+const [reservationDetails, setreservationDetails] = useState({})
+const {_id} = useParams()
+
+const [message, setmessage] = useState(null)
+useEffect(() => {
+  const reservationfunc =  async ()=>{
+
+    const reservationDetails = await fetchWithRefresh(`http://localhost:4090/reservationDetails/${_id}` , {
+      method: "GET",
+      headers:{
+    authorization: localStorage.getItem("accessToken")
+  },
+  credentials: "include"
+})
+
+
+const result =  await reservationDetails.json()
+setreservationDetails(result)
+}
+reservationfunc()
+} , [])
+
+
+useEffect(() => {
+  console.log(reservationDetails)
+}, [reservationDetails])
+
+
+
+console.log(reservationDetails)
+
+const HandleCancel =  async (id)=>{
+  const req = await fetchWithRefresh(`http://localhost:4090/cancel-reservations/${id}` , {
+  method: "PUT",
+  headers: {
+    authorization: localStorage.getItem("accessToken")
+  } ,
+  credentials: "include"
+})
+
+
+
+
+const res = await req.json()
+setmessage(res.message)
+
+
+
+}
+
+
+
 
 
   const handleshare = async () => {
@@ -29,63 +72,11 @@ const DashboardHomesDetails = () => {
   };
 
 
-  useEffect(() => {
-  
-    async function dashbaordDetails() {
-      const req = await   fetchWithRefresh(`http://localhost:4090/dashboardHomeDetails/${_id}` , {
-headers: {
-  authorization: localStorage.getItem("accessToken"),
-  credentials: "include"
-}
-      }) 
-       
-      
-      const result = await req.json();
-      setdashboardHomeDetails(result);
-    }
-
-
-
-    dashbaordDetails();
-  }, []);
-
-  const HandleDelete = async (id) => {
-    let api = await  fetchWithRefresh(`http://localhost:4090/deletehome/${id}`, {
-      method: "DELETE",
-      headers: {
-        authorization: localStorage.getItem("token"),
-      },
-      credentials: "include"
-    });
-
-
-    if (api.ok) {
-      const newitem = dashboard.filter((val) => {
-        return val._id !== id;
-      });
-      setdashboard(newitem);
-      setdashboardHomeDetails(null);
-
-      const newResponse = response.filter((val) => val._id !== id);
-      setresponse(newResponse);
-    }
-  };
-
-  const HandleEdit = (home) => {
-    setform(home);
-    const newItem = dashboard.filter((val) => {
-      return val._id !== home._id;
-    });
-    // filter removes
-    setdashboard(newItem);
-    navigate("/Host");
-  };
-
   return (
     <>
-      <Navbar />
-      {dashboardHomeDetails ? (
-       <div className="hd-wrapper">
+    <Navbar/>
+   {reservationDetails ? (
+     <div className="hd-wrapper">
        
          <div className="hd-gallery-wrapper">
        
@@ -93,7 +84,7 @@ headers: {
        
              <div className="hd-gallery-left">
                <img
-                 src={dashboardHomeDetails?.home?.files?.[0]}
+                 src={reservationDetails?.home?.files?.[0]}
                  alt=""
                />
              </div>
@@ -101,12 +92,12 @@ headers: {
              <div className="hd-gallery-right">
        
                <img
-                 src={dashboardHomeDetails?.home?.files?.[1] || dashboardHomeDetails?.home?.files?.[0]}
+                 src={reservationDetails?.home?.files?.[1] || reservationDetails?.home?.files?.[0]}
                  alt=""
                />
        
                <img
-                 src={dashboardHomeDetails?.home?.files?.[2] || dashboardHomeDetails?.home?.files?.[0]}
+                 src={reservationDetails?.home?.files?.[2] || reservationDetails?.home?.files?.[0]}
                  alt=""
                />
        
@@ -152,11 +143,11 @@ headers: {
          <div className="hd-left">
        
            <h1 className="hd-title">
-             {dashboardHomeDetails?.home?.propertyName}
+             {reservationDetails?.home?.propertyName}
            </h1>
        
            <p className="hd-location">
-             📍 {dashboardHomeDetails?.home?.cityname}
+             📍 {reservationDetails?.home?.cityname}
            </p>
        
        
@@ -168,7 +159,7 @@ headers: {
              <h2>About this Place</h2>
        
              <p>
-               {dashboardHomeDetails?.home?.desc}
+               {reservationDetails?.home?.desc}
              </p>
        
            </div>
@@ -184,7 +175,7 @@ headers: {
        
            <div className="booking-price">
        
-             <h2>₹{dashboardHomeDetails?.home?.price}</h2>
+             <h2>₹{reservationDetails?.home?.totalPrice}</h2>
        
              <span>/ Night</span>
        
@@ -193,6 +184,13 @@ headers: {
            <div className="booking-grid">
        
        
+             
+       
+              
+       
+             
+       
+           
        
            </div>
        
@@ -202,6 +200,7 @@ headers: {
            <div className="price-breakdown">
        
             
+       
              <div className="price-row">
                <span>Cleaning Fee</span>
                <span>₹500</span>
@@ -218,24 +217,18 @@ headers: {
                <strong>Total</strong>
        
                <strong>
-                 ₹{Number(dashboardHomeDetails?.home?.price|| 0) + 800}
+                 ₹{Number(reservationDetails?.home?.totalPrice || 0) + 800}
                </strong>
              </div>
            <button
              className="book-btn"
-             onClick={() => HandleDelete(dashboardHomeDetails?.home?._id)}
+             onClick={()=>HandleCancel(reservationDetails?.home?._id)}
            >
-             Delete
+             Cancel the reservation
            </button>
-           <button
-             className="book-btn"
-             onClick={() => HandleEdit(dashboardHomeDetails?.home)}
-           >
-             Edit
-           </button>
-       
+           
            </div>
-       
+       <div>{message}</div>
          </div>
        
        </div>
@@ -253,21 +246,19 @@ headers: {
 
     <p>
       This property may have been deleted or is no longer available.
-    </p>
-
+    </p> 
     <button
       className="dashboardhomesdetails-back-btn"
-      onClick={() => navigate("/dashboard")}
+      // onClick={() => navigate("/dashboard")}
     >
       Back to Dashboard
     </button>
   </div>
 </div>
       )}
+      <Footer/>
+      </>
+  )
+}
 
-      <Footer />
-    </>
-  );
-};
-
-export default DashboardHomesDetails;
+export default ReservationDetails

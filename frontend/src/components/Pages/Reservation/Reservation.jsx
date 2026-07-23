@@ -2,12 +2,20 @@ import React from 'react'
 import { useState , useEffect } from 'react'
 import fetchWithRefresh from '../../../Utils/fetchWithRefresh'
 import Navbar from '../../Navbar/Navbar'
+import { useNavigate } from 'react-router-dom'
 import Footer from '../../Footer/Footer'
 import "./Reservation.css"
+
+
+
 const Reservation = () => {
 const [reservedHomes, setreservedHomes] = useState([])
+const navigate = useNavigate()
+
+
 useEffect(() => {
- const  reservation = async ()=>{
+    const  reservation = async ()=>{
+
     const reservationReq = await  fetchWithRefresh("http://localhost:4090/reservations" , {
     headers: {
          "Content-Type": "application/json",
@@ -25,14 +33,10 @@ useEffect(() => {
 
  
 }
-
  reservation()
-
 }, [])
 
-const handleDelete = async(id)=>{
-  const deleteReq  = await fetch(`http://localhost:4090/delete-reservations/${id}`)
-}
+
 
 
   return (
@@ -99,7 +103,8 @@ const handleDelete = async(id)=>{
                         <span className="detail-value detail-price">₹{home.totalPrice}</span>
                       </div>
                     </div>
-                    <button onClick={()=>handleDelete(home._id)}>Cancel Reservation?</button>
+                    <button onClick={()=>navigate(`/reservationDetails/${home._id}`)}>View Details</button>
+                
 
                   </div>
 

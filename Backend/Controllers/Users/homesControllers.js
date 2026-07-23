@@ -10,7 +10,7 @@ const Home = require("../../Models/Home")
      }
 
      if(!page){
-      const Homes = await Home.find().limit(20)
+      const Homes = await Home.find().limit(12)
     return  res.status(200).json(Homes)
      }
      

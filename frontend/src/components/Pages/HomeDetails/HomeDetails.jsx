@@ -14,10 +14,15 @@ const Home = () => {
 
   const { id } = useParams();
   const [home, sethome] = useState(null);
-  const [imgError, setImgError] = useState(false);
   const [checkIn, setcheckIn] = useState(null);
   const [checkOut, setcheckOut] = useState(null);
   const [message, setmessage] = useState("");
+const [loader, setloader] = useState(false)
+
+
+
+
+
 
   useEffect(() => {
     const homefunc = async () => {
@@ -30,38 +35,62 @@ const Home = () => {
     homefunc();
   }, []);
 
+
+
+
+
+
+
+
+  
   const handleadd = async (id) => {
-    if (!checkIn || !checkOut) {
-      return setmessage("Please select check-in and check-out dates.");
-    }
+    setloader(true)
 
-    const createCheckoutSession = await fetchWithRefresh(
-      `http://localhost:4090/create-checkout-session/${id}`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          authorization: localStorage.getItem("accessToken"),
+
+    try {
+      if (!checkIn || !checkOut) {
+        return setmessage("Please select check-in and check-out dates.");
+      }
+  
+      const createCheckoutSession = await fetchWithRefresh(
+        `http://localhost:4090/create-checkout-session/${id}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            authorization: localStorage.getItem("accessToken"),
+          },
+          method: "POST",
+          body: JSON.stringify({
+            checkIn: checkIn,
+            checkOut: checkOut,
+          }),
+          credentials: "include",
         },
-        method: "POST",
-        body: JSON.stringify({
-          checkIn: checkIn,
-          checkOut: checkOut,
-        }),
-        credentials: "include",
-      },
-    );
-
-    const data = await createCheckoutSession.json();
-    console.log(createCheckoutSession.status);
-    console.log(data);
-
-    if (createCheckoutSession.ok) {
+      );
+  
+      const data = await createCheckoutSession.json();
+      console.log(createCheckoutSession.status);
+      console.log(data);
+  
+      if (createCheckoutSession.ok) {
+        setmessage(data.message);
+        window.location.href = data.url;
+      }
+  
       setmessage(data.message);
-      window.location.href = data.url;
+    }
+      
+     catch (error) {
+      return setmessage(error)
     }
 
-    setmessage(data.message);
-  };
+
+   finally{
+    setloader(false)
+   }
+
+  }
+
 
   const handleshare = async () => {
     try {
@@ -74,6 +103,12 @@ const Home = () => {
       console.log(error);
     }
   };
+
+
+
+
+
+
   return (
     <>
       <Navbar/>
@@ -210,39 +245,31 @@ const Home = () => {
 
       </div>
 
-      <div className="booking-box">
-
-        <label>GUESTS</label>
-
-        <p>1 Guest</p>
-
-      </div>
-
-      <div className="booking-box">
-
-        <label>ROOMS</label>
-
-        <p>1 Room</p>
-
-      </div>
+     
 
     </div>
 
     <button
       className="book-btn"
       onClick={() => handleadd(home?.home?._id)}
-    >
-      Reserve Now
+      >
+        {loader ? (
+          <>
+    <div className="loader-2"></div>
+          </>
+        ) : (
+          <>
+          Reserve Now
+          </>
+        )}
+      
     </button>
 
     <p className="booking-msg">{message}</p>
 
     <div className="price-breakdown">
 
-      <div className="price-row">
-        <span>Night Charges</span>
-        <span>₹{home?.home?.price}</span>
-      </div>
+     
 
       <div className="price-row">
         <span>Cleaning Fee</span>

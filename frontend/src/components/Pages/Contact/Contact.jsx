@@ -1,171 +1,214 @@
-import React from 'react'
-import Navbar from '../../Navbar/Navbar'
-import Footer from '../../Footer/Footer'
-import { useState , useEffect } from 'react'
-import "./Contact.css"
+import React, { useState } from "react";
+import Navbar from "../../Navbar/Navbar";
+import Footer from "../../Footer/Footer";
+import {
+  FiMail,
+  FiPhone,
+  FiMapPin,
+  FiSend,
+} from "react-icons/fi";
+import "./Contact.css";
+
 const Contact = () => {
-
-const [message, setmessage] = useState("")
-
-  const [first, setfirst] = useState({
+  const [loader, setloader] = useState(false)
+  const [message, setMessage] = useState("");
+const [error, seterror] = useState({})
+  const [first, setFirst] = useState({
     name: "",
     email: "",
     phoneNumber: "",
-    feedback: ""
-  })
+    subject: "",
+    message: "",
+  });
 
-const handlechange = (e)=>{
-  setfirst({...first , [e.target.name] : e.target.value})
+  const handlechange = (e) => {
+      setMessage("")
+
+    seterror({... error , [e.target.name] : ""})
+    setFirst({ ...first, [e.target.name]: e.target.value });
+  };
+
+  
+  const handleadd = async (e) => {
+
+    setMessage("")
+    setloader(true)
+    e.preventDefault();
+const errors = {}
+
+if(first.name === ""){
+  errors.name = "Name is required"
 }
-
-const handleadd =  async (e)=>{
-  e.preventDefault()
-const request = await fetch(`http://localhost:4090/contact` , {
-  headers: {"Content-Type":"application/json"},
-  method: "POST",
-  body: JSON.stringify(first)
-})
-
-let result  = await request.json()
-setmessage(result.message)
-
+if(first.email === ""){
+  errors.email = "Email is required"
 }
+if(first.phoneNumber === ""){
+  errors.phoneNumber = "PhoneNumber is required"
+}
+if(first.subject === ""){
+  errors.subject = "Subject is required"
+}
+if(first.message === ""){
+  errors.message = "Message is required"
+}
+ seterror(errors)
 
+  if(Object.keys(errors).length > 0){
+    setloader(false)
+    return
+  }
+  
+
+    const request = await fetch("http://localhost:4090/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(first),
+    });
+
+    if(request.ok){
+      setloader(false)
+      const result = await request.json();
+      setMessage(result.message);
+  
+      setFirst({
+        name: "",
+        email: "",
+        phoneNumber: "",
+        subject: "",
+        message: "",
+      });
+    }
+
+  };
 
   return (
-    <div>
-      <Navbar/>
+    <>
+      <Navbar />
 
-<div className="contact-page">
+      <section className="contact">
 
-<div className="contact-container">
+        <div className="contact-left">
 
-{/* LEFT SECTION */}
-<div className="contact-left">
+          
 
-<h1>Get In Touch</h1>
+          <h1>
+            Let's Plan Your
+            <br />
+            Next Escape.
+          </h1>
 
-<p className="contact-desc">
-We’d love to hear from travelers, hosts and adventure seekers from
-around the world. Reach out for booking support, partnerships or
-general inquiries about UrbanStay.
-</p>
+          <p>
+            Have questions about bookings, hosting or partnerships?
+            Our team is always here to help you plan the perfect getaway.
+          </p>
 
-<div className="contact-info-box">
+          <div className="contact-info">
 
-<h2>Email</h2>
+            <div className="info-box">
+              <FiMail className="info-icon" />
+              <div>
+                <h3>Email</h3>
+                <p>havenly24@gmail.com</p>
+              </div>
+            </div>
 
-<p>support@urbanstay.com</p>
+            <div className="info-box">
+              <FiPhone className="info-icon" />
+              <div>
+                <h3>Phone</h3>
+                <p>+91 98765 43210</p>
+              </div>
+            </div>
 
-</div>
+            <div className="info-box">
+              <FiMapPin className="info-icon" />
+              <div>
+                <h3>Location</h3>
+                <p>Mumbai, India</p>
+              </div>
+            </div>
 
-<div className="contact-info-box">
+          </div>
 
-<h2>Phone</h2>
+        </div>
 
-<p>+91 98765 43210</p>
+        <div className="contact-right">
 
-<p>Available: 24/7 Customer Support</p>
+          <form onSubmit={handleadd} className="contact-form">
 
-</div>
-
-<div className="contact-info-box">
-
-<h2>Head Office</h2>
-
-<p>
-UrbanStay Headquarters<br/>
-Mumbai, India
-</p>
-
-</div>
-
-<div className="contact-info-box">
-
-<h2>Why Travelers Love Us</h2>
-
-<ul>
-
-<li>Handpicked Luxury Stays</li>
-
-<li>Verified & Trusted Hosts</li>
-
-<li>Seamless Booking Experience</li>
-
-<li>24/7 Customer Assistance</li>
-
-</ul>
-
-</div>
-
-</div>
-
-{/* RIGHT SECTION */}
-
-<div className="contact-right">
-
-<h1>Send Us A Message</h1>
-
-<form className="contact-form">
-
-<div className="input-group">
-
-<label>Name</label>
-
-<input name='name'  onChange={handlechange}  type="text" placeholder="Enter your full name" />
-
-</div>
-
-<div className="input-group">
-
-<label>Email</label>
-
-<input name='email' onChange={handlechange}  type="email" placeholder="Enter your email" />
-
-</div>
-
-<div className="input-group">
-
-<label>Phone Number</label>
-
-<input  name='phoneNumber' onChange={handlechange}  type="text" placeholder="Enter your phone number" />
-
-</div>
-
-<div className="input-group">
-
-<label>Subject</label>
-
-<input name='feedback'  onChange={handlechange}  type="text" placeholder="Order Issue / Partnership / Feedback" />
-
-</div>
-
-<div className="input-group">
-
-<label>Message</label>
-
-<textarea placeholder="Write your message here..."></textarea>
-
-</div>
-
-<button onClick={handleadd} id="contact-btn">
-Send Message
-</button>
-<p>{message}</p>
-
-</form>
-
-</div>
-
-</div>
-
-</div>
+            <input
+              type="text"
+              placeholder="Full Name"
+              name="name"
+              value={first.name}
+              onChange={handlechange}
+            />
+{error.name &&<p className="error" >Name is required</p>}
+            <input
+              type="email"
+              placeholder="Email Address"
+              name="email"
+              value={first.email}
+              onChange={handlechange}
+            />
+{error.email &&<p className="error" >Email is required</p>}
+            <input
+              type="text"
+              placeholder="Phone Number"
+              name="phoneNumber"
+              value={first.phoneNumber}
+              onChange={handlechange}
+            />
+{error.phoneNumber &&<p className="error" >phoneNumber is required</p>}
+            <input
+              type="text"
+              placeholder="Subject"
+              name="subject"
+              value={first.subject}
+              onChange={handlechange}
+            />
+{error.subject &&<p className="error" > Subject is required</p>}
+            <textarea
+              rows="6"
+              placeholder="Write your message..."
+              name="message"
+              value={first.message}
+              onChange={handlechange}
+            />
+{error.message &&<p className="error" >Message is required is required</p>}
 
 
 
-      <Footer/>
-    </div>
-  )
 
-}
-export default Contact
+ <button id="btn" type="submit">
+{loader ? (
+   <div className="loader"></div>
+) : (
+  <>
+  <FiSend />
+      Send Message
+  </>
+
+)}
+ </button>
+
+            {message && (
+              <p className="success">
+                {message}
+              </p>
+            )}
+
+          </form>
+
+        </div>
+
+      </section>
+
+      <Footer />
+    </>
+  );
+};
+
+export default Contact;

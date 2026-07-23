@@ -46,7 +46,6 @@ const createCheckoutSession =  async (req, res)=>{
                 homeId: home._id.toString(),
                 checkIn: checkIn,
                 checkOut: checkOut
-
             } ,
             payment_method_types: ["card"],
             line_items: [

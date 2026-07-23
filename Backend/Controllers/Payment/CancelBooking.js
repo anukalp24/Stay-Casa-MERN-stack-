@@ -6,12 +6,12 @@ const payment = async (req , res)=>{
 
    
        
-        const deleteBooking = await Payment.findOneAndDelete({
+        const cancelBooking = await Payment.findOneAndDelete({
             _id: req.params.id,
             owner: req.user.id
         })
 
-        if(!deleteBooking){
+        if(!cancelBooking){
             return res.status(404).json({
                 message: "Booking not found or not authorized"
             })
